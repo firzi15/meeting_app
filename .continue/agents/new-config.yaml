@@ -1,0 +1,15 @@
+models:
+  - title: Ollama Gemma Kantor
+    provider: openai
+    model: gemma
+    apiBase: http://115.124.73.19:4000/v1
+    apiKey: sk-aac4e4835c604251906ce146e16d0109
+  - name: Gemma 2 2b IT
+    provider: ollama
+    model: gemma2-2b-it
+tabAutocompleteModel:
+  title: Ollama Gemma Kantor
+  provider: openai
+  model: gemma
+  apiBase: http://115.124.73.19:4000/v1
+  apiKey: sk-aac4e4835c604251906ce146e16d0109

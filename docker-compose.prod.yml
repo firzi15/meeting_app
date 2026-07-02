@@ -1,0 +1,57 @@
+services:
+  app:
+    build: .
+    image: meeting-app:latest
+    container_name: meeting_app
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=${POSTGRES_DB}
+      - DB_USER=${POSTGRES_USER}
+      - DB_PASS=${POSTGRES_PASSWORD}
+    volumes:
+      # Persist uploads (foto profil, dll)
+      - uploads_data:/var/www/html/uploads
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - meeting_network
+
+  db:
+    image: postgres:15-alpine
+    container_name: meeting_db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # Auto-init schema saat pertama kali container dibuat
+      - ./db_meeting_dump.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      - meeting_network
+    # Jangan expose port DB ke luar di production
+    # ports:
+    #   - "5432:5432"
+
+
+
+volumes:
+  postgres_data:
+    driver: local
+  uploads_data:
+    driver: local
+
+networks:
+  meeting_network:
+    driver: bridge

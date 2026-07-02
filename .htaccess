@@ -1,0 +1,27 @@
+# Apache Security Headers - disertakan via file conf terpisah
+<IfModule mod_headers.c>
+    # Cegah browser menebak MIME type
+    Header always set X-Content-Type-Options "nosniff"
+    # Cegah clickjacking (embed di iframe luar)
+    Header always set X-Frame-Options "SAMEORIGIN"
+    # Aktifkan XSS Protection di browser lama
+    Header always set X-XSS-Protection "1; mode=block"
+    # Referrer policy - jangan bocorkan URL ke pihak luar
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    # Jangan cache halaman sensitif
+    Header always set Cache-Control "no-store, no-cache, must-revalidate"
+    # Hapus header Server yang bocorkan versi Apache (backup dari ServerTokens Prod)
+    Header always unset Server
+    Header always unset X-Powered-By
+</IfModule>
+
+# Larang akses langsung ke file sensitif
+<FilesMatch "\.(sql|env|log|md|json|lock|yml|yaml|sh)$">
+    Require all denied
+</FilesMatch>
+
+# Larang direktori listing
+Options -Indexes
+
+# Batasi ukuran request body (10MB)
+LimitRequestBody 10485760

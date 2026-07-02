@@ -1,0 +1,46 @@
+# Environment variables
+.env
+
+# Dependencies
+node_modules/
+vendor/
+
+# User Uploads
+uploads/
+
+# Database dumps
+*.sql
+*.sqlite
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Cypress temporary files
+cypress/videos/
+cypress/screenshots/
+cypress.config.zip
+
+# Scratch/Temporary folders
+scratch/
+scratch_*.php

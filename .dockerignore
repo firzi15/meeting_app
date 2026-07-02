@@ -1,0 +1,27 @@
+.git
+.gitignore
+.dockerignore
+.env
+.env.example
+.vscode
+.continue
+
+# Dev files
+Dockerfile
+docker-compose.yml
+docker-compose.prod.yml
+node_modules
+vendor
+cypress
+cypress.config.js
+package.json
+package-lock.json
+
+# Scratch & debug files
+scratch/
+scratch_check_ids.php
+scratch_check_schedule.php
+cypress_reset_db.php
+
+# Docs (already copied in Dockerfile RUN rm)
+README.md
