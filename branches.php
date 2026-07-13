@@ -77,13 +77,13 @@ if (isset($_POST['bulk_delete_branch'])) {
     $ids = $_POST['bulk_ids'] ?? [];
     if (!empty($ids)) {
         try {
-            $inQuery = implode(',', array_fill(0, count($ids), '?'));
-            $stmt = $pdo->prepare("SELECT name FROM branches WHERE id IN ($inQuery)");
+            $placeholders = implode(',', array_fill(0, count($ids), '?'));
+            $stmt = $pdo->prepare("SELECT name FROM branches WHERE id IN ($placeholders)");
             $stmt->execute($ids);
             $names = $stmt->fetchAll(PDO::FETCH_COLUMN);
             
             if ($names) {
-                $check = $pdo->prepare("SELECT DISTINCT branch_id FROM users WHERE branch_id IN ($inQuery)");
+                $check = $pdo->prepare("SELECT DISTINCT branch_id FROM users WHERE branch_id IN ($placeholders)");
                 $check->execute($ids);
                 $used = $check->fetchAll(PDO::FETCH_COLUMN);
                 
@@ -91,7 +91,7 @@ if (isset($_POST['bulk_delete_branch'])) {
                     $usedStr = implode(", ", $used);
                     $error = "Aman DB: Beberapa Cabang (ID: $usedStr) masih terkait dengan karyawan. Silakan ubah/hapus karyawan tersebut di Master Karyawan.";
                 } else {
-                    $stmt = $pdo->prepare("DELETE FROM branches WHERE id IN ($inQuery)");
+                    $stmt = $pdo->prepare("DELETE FROM branches WHERE id IN ($placeholders)");
                     $stmt->execute($ids);
                     $success = count($ids) . " Cabang berhasil dihapus!";
                 }
