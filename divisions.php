@@ -81,14 +81,14 @@ if (isset($_POST['bulk_delete_division'])) {
     $ids = $_POST['bulk_ids'] ?? [];
     if (!empty($ids)) {
         try {
-            $inQuery = implode(',', array_fill(0, count($ids), '?'));
-            $stmt = $pdo->prepare("SELECT name FROM divisions WHERE id IN ($inQuery)");
+            $placeholders = implode(',', array_fill(0, count($ids), '?'));
+            $stmt = $pdo->prepare("SELECT name FROM divisions WHERE id IN ($placeholders)");
             $stmt->execute($ids);
             $names = $stmt->fetchAll(PDO::FETCH_COLUMN);
             
             if ($names) {
-                $inQueryNames = implode(',', array_fill(0, count($names), '?'));
-                $check = $pdo->prepare("SELECT DISTINCT division FROM users WHERE division IN ($inQueryNames)");
+                $placeholdersNames = implode(',', array_fill(0, count($names), '?'));
+                $check = $pdo->prepare("SELECT DISTINCT division FROM users WHERE division IN ($placeholdersNames)");
                 $check->execute($names);
                 $used = $check->fetchAll(PDO::FETCH_COLUMN);
                 
@@ -96,8 +96,14 @@ if (isset($_POST['bulk_delete_division'])) {
                     $usedStr = implode(", ", $used);
                     $error = "Aman DB: Divisi ($usedStr) masih terkait dengan karyawan. Silakan ubah/hapus karyawan tersebut di Master Karyawan.";
                 } else {
-                    $stmt = $pdo->prepare("DELETE FROM divisions WHERE id IN ($inQuery) $branch_condition");
-                    $stmt->execute($ids);
+                    $branch_clause = "";
+                    $params = $ids;
+                    if ($current_branch > 0) {
+                        $branch_clause = " AND branch_id = ?";
+                        $params[] = $current_branch;
+                    }
+                    $stmt = $pdo->prepare("DELETE FROM divisions WHERE id IN ($placeholders)$branch_clause");
+                    $stmt->execute($params);
                     $success = count($ids) . " divisi berhasil dihapus!";
                 }
             }
@@ -178,7 +184,7 @@ $divisions = $stmt->fetchAll();
                                     <tr class="selectable-row">
                                         <td style="text-align: center; color: #94a3b8; font-size: 0.8rem;">
                                             <input type="checkbox" name="bulk_ids[]" value="<?= $division['id'] ?>" class="row-checkbox" style="display:none;">
-                                            <?= $no++ ?>
+                                            <?= htmlspecialchars($no++) ?>
                                         </td>
                                         <td><strong><?= htmlspecialchars($division['name']) ?></strong></td>
                                         <td style="text-align: center;">
@@ -382,12 +388,12 @@ $divisions = $stmt->fetchAll();
 
     <?php if ($success): ?>
     <script>
-        Toast.fire({ icon: 'success', title: '<?= $success ?>' });
+        Toast.fire({ icon: 'success', title: '<?= htmlspecialchars($success) ?>' });
     </script>
     <?php endif; ?>
     <?php if ($error): ?>
     <script>
-        Toast.fire({ icon: 'error', title: '<?= $error ?>' });
+        Toast.fire({ icon: 'error', title: '<?= htmlspecialchars($error) ?>' });
     </script>
     <?php endif; ?>
 </body>
