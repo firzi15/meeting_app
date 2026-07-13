@@ -173,7 +173,7 @@ $branches = $stmt->fetchAll();
                                     <tr class="selectable-row">
                                         <td style="text-align: center; color: #94a3b8; font-size: 0.8rem;">
                                             <input type="checkbox" name="bulk_ids[]" value="<?= $branch['id'] ?>" class="row-checkbox" style="display:none;">
-                                            <?= $no++ ?>
+                                            <?= htmlspecialchars($no++) ?>
                                         </td>
                                         <td><strong><?= htmlspecialchars($branch['name']) ?></strong></td>
                                         <td style="text-align: center;">
@@ -377,12 +377,12 @@ $branches = $stmt->fetchAll();
 
     <?php if ($success): ?>
     <script>
-        Toast.fire({ icon: 'success', title: '<?= $success ?>' });
+        Toast.fire({ icon: 'success', title: '<?= htmlspecialchars($success) ?>' });
     </script>
     <?php endif; ?>
     <?php if ($error): ?>
     <script>
-        Toast.fire({ icon: 'error', title: '<?= $error ?>' });
+        Toast.fire({ icon: 'error', title: '<?= htmlspecialchars($error) ?>' });
     </script>
     <?php endif; ?>
 </body>
