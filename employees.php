@@ -85,22 +85,28 @@ if (isset($_POST['bulk_delete_employee'])) {
     $ids = $_POST['bulk_ids'] ?? [];
     if (!empty($ids)) {
         try {
-            $inQuery = implode(',', array_fill(0, count($ids), '?'));
+            $placeholders = implode(',', array_fill(0, count($ids), '?'));
             
             // Periksa relasi di tabel meetings dan meeting_participants
-            $check = $pdo->prepare("SELECT COUNT(*) FROM meetings WHERE created_by IN ($inQuery) OR pic_id IN ($inQuery)");
+            $check = $pdo->prepare("SELECT COUNT(*) FROM meetings WHERE created_by IN ($placeholders) OR pic_id IN ($placeholders)");
             $check->execute(array_merge($ids, $ids));
             $meetingsCount = $check->fetchColumn();
 
-            $checkPart = $pdo->prepare("SELECT COUNT(*) FROM meeting_participants WHERE user_id IN ($inQuery)");
+            $checkPart = $pdo->prepare("SELECT COUNT(*) FROM meeting_participants WHERE user_id IN ($placeholders)");
             $checkPart->execute($ids);
             $partCount = $checkPart->fetchColumn();
 
             if ($meetingsCount > 0 || $partCount > 0) {
                 $error = "Aman DB: Karyawan masih memiliki keterlibatan dalam meeting terdaftar (sebagai pembuat, PIC, atau peserta). Silakan hapus meeting terkait terlebih dahulu.";
             } else {
-                $stmt = $pdo->prepare("DELETE FROM users WHERE id IN ($inQuery) AND role != 'admin' $branch_condition");
-                $stmt->execute($ids);
+                $branch_clause = "";
+                $params = $ids;
+                if ($current_branch > 0) {
+                    $branch_clause = " AND branch_id = ?";
+                    $params[] = $current_branch;
+                }
+                $stmt = $pdo->prepare("DELETE FROM users WHERE id IN ($placeholders) AND role != 'admin'$branch_clause");
+                $stmt->execute($params);
                 $success = count($ids) . " karyawan berhasil dihapus!";
             }
         } catch (Exception $e) {
@@ -190,7 +196,7 @@ $divisions = $pdo->query("SELECT name FROM divisions WHERE 1=1 $branch_condition
                                         <tr class="selectable-row">
                                             <td style="color: #94a3b8; font-weight: 500; text-align: center;">
                                                 <input type="checkbox" name="bulk_ids[]" value="<?= $emp['id'] ?>" class="row-checkbox" style="display:none;">
-                                                <?= $no++ ?>
+                                                <?= htmlspecialchars($no++) ?>
                                             </td>
                                             <td><strong><?= htmlspecialchars($emp['name']) ?></strong></td>
                                             <td><code><?= htmlspecialchars($emp['username']) ?></code></td>
@@ -413,12 +419,12 @@ $divisions = $pdo->query("SELECT name FROM divisions WHERE 1=1 $branch_condition
 
     <?php if ($success): ?>
     <script>
-        Toast.fire({ icon: 'success', title: <?= json_encode($success) ?> });
+        Toast.fire({ icon: 'success', title: <?= json_encode(htmlspecialchars($success)) ?> });
     </script>
     <?php endif; ?>
     <?php if ($error): ?>
     <script>
-        Toast.fire({ icon: 'error', title: <?= json_encode($error) ?> });
+        Toast.fire({ icon: 'error', title: <?= json_encode(htmlspecialchars($error)) ?> });
     </script>
     <?php endif; ?>
 </body>
