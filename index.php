@@ -431,7 +431,7 @@ if (!$has_dashboard) {
                                                 <button type="button"
                                                     class="btn-icon-outline"
                                                     title="Lihat QR Absensi"
-                                                    onclick="showQRModal('<?= htmlspecialchars(addslashes($rm['title'])) ?>', '<?= htmlspecialchars(rtrim(str_replace(['http://','https://'], '//', (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME'])), '/') . '/attendance.php?token=' . $rm['token']) ?>')">
+                                                    onclick="showQRModal('<?= htmlspecialchars(addslashes($rm['title'])) ?>', '<?= htmlspecialchars(rtrim((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']), '/') . '/attendance.php?token=' . $rm['token']) ?>')">
                                                     <i class="fa-solid fa-qrcode"></i>
                                                 </button>
                                                 <?php if ($has_dashboard): ?>

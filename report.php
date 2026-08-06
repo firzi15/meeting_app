@@ -267,7 +267,7 @@ $detail_id = $_GET['id'] ?? null;
                                     foreach ($meetings as $m):
                                         $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http";
                                         $basePath = rtrim(dirname($_SERVER['SCRIPT_NAME']), '/\\');
-                                        $link = $protocol . "://" . $_SERVER['HTTP_HOST'] . $basePath . "/attendance.php?room_id=" . $m['room_id'];
+                                        $link = $protocol . "://" . $_SERVER['HTTPS_HOST'] . $basePath . "/attendance.php?room_id=" . $m['room_id'];
                                 ?>
                                 <?php 
                                     $now_ts = time();
