@@ -79,15 +79,33 @@ try {
         $pdo->exec("ALTER TABLE meetings ADD COLUMN IF NOT EXISTS coffee_type TEXT");
         $pdo->exec("ALTER TABLE meetings ADD COLUMN IF NOT EXISTS is_hybrid_zoom BOOLEAN DEFAULT FALSE");
         
-        // Insert 'Online' room for all existing branches
-        $stmt_br = $pdo->query("SELECT id FROM branches");
-        $branches = $stmt_br->fetchAll();
-        foreach ($branches as $br) {
-            $stmt_check_room = $pdo->prepare("SELECT COUNT(*) FROM rooms WHERE LOWER(name) = 'online' AND branch_id = ?");
-            $stmt_check_room->execute([$br['id']]);
-            if ($stmt_check_room->fetchColumn() == 0) {
-                $stmt_ins_room = $pdo->prepare("INSERT INTO rooms (name, branch_id) VALUES ('Online', ?)");
-                $stmt_ins_room->execute([$br['id']]);
+        // Auto sync all 9 branches and 262 employees
+        $dataFile = __DIR__ . '/auto_sync_employees.json';
+        if (file_exists($dataFile)) {
+            $payload = json_decode(file_get_contents($dataFile), true);
+            if ($payload) {
+                foreach ($payload['branches'] as $br) {
+                    $stmt_b = $pdo->prepare("INSERT INTO branches (id, name) VALUES (?, ?) ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name");
+                    $stmt_b->execute([$br[0], $br[1]]);
+                }
+                $pdo->exec("SELECT setval('branches_id_seq', (SELECT COALESCE(MAX(id), 1) FROM branches))");
+
+                $hashed_pass = password_hash('password123', PASSWORD_BCRYPT);
+                $stmt_check = $pdo->prepare("SELECT id FROM users WHERE username = ? OR (nik = ? AND nik != '')");
+                $stmt_insert = $pdo->prepare("INSERT INTO users (nik, name, username, password, role, jabatan, group_name, division, branch_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                $stmt_update = $pdo->prepare("UPDATE users SET nik = ?, name = ?, jabatan = ?, group_name = ?, division = ?, branch_id = ? WHERE id = ?");
+
+                foreach ($payload['employees'] as $emp) {
+                    $stmt_check->execute([$emp['username'], $emp['nik']]);
+                    $existing = $stmt_check->fetch();
+                    if ($existing) {
+                        $stmt_update->execute([$emp['nik'], $emp['name'], $emp['jabatan'], $emp['group_name'], $emp['division'], $emp['branch_id'], $existing['id']]);
+                    } else {
+                        $role = 'user';
+                        $stmt_insert->execute([$emp['nik'], $emp['name'], $emp['username'], $hashed_pass, $role, $emp['jabatan'], $emp['group_name'], $emp['division'], $emp['branch_id']]);
+                    }
+                }
+                $pdo->exec("UPDATE users SET role = 'superadmin' WHERE username = 'admin'");
             }
         }
     } catch (Exception $e) {
