@@ -1899,3 +1899,15 @@ button.btn-icon-outline {
     background: #ffffff;
     outline: none;
 }
+
+/* Universal Pagination Component Styling */
+.pagination-wrapper {
+    user-select: none;
+}
+.pagination-nav-btn:hover:not(.disabled),
+.pagination-num-btn:hover:not(.active) {
+    background-color: #f8fafc !important;
+    border-color: #94a3b8 !important;
+    color: var(--primary-color, #4f46e5) !important;
+}
+

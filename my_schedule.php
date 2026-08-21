@@ -204,13 +204,7 @@ $branch_condition = $current_branch > 0 ? "WHERE branch_id = $current_branch" : 
                         </table>
                     </div>
 
-                    <?php if ($total_pages > 1): ?>
-                    <div class="pagination">
-                        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                            <a href="my_schedule.php?page=<?= $i ?><?= $room_filter ? '&room='.urlencode($room_filter) : '' ?>" class="page-link <?= ($page == $i) ? 'active' : '' ?>"><?= $i ?></a>
-                        <?php endfor; ?>
-                    </div>
-                    <?php endif; ?>
+                    <?php renderPagination($page, $total_pages, ['room' => $room_filter]); ?>
                 </div>
             </main>
             <?php include 'footer.php'; ?>

@@ -91,14 +91,25 @@ if (isset($_POST['delete_group'])) {
     }
 }
 
+// Pagination logic
+$limit = 10;
+$page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
+if ($page < 1) $page = 1;
+$offset = ($page - 1) * $limit;
+
+$total_groups = (int)$pdo->query("SELECT COUNT(*) FROM employee_groups")->fetchColumn();
+$total_pages = ceil($total_groups / $limit);
+
 // Fetch groups with member count
-$stmt = $pdo->query("
+$stmt = $pdo->prepare("
     SELECT g.*, COUNT(u.id) as member_count 
     FROM employee_groups g
     LEFT JOIN users u ON u.group_name = g.name
     GROUP BY g.id, g.name, g.description, g.created_at
     ORDER BY g.id ASC
+    LIMIT ? OFFSET ?
 ");
+$stmt->execute([$limit, $offset]);
 $groups = $stmt->fetchAll();
 ?>
 <!DOCTYPE html>
@@ -199,6 +210,7 @@ $groups = $stmt->fetchAll();
                             </tbody>
                         </table>
                     </div>
+                    <?php renderPagination($page, $total_pages); ?>
                 </div>
             </main>
             <?php include 'footer.php'; ?>

@@ -627,13 +627,7 @@ function renderGroupedUserOptions($pdo, $current_branch, $include_empty = false,
                             </tbody>
                         </table>
                     </div>
-                    <?php if ($total_pages > 1): ?>
-                    <div class="pagination" style="display:flex; justify-content:center; gap:8px; margin-top:20px; padding-bottom:20px;">
-                        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                            <a href="index.php?page=<?= $i ?>" class="page-link <?= ($page == $i) ? 'active' : '' ?>" style="text-decoration:none; padding: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0; color: #475569; font-weight: 600; font-size: 0.9rem; <?= ($page == $i) ? 'background:#8b5cf6; color:white; border-color:#8b5cf6;' : 'background:white;' ?>"><?= $i ?></a>
-                        <?php endfor; ?>
-                    </div>
-                    <?php endif; ?>
+                    <?php renderPagination($page, $total_pages); ?>
                 </div>
             </main>
 

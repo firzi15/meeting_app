@@ -353,13 +353,7 @@ $detail_id = $_GET['id'] ?? null;
                         </table>
                     </div>
 
-                    <?php if ($total_pages > 1): ?>
-                    <div class="pagination">
-                        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                            <a href="report.php?page=<?= $i ?><?= $room_filter ? '&room='.urlencode($room_filter) : '' ?>" class="page-link <?= ($page == $i) ? 'active' : '' ?>"><?= $i ?></a>
-                        <?php endfor; ?>
-                    </div>
-                    <?php endif; ?>
+                    <?php renderPagination($page, $total_pages, ['room' => $room_filter]); ?>
                     </form>
                     
                     <!-- Hidden Form for End Meeting (To avoid nested form issue) -->

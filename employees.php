@@ -324,13 +324,7 @@ $divisions = $pdo->query("SELECT name FROM divisions WHERE 1=1 $branch_condition
                         </div>
                     </div>
 
-                    <?php if ($total_pages > 1): ?>
-                    <div style="padding: 15px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap;">
-                        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                            <a href="?page=<?= $i ?>&search=<?= urlencode($search) ?>&filter_group=<?= urlencode($filter_group) ?>" class="btn-action-text <?= $i === $page ? 'btn-view-blue' : '' ?>" style="text-decoration: none; border: 1px solid #e2e8f0; padding: 6px 12px; border-radius: 6px; font-weight: 600; <?= $i === $page ? 'background:var(--primary-color); color:white;' : 'background:white; color:#475569;' ?>"><?= $i ?></a>
-                        <?php endfor; ?>
-                    </div>
-                    <?php endif; ?>
+                    <?php renderPagination($page, $total_pages, ['search' => $search, 'filter_group' => $filter_group]); ?>
                 </div>
                 </form>
             </main>

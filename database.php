@@ -118,4 +118,59 @@ function getCurrentBranchId() {
     }
     return $_SESSION['branch_id'] ?? 1;
 }
+
+function renderPagination($page, $total_pages, $params = []) {
+    if ($total_pages <= 1) return;
+    
+    $buildUrl = function($p) use ($params) {
+        $pArr = array_merge($_GET, $params, ['page' => $p]);
+        return '?' . http_build_query($pArr);
+    };
+
+    echo '<div class="pagination-wrapper" style="padding: 20px 15px; display: flex; justify-content: center; align-items: center; gap: 6px; flex-wrap: wrap;">';
+
+    // Previous Button
+    if ($page > 1) {
+        echo '<a href="' . htmlspecialchars($buildUrl($page - 1)) . '" class="pagination-nav-btn" style="padding: 6px 14px; border: 1px solid #cbd5e1; border-radius: 8px; color: #334155; text-decoration: none; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; background: #ffffff; box-shadow: 0 1px 2px rgba(0,0,0,0.05);"><i class="fa-solid fa-chevron-left" style="font-size:0.75rem;"></i> Prev</a>';
+    } else {
+        echo '<span class="pagination-nav-btn disabled" style="padding: 6px 14px; border: 1px solid #e2e8f0; border-radius: 8px; color: #94a3b8; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; background: #f8fafc; cursor: not-allowed;"><i class="fa-solid fa-chevron-left" style="font-size:0.75rem;"></i> Prev</span>';
+    }
+
+    // Numbered pages with window
+    $range = 2;
+    $start = max(1, $page - $range);
+    $end = min($total_pages, $page + $range);
+
+    if ($start > 1) {
+        echo '<a href="' . htmlspecialchars($buildUrl(1)) . '" class="pagination-num-btn" style="min-width: 36px; height: 36px; display: inline-flex; justify-content: center; align-items: center; border: 1px solid #cbd5e1; border-radius: 8px; color: #334155; text-decoration: none; font-size: 0.85rem; font-weight: 600; background: #ffffff; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">1</a>';
+        if ($start > 2) {
+            echo '<span style="color: #94a3b8; padding: 0 4px; font-weight: 700; font-size: 0.85rem;">...</span>';
+        }
+    }
+
+    for ($i = $start; $i <= $end; $i++) {
+        if ($i == $page) {
+            echo '<span class="pagination-num-btn active" style="min-width: 36px; height: 36px; display: inline-flex; justify-content: center; align-items: center; border: 1px solid var(--primary-color, #4f46e5); border-radius: 8px; color: #ffffff; font-size: 0.85rem; font-weight: 700; background: var(--primary-color, #4f46e5); box-shadow: 0 2px 4px rgba(79, 70, 229, 0.25);">' . $i . '</span>';
+        } else {
+            echo '<a href="' . htmlspecialchars($buildUrl($i)) . '" class="pagination-num-btn" style="min-width: 36px; height: 36px; display: inline-flex; justify-content: center; align-items: center; border: 1px solid #cbd5e1; border-radius: 8px; color: #334155; text-decoration: none; font-size: 0.85rem; font-weight: 600; background: #ffffff; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">' . $i . '</a>';
+        }
+    }
+
+    if ($end < $total_pages) {
+        if ($end < $total_pages - 1) {
+            echo '<span style="color: #94a3b8; padding: 0 4px; font-weight: 700; font-size: 0.85rem;">...</span>';
+        }
+        echo '<a href="' . htmlspecialchars($buildUrl($total_pages)) . '" class="pagination-num-btn" style="min-width: 36px; height: 36px; display: inline-flex; justify-content: center; align-items: center; border: 1px solid #cbd5e1; border-radius: 8px; color: #334155; text-decoration: none; font-size: 0.85rem; font-weight: 600; background: #ffffff; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">' . $total_pages . '</a>';
+    }
+
+    // Next Button
+    if ($page < $total_pages) {
+        echo '<a href="' . htmlspecialchars($buildUrl($page + 1)) . '" class="pagination-nav-btn" style="padding: 6px 14px; border: 1px solid #cbd5e1; border-radius: 8px; color: #334155; text-decoration: none; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; background: #ffffff; box-shadow: 0 1px 2px rgba(0,0,0,0.05);">Next <i class="fa-solid fa-chevron-right" style="font-size:0.75rem;"></i></a>';
+    } else {
+        echo '<span class="pagination-nav-btn disabled" style="padding: 6px 14px; border: 1px solid #e2e8f0; border-radius: 8px; color: #94a3b8; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; background: #f8fafc; cursor: not-allowed;">Next <i class="fa-solid fa-chevron-right" style="font-size:0.75rem;"></i></span>';
+    }
+
+    echo '</div>';
+}
+
 ?>
