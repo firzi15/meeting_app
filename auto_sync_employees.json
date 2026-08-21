@@ -1,0 +1,2400 @@
+{
+  "branches": [
+    [
+      1,
+      "Jakarta"
+    ],
+    [
+      2,
+      "Surabaya"
+    ],
+    [
+      3,
+      "Karawang"
+    ],
+    [
+      4,
+      "Bandung"
+    ],
+    [
+      5,
+      "Makassar"
+    ],
+    [
+      6,
+      "Semarang"
+    ],
+    [
+      7,
+      "Klaten"
+    ],
+    [
+      8,
+      "Medan"
+    ],
+    [
+      9,
+      "Manado"
+    ]
+  ],
+  "employees": [
+    {
+      "nik": "120002",
+      "name": "MICHEL JIMMY HALAUW",
+      "username": "120002",
+      "jabatan": "INTERNAL AUDIT",
+      "group_name": "Staff",
+      "division": "INTERNAL AUDIT",
+      "branch_id": 1
+    },
+    {
+      "nik": "120004",
+      "name": "UMI DAMAYANTI",
+      "username": "120004",
+      "jabatan": "FA MANAGER",
+      "group_name": "Manager",
+      "division": "FINANCE & ACCOUNTING",
+      "branch_id": 1
+    },
+    {
+      "nik": "120010",
+      "name": "YAYAH HERLIANTINI",
+      "username": "120010",
+      "jabatan": "CONVENTIONAL ARCHIVE MANAGER",
+      "group_name": "Manager",
+      "division": "CONVENTIONAL ARCHIVE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120163",
+      "name": "YAHYA SABIL",
+      "username": "120163",
+      "jabatan": "HR & GA MANAGER",
+      "group_name": "Manager",
+      "division": "HUMAN RESOURCES & GENERAL AFFAIRS",
+      "branch_id": 1
+    },
+    {
+      "nik": "120041",
+      "name": "DWI PRASETYA",
+      "username": "120041",
+      "jabatan": "IT MANAGER",
+      "group_name": "Manager",
+      "division": "INFORMATION TECHNOLOGY",
+      "branch_id": 1
+    },
+    {
+      "nik": "120205",
+      "name": "NURUL HUDA TRIWIJANARKO PAMUNGKAS",
+      "username": "120205",
+      "jabatan": "STRATEGIC MANAGEMENT OFFICE MANAGER",
+      "group_name": "Manager",
+      "division": "STRATEGIC MANAGEMENT OFFICE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120185",
+      "name": "ABDURRAHMAN FAIZ",
+      "username": "120185",
+      "jabatan": "ELECTRONIC ARCHIVE MANAGER",
+      "group_name": "Manager",
+      "division": "ELECTRONIC ARCHIVE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120066",
+      "name": "EFFENDI",
+      "username": "120066",
+      "jabatan": "KEPALA BAGIAN ACCOUNTING",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "FINANCE & ACCOUNTING",
+      "branch_id": 1
+    },
+    {
+      "nik": "120074",
+      "name": "FIRMAN SETYAWAN",
+      "username": "120074",
+      "jabatan": "KEPALA BAGIAN DATA CONVERTION",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "ELECTRONIC ARCHIVE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120001",
+      "name": "NURMAILAH",
+      "username": "120001",
+      "jabatan": "KEPALA BAGIAN FINANCE",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "FINANCE & ACCOUNTING",
+      "branch_id": 1
+    },
+    {
+      "nik": "120221",
+      "name": "ALFIN PRIANDI",
+      "username": "120221",
+      "jabatan": "KEPALA BAGIAN SYSTEM & APPLICATION",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "INFORMATION TECHNOLOGY",
+      "branch_id": 1
+    },
+    {
+      "nik": "120237",
+      "name": "RIDWAN NUR MUTTAQIN",
+      "username": "120237",
+      "jabatan": "KEPALA BAGIAN OPERATIONAL ANALYST",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "STRATEGIC MANAGEMENT OFFICE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120232",
+      "name": "JANTIKA EFFENDIE",
+      "username": "120232",
+      "jabatan": "KEPALA BAGIAN DIGITAL MARKETING",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "ELECTRONIC ARCHIVE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120217",
+      "name": "HAIDIR ALI",
+      "username": "120217",
+      "jabatan": "KEPALA BAGIAN ELECTRONIC ARCHIVE SALES",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "ELECTRONIC ARCHIVE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120118",
+      "name": "HERNANDO",
+      "username": "120118",
+      "jabatan": "KEPALA BAGIAN HR",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "HUMAN RESOURCES & GENERAL AFFAIRS",
+      "branch_id": 1
+    },
+    {
+      "nik": "120012",
+      "name": "MANYU SURYANTORO",
+      "username": "120012",
+      "jabatan": "KEPALA BAGIAN GA",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "HUMAN RESOURCES & GENERAL AFFAIRS",
+      "branch_id": 1
+    },
+    {
+      "nik": "120215",
+      "name": "SANDRO TOBING",
+      "username": "120215",
+      "jabatan": "KEPALA BAGIAN ACCOUNT OFFICER",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "CONVENTIONAL ARCHIVE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120206",
+      "name": "HANDAYANI HALOHO",
+      "username": "120206",
+      "jabatan": "FINANCIAL ANALYST",
+      "group_name": "Staff",
+      "division": "STRATEGIC MANAGEMENT OFFICE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120234",
+      "name": "DANDO RIDWANTO",
+      "username": "120234",
+      "jabatan": "IT SENIOR PROGRAMMER",
+      "group_name": "Staff",
+      "division": "INFORMATION TECHNOLOGY",
+      "branch_id": 1
+    },
+    {
+      "nik": "120209",
+      "name": "PAISAL FAHMI",
+      "username": "120209",
+      "jabatan": "SYSTEM & IMPROVEMENT SUPERVISOR",
+      "group_name": "Staff",
+      "division": "INFORMATION TECHNOLOGY",
+      "branch_id": 1
+    },
+    {
+      "nik": "120104",
+      "name": "ASMAT",
+      "username": "120104",
+      "jabatan": "IT INFRASTRUCTURE SUPERVISOR",
+      "group_name": "Staff",
+      "division": "INFORMATION TECHNOLOGY",
+      "branch_id": 1
+    },
+    {
+      "nik": "120082",
+      "name": "ARI TAUFIK HIDAYAT",
+      "username": "120082",
+      "jabatan": "TAX SUPERVISOR",
+      "group_name": "Staff",
+      "division": "FINANCE & ACCOUNTING",
+      "branch_id": 1
+    },
+    {
+      "nik": "120184",
+      "name": "TRI ANANDA BR TARIGAN",
+      "username": "120184",
+      "jabatan": "A/R & COLLECTION SUPERVISOR",
+      "group_name": "Staff",
+      "division": "FINANCE & ACCOUNTING",
+      "branch_id": 1
+    },
+    {
+      "nik": "120229",
+      "name": "DIAN AYU PERMATASAKTI",
+      "username": "120229",
+      "jabatan": "GL & REPORTING SUPERVISOR",
+      "group_name": "Staff",
+      "division": "FINANCE & ACCOUNTING",
+      "branch_id": 1
+    },
+    {
+      "nik": "120230",
+      "name": "ANDRI SUSANTO",
+      "username": "120230",
+      "jabatan": "MITRA KERJA COORDINATOR",
+      "group_name": "Staff",
+      "division": "CONVENTIONAL ARCHIVE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120076",
+      "name": "AHMAD ZAKIYYUDDIN",
+      "username": "120076",
+      "jabatan": "TECHNICAL DMS",
+      "group_name": "Staff",
+      "division": "ELECTRONIC ARCHIVE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120223",
+      "name": "TAUFIK NUGRAHA",
+      "username": "120223",
+      "jabatan": "SEO, SEM & AFFILIATE MARKETING SPECIALIST",
+      "group_name": "Staff",
+      "division": "ELECTRONIC ARCHIVE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120077",
+      "name": "BELA DINDA WATI",
+      "username": "120077",
+      "jabatan": "OFFICE SUPPLIES & LICENSING STAFF",
+      "group_name": "Staff",
+      "division": "HUMAN RESOURCES & GENERAL AFFAIRS",
+      "branch_id": 1
+    },
+    {
+      "nik": "120087",
+      "name": "AVIV UBAIDILLAH",
+      "username": "120087",
+      "jabatan": "HR & PAYROLL STAFF",
+      "group_name": "Staff",
+      "division": "HUMAN RESOURCES & GENERAL AFFAIRS",
+      "branch_id": 1
+    },
+    {
+      "nik": "120240",
+      "name": "LUTFIA AHMADIN",
+      "username": "120240",
+      "jabatan": "RECEPTIONIST & PHONE OPERATOR",
+      "group_name": "Staff",
+      "division": "HUMAN RESOURCES & GENERAL AFFAIRS",
+      "branch_id": 1
+    },
+    {
+      "nik": "120058",
+      "name": "AHMAD SARNUBI",
+      "username": "120058",
+      "jabatan": "PURCHASING & INVENTORY STAFF",
+      "group_name": "Staff",
+      "division": "HUMAN RESOURCES & GENERAL AFFAIRS",
+      "branch_id": 1
+    },
+    {
+      "nik": "120228",
+      "name": "MUHAMMAD ABDUH",
+      "username": "120228",
+      "jabatan": "BUILDING & VEHICLE MAINTENANCE STAFF",
+      "group_name": "Staff",
+      "division": "HUMAN RESOURCES & GENERAL AFFAIRS",
+      "branch_id": 1
+    },
+    {
+      "nik": "120236",
+      "name": "MUHAMMAD FIRZI RABBANI",
+      "username": "120236",
+      "jabatan": "PERFORMANCE ADMINISTRATOR",
+      "group_name": "Staff",
+      "division": "STRATEGIC MANAGEMENT OFFICE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120032",
+      "name": "ENI ERNAWATI",
+      "username": "120032",
+      "jabatan": "IT ADMINISTRATOR & SUPPORT STAFF",
+      "group_name": "Staff",
+      "division": "INFORMATION TECHNOLOGY",
+      "branch_id": 1
+    },
+    {
+      "nik": "120048",
+      "name": "EVIE ARDIANTI",
+      "username": "120048",
+      "jabatan": "CUSTOMER CONTRACT STAFF",
+      "group_name": "Staff",
+      "division": "CONVENTIONAL ARCHIVE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120198",
+      "name": "WIDDY FEBRIAN",
+      "username": "120198",
+      "jabatan": "ADMINISTRATION STAFF",
+      "group_name": "Staff",
+      "division": "CONVENTIONAL ARCHIVE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120225",
+      "name": "IRFAN FADILAH",
+      "username": "120225",
+      "jabatan": "ADMINISTRATION STAFF",
+      "group_name": "Staff",
+      "division": "CONVENTIONAL ARCHIVE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120213",
+      "name": "DERAJAT WAHYU UTAMA",
+      "username": "120213",
+      "jabatan": "CUSTOMER LEGAL STAFF",
+      "group_name": "Staff",
+      "division": "CONVENTIONAL ARCHIVE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120164",
+      "name": "MARIO HASYULANDIKA",
+      "username": "120164",
+      "jabatan": "SALES & MARKETING STAFF",
+      "group_name": "Staff",
+      "division": "CONVENTIONAL ARCHIVE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120235",
+      "name": "DINA ASSYFA",
+      "username": "120235",
+      "jabatan": "SALES & MARKETING STAFF",
+      "group_name": "Staff",
+      "division": "CONVENTIONAL ARCHIVE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120195",
+      "name": "RATU MUTHMAINNAH",
+      "username": "120195",
+      "jabatan": "SALES & MARKETING GOVERNMENT STAFF",
+      "group_name": "Staff",
+      "division": "CONVENTIONAL ARCHIVE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120227",
+      "name": "PUTRI SALSABILA APRILIANA",
+      "username": "120227",
+      "jabatan": "ELECTRONIC ARCHIVE SALES STAFF",
+      "group_name": "Staff",
+      "division": "ELECTRONIC ARCHIVE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120233",
+      "name": "CHARMELIA SHELLY SUBONO",
+      "username": "120233",
+      "jabatan": "ELECTRONIC ARCHIVE SALES STAFF",
+      "group_name": "Staff",
+      "division": "ELECTRONIC ARCHIVE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120238",
+      "name": "MOHAMMAD KHALID I ALHADAD",
+      "username": "120238",
+      "jabatan": "JUNIOR PROGRAMMER",
+      "group_name": "Staff",
+      "division": "ELECTRONIC ARCHIVE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120214",
+      "name": "NANO ARISTIANTO",
+      "username": "120214",
+      "jabatan": "TECHNICAL DATA CONVERSION STAFF",
+      "group_name": "Staff",
+      "division": "ELECTRONIC ARCHIVE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120218",
+      "name": "MUHAMMAD RIZQI PRATAMA",
+      "username": "120218",
+      "jabatan": "DATA CONVERTION ADMINISTRATION STAFF",
+      "group_name": "Staff",
+      "division": "ELECTRONIC ARCHIVE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120220",
+      "name": "BAYU SETYOKO MOERTI",
+      "username": "120220",
+      "jabatan": "EMAIL & MOBILE MARKETING SPECIALIST",
+      "group_name": "Staff",
+      "division": "ELECTRONIC ARCHIVE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120239",
+      "name": "MICKO EVERALD IMMANUEL",
+      "username": "120239",
+      "jabatan": "CONTENT & SOCIAL ENGAGEMENT SPECIALIST",
+      "group_name": "Staff",
+      "division": "ELECTRONIC ARCHIVE",
+      "branch_id": 1
+    },
+    {
+      "nik": "120180",
+      "name": "NUR HALIMAH",
+      "username": "120180",
+      "jabatan": "A/R & COLLECTION STAFF",
+      "group_name": "Staff",
+      "division": "FINANCE & ACCOUNTING",
+      "branch_id": 1
+    },
+    {
+      "nik": "120192",
+      "name": "TOMAS MARLINGGA",
+      "username": "120192",
+      "jabatan": "A/R & COLLECTION STAFF",
+      "group_name": "Staff",
+      "division": "FINANCE & ACCOUNTING",
+      "branch_id": 1
+    },
+    {
+      "nik": "120187",
+      "name": "ANDIRA KUSUMA PUTRI",
+      "username": "120187",
+      "jabatan": "SALES & BILLING STAFF",
+      "group_name": "Staff",
+      "division": "FINANCE & ACCOUNTING",
+      "branch_id": 1
+    },
+    {
+      "nik": "120241",
+      "name": "NISBAH MAHARANI AZRA",
+      "username": "120241",
+      "jabatan": "SALES & BILLING STAFF",
+      "group_name": "Staff",
+      "division": "FINANCE & ACCOUNTING",
+      "branch_id": 1
+    },
+    {
+      "nik": "120222",
+      "name": "DIAH WULANDANI NURUTAMI",
+      "username": "120222",
+      "jabatan": "TAX STAFF",
+      "group_name": "Staff",
+      "division": "FINANCE & ACCOUNTING",
+      "branch_id": 1
+    },
+    {
+      "nik": "120167",
+      "name": "VERINDA SEKAR KINASIH ARARUNA WINDYARDI",
+      "username": "120167",
+      "jabatan": "CASHIER",
+      "group_name": "Staff",
+      "division": "FINANCE & ACCOUNTING",
+      "branch_id": 1
+    },
+    {
+      "nik": "120182",
+      "name": "ABDUL AZIZ",
+      "username": "120182",
+      "jabatan": "CENTRAL MONITORING SYSTEM STAFF",
+      "group_name": "Staff",
+      "division": "INFORMATION TECHNOLOGY",
+      "branch_id": 1
+    },
+    {
+      "nik": "120208",
+      "name": "AHMAD ARFIANTONI",
+      "username": "120208",
+      "jabatan": "CENTRAL MONITORING SYSTEM STAFF",
+      "group_name": "Staff",
+      "division": "INFORMATION TECHNOLOGY",
+      "branch_id": 1
+    },
+    {
+      "nik": "120210",
+      "name": "IRWANDA IGIR",
+      "username": "120210",
+      "jabatan": "CENTRAL MONITORING SYSTEM STAFF",
+      "group_name": "Staff",
+      "division": "INFORMATION TECHNOLOGY",
+      "branch_id": 1
+    },
+    {
+      "nik": "120212",
+      "name": "JUJUN JUNARDI",
+      "username": "120212",
+      "jabatan": "CENTRAL MONITORING SYSTEM STAFF",
+      "group_name": "Staff",
+      "division": "INFORMATION TECHNOLOGY",
+      "branch_id": 1
+    },
+    {
+      "nik": "120231",
+      "name": "JERRY POSUMA",
+      "username": "120231",
+      "jabatan": "CENTRAL MONITORING SYSTEM STAFF",
+      "group_name": "Staff",
+      "division": "INFORMATION TECHNOLOGY",
+      "branch_id": 1
+    },
+    {
+      "nik": "120009",
+      "name": "JAINUDIN",
+      "username": "120009",
+      "jabatan": "MESSENGER",
+      "group_name": "Staff",
+      "division": "HUMAN RESOURCES & GENERAL AFFAIRS",
+      "branch_id": 1
+    },
+    {
+      "nik": "120070",
+      "name": "HERMAWAN",
+      "username": "120070",
+      "jabatan": "OFFICE DRIVER",
+      "group_name": "Staff",
+      "division": "HUMAN RESOURCES & GENERAL AFFAIRS",
+      "branch_id": 1
+    },
+    {
+      "nik": "120190",
+      "name": "FALDO FREDY",
+      "username": "120190",
+      "jabatan": "OFFICE DRIVER",
+      "group_name": "Staff",
+      "division": "HUMAN RESOURCES & GENERAL AFFAIRS",
+      "branch_id": 1
+    },
+    {
+      "nik": "120194",
+      "name": "MALACHIAS F.M DJEDDIN",
+      "username": "120194",
+      "jabatan": "OFFICE DRIVER",
+      "group_name": "Staff",
+      "division": "HUMAN RESOURCES & GENERAL AFFAIRS",
+      "branch_id": 1
+    },
+    {
+      "nik": "120199",
+      "name": "ASEP SULAEMAN",
+      "username": "120199",
+      "jabatan": "OFFICE DRIVER",
+      "group_name": "Staff",
+      "division": "HUMAN RESOURCES & GENERAL AFFAIRS",
+      "branch_id": 1
+    },
+    {
+      "nik": "220146",
+      "name": "ADELYA VIKY ANDYNI",
+      "username": "220146",
+      "jabatan": "RECEPTIONIST",
+      "group_name": "Staff",
+      "division": "HUMAN RESOURCES & GENERAL AFFAIRS",
+      "branch_id": 1
+    },
+    {
+      "nik": "220111",
+      "name": "JAENAL ARIFIN",
+      "username": "220111",
+      "jabatan": "OFFICE BOY",
+      "group_name": "Staff",
+      "division": "HUMAN RESOURCES & GENERAL AFFAIRS",
+      "branch_id": 1
+    },
+    {
+      "nik": "220144",
+      "name": "FAHMI AS",
+      "username": "220144",
+      "jabatan": "OFFICE BOY",
+      "group_name": "Staff",
+      "division": "HUMAN RESOURCES & GENERAL AFFAIRS",
+      "branch_id": 1
+    },
+    {
+      "nik": "220145",
+      "name": "MUHAMMAD RIDWAN",
+      "username": "220145",
+      "jabatan": "OFFICE BOY",
+      "group_name": "Staff",
+      "division": "HUMAN RESOURCES & GENERAL AFFAIRS",
+      "branch_id": 1
+    },
+    {
+      "nik": "130002",
+      "name": "YULIANA",
+      "username": "130002",
+      "jabatan": "MANAGER",
+      "group_name": "Manager",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130008",
+      "name": "NINA MAESAROH",
+      "username": "130008",
+      "jabatan": "STORAGE SECTION HEAD",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130164",
+      "name": "DIAN OKMAWATI",
+      "username": "130164",
+      "jabatan": "HR & ADM SECTION HEAD",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130415",
+      "name": "MUHAMMAD RIDWAN",
+      "username": "130415",
+      "jabatan": "SERVICE & MAINTENANCE SECTION HEAD",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130073",
+      "name": "INTAN KHODIJAH",
+      "username": "130073",
+      "jabatan": "EDP SUPERVISOR",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130408",
+      "name": "JAENUDIN",
+      "username": "130408",
+      "jabatan": "HR & GA SUPERVISOR",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130097",
+      "name": "SITI MAEMUNAH",
+      "username": "130097",
+      "jabatan": "DELIVERY & EXPEDITION SUPERVISOR",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130388",
+      "name": "MAULANA JODI PRAYOGO",
+      "username": "130388",
+      "jabatan": "RECEIVING & FUMIGATION SUPERVISOR",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130228",
+      "name": "ADANG BIN SAEDI",
+      "username": "130228",
+      "jabatan": "STORAGE SUPERVISOR",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130014",
+      "name": "ENDIH KUSTANDI",
+      "username": "130014",
+      "jabatan": "STORAGE SUPERVISOR",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130020",
+      "name": "DASIR",
+      "username": "130020",
+      "jabatan": "STORAGE SUPERVISOR",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130417",
+      "name": "RIZKY AGUS KURNIAWAN",
+      "username": "130417",
+      "jabatan": "IT SUPPORT STAFF",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130420",
+      "name": "AHMAD MUKTAMAR",
+      "username": "130420",
+      "jabatan": "IT SUPPORT STAFF",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130294",
+      "name": "NIKEN HIDAYATI",
+      "username": "130294",
+      "jabatan": "CASHIER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130249",
+      "name": "CARMAN HERMAWAN",
+      "username": "130249",
+      "jabatan": "GENERAL AFFAIRS",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130385",
+      "name": "ANISA WIDYA UTAMI",
+      "username": "130385",
+      "jabatan": "PERSONNEL ADMINISTRATION STAFF",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130199",
+      "name": "EYUM WIDIA SARI",
+      "username": "130199",
+      "jabatan": "DATA ENTRY STAFF",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130235",
+      "name": "ROSLIANA",
+      "username": "130235",
+      "jabatan": "DATA ENTRY STAFF",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130418",
+      "name": "GILANG OKILEA FALISYAH",
+      "username": "130418",
+      "jabatan": "DATA ENTRY STAFF",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130132",
+      "name": "DEDEN SUDRAJAT",
+      "username": "130132",
+      "jabatan": "SECURITY COORDINATOR",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130133",
+      "name": "EDI SUHANDI",
+      "username": "130133",
+      "jabatan": "SECURITY COORDINATOR",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130252",
+      "name": "AGUNG LAKSANA",
+      "username": "130252",
+      "jabatan": "DELIVERY ADMINISTRATION STAFF",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130253",
+      "name": "DANI MARDIYANA",
+      "username": "130253",
+      "jabatan": "DELIVERY ADMINISTRATION STAFF",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130373",
+      "name": "ANWAR APRIJAL",
+      "username": "130373",
+      "jabatan": "DELIVERY ADMINISTRATION STAFF",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130422",
+      "name": "TONY SONTANY",
+      "username": "130422",
+      "jabatan": "DELIVERY ADMINISTRATION STAFF",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130421",
+      "name": "REGIANA MEGASARI",
+      "username": "130421",
+      "jabatan": "EXPEDITION ADMINISTRATION STAFF",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130211",
+      "name": "PANJI",
+      "username": "130211",
+      "jabatan": "PENJADWALAN STAFF",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130247",
+      "name": "USMAN PERMANA",
+      "username": "130247",
+      "jabatan": "PENJADWALAN STAFF",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130246",
+      "name": "MISTA MUSTHOPA",
+      "username": "130246",
+      "jabatan": "VEHICLE MAINTENANCE",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130015",
+      "name": "MAHDI KURNIAWAN",
+      "username": "130015",
+      "jabatan": "STOCK OPNAME & BOX CHECKER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130229",
+      "name": "NEDDY RUWENDHA",
+      "username": "130229",
+      "jabatan": "STOCK OPNAME & BOX CHECKER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130237",
+      "name": "WARSIM",
+      "username": "130237",
+      "jabatan": "STOCK OPNAME & BOX CHECKER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130201",
+      "name": "ADIT RADITA",
+      "username": "130201",
+      "jabatan": "SECURITY",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130202",
+      "name": "ENDANG SUHENDAR",
+      "username": "130202",
+      "jabatan": "SECURITY",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130203",
+      "name": "ADANG BIN SUPRIAT",
+      "username": "130203",
+      "jabatan": "SECURITY",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130230",
+      "name": "NURUDDIN AHMAD",
+      "username": "130230",
+      "jabatan": "SECURITY",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130234",
+      "name": "ABDURAHMAN",
+      "username": "130234",
+      "jabatan": "SECURITY",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130365",
+      "name": "HERU HERMANSYAH",
+      "username": "130365",
+      "jabatan": "SECURITY",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130377",
+      "name": "RIYAN FAUZI",
+      "username": "130377",
+      "jabatan": "SECURITY",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130413",
+      "name": "AEP SYAEPULLOH",
+      "username": "130413",
+      "jabatan": "SECURITY",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130371",
+      "name": "ADE DENI",
+      "username": "130371",
+      "jabatan": "EXPEDITION DRIVER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130363",
+      "name": "AHMAD HAMBALI",
+      "username": "130363",
+      "jabatan": "EXPEDITION DRIVER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130362",
+      "name": "ATA",
+      "username": "130362",
+      "jabatan": "EXPEDITION DRIVER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130383",
+      "name": "CAHYA GUMILAR",
+      "username": "130383",
+      "jabatan": "EXPEDITION DRIVER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130404",
+      "name": "IMAM NURDIANSYAH",
+      "username": "130404",
+      "jabatan": "EXPEDITION DRIVER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130414",
+      "name": "MAULANA",
+      "username": "130414",
+      "jabatan": "EXPEDITION DRIVER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130416",
+      "name": "SUHENDA",
+      "username": "130416",
+      "jabatan": "EXPEDITION DRIVER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130412",
+      "name": "TAUFIK HIDAYAT",
+      "username": "130412",
+      "jabatan": "EXPEDITION DRIVER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130378",
+      "name": "TUGINO",
+      "username": "130378",
+      "jabatan": "EXPEDITION DRIVER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130376",
+      "name": "YANA ANDRIYANA",
+      "username": "130376",
+      "jabatan": "EXPEDITION DRIVER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130206",
+      "name": "MESRAN",
+      "username": "130206",
+      "jabatan": "FUMIGAtION",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130394",
+      "name": "YUSUF HIDAYAT",
+      "username": "130394",
+      "jabatan": "FUMIGAtION",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130401",
+      "name": "ALI USMAN",
+      "username": "130401",
+      "jabatan": "PENATA & PENURUNAN BOX",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130236",
+      "name": "ENJANG",
+      "username": "130236",
+      "jabatan": "PENATA & PENURUNAN BOX",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130227",
+      "name": "KASJU",
+      "username": "130227",
+      "jabatan": "PENATA & PENURUNAN BOX",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130241",
+      "name": "M. PARMAN",
+      "username": "130241",
+      "jabatan": "PENATA & PENURUNAN BOX",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130390",
+      "name": "SAMIN GUNAWAN",
+      "username": "130390",
+      "jabatan": "PENATA & PENURUNAN BOX",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130208",
+      "name": "UDIN SAEPUDIN",
+      "username": "130208",
+      "jabatan": "PENATA & PENURUNAN BOX",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130232",
+      "name": "YAYAT ROHIYAT",
+      "username": "130232",
+      "jabatan": "PENATA & PENURUNAN BOX",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130238",
+      "name": "ITA HERMAWAN",
+      "username": "130238",
+      "jabatan": "PENATA & PENURUNAN BOX",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130243",
+      "name": "JAMAR",
+      "username": "130243",
+      "jabatan": "PENATA & PENURUNAN BOX",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130231",
+      "name": "NURJAMIN MUSLIM",
+      "username": "130231",
+      "jabatan": "PENATA & PENURUNAN BOX",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130389",
+      "name": "OYIM MULYANA",
+      "username": "130389",
+      "jabatan": "PENATA & PENURUNAN BOX",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130391",
+      "name": "RAHMAT KURNIA",
+      "username": "130391",
+      "jabatan": "PENATA & PENURUNAN BOX",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130250",
+      "name": "UTIN GUNAWAN",
+      "username": "130250",
+      "jabatan": "PENATA & PENURUNAN BOX",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130209",
+      "name": "UYIM AGUNG",
+      "username": "130209",
+      "jabatan": "PENATA & PENURUNAN BOX",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130375",
+      "name": "ASEP MUHAMAD YUSUF",
+      "username": "130375",
+      "jabatan": "DRIVER HELPER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130402",
+      "name": "DEDI SUPRIYADI",
+      "username": "130402",
+      "jabatan": "DRIVER HELPER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130207",
+      "name": "ENDANG SOPIAN",
+      "username": "130207",
+      "jabatan": "DRIVER HELPER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130386",
+      "name": "RIZKI",
+      "username": "130386",
+      "jabatan": "DRIVER HELPER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130405",
+      "name": "ROBI AGUNG",
+      "username": "130405",
+      "jabatan": "DRIVER HELPER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130393",
+      "name": "SADI HARYANTO",
+      "username": "130393",
+      "jabatan": "DRIVER HELPER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130368",
+      "name": "YAHYA",
+      "username": "130368",
+      "jabatan": "DRIVER HELPER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130392",
+      "name": "YOGA FIKI ZULFIKAR",
+      "username": "130392",
+      "jabatan": "DRIVER HELPER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130367",
+      "name": "YULIANTO",
+      "username": "130367",
+      "jabatan": "DRIVER HELPER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130049",
+      "name": "ADANG HIDAYAT",
+      "username": "130049",
+      "jabatan": "KEBERSIHAN GUDANG",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "130204",
+      "name": "SUTIRWAN SAEPUDIN",
+      "username": "130204",
+      "jabatan": "KEBERSIHAN GUDANG",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "230004",
+      "name": "NOPITA",
+      "username": "230004",
+      "jabatan": "PHONE OPERATOR",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "230001",
+      "name": "CEF EKA GUNAWAN",
+      "username": "230001",
+      "jabatan": "KEBERSIHAN GUDANG",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "230003",
+      "name": "NANDANG KUSWARA",
+      "username": "230003",
+      "jabatan": "KEBERSIHAN GUDANG",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "230006",
+      "name": "MUHAMAD FAIZ AL-HAFID",
+      "username": "230006",
+      "jabatan": "KEBERSIHAN GUDANG",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "230007",
+      "name": "SUTAMIHARJA",
+      "username": "230007",
+      "jabatan": "GROUND KEEPER",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "230002",
+      "name": "NACEP PURWANTO",
+      "username": "230002",
+      "jabatan": "OFFICE BOY",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "230008",
+      "name": "ALI SUNANDAR",
+      "username": "230008",
+      "jabatan": "OFFICE BOY",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "230009",
+      "name": "ADE SRI",
+      "username": "230009",
+      "jabatan": "OFFICE GIRL",
+      "group_name": "Staff",
+      "division": "REPOSITORY",
+      "branch_id": 3
+    },
+    {
+      "nik": "140091",
+      "name": "WARI",
+      "username": "140091",
+      "jabatan": "BRANCH MANAGER",
+      "group_name": "Manager",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140066",
+      "name": "ASRI STIA RINI MALIEK",
+      "username": "140066",
+      "jabatan": "KEPALA BAGIAN FA & ADM",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140065",
+      "name": "LATIHANTO DWI ATMOJO",
+      "username": "140065",
+      "jabatan": "KEPALA BAGIAN REPOSITORY",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140010",
+      "name": "YUNI NURUL HAYATI",
+      "username": "140010",
+      "jabatan": "KEPALA BAGIAN SALES & MARKETING",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140051",
+      "name": "MUHAMMAD FAHRI AMRULLAH",
+      "username": "140051",
+      "jabatan": "HRGA SUPERVISOR",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140072",
+      "name": "MAGA HERAWAN",
+      "username": "140072",
+      "jabatan": "IT SUPERVISOR",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140044",
+      "name": "YUWANITA PUSPITASARI",
+      "username": "140044",
+      "jabatan": "SALES & MARKETING SUPERVISOR",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140033",
+      "name": "EKO PRAMONO ADY WIBOWO",
+      "username": "140033",
+      "jabatan": "SERVICE & MAINTENANCE SUPERVISOR",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140029",
+      "name": "ANGGA WAHYU APRISTA PUTRA",
+      "username": "140029",
+      "jabatan": "STORAGE SUPERVISOR",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140085",
+      "name": "JIMI VARIS RISKI",
+      "username": "140085",
+      "jabatan": "SHREDDER SUPERVISOR",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140014",
+      "name": "RATNA EKAWATI",
+      "username": "140014",
+      "jabatan": "SALES & INVOICING STAFF",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140088",
+      "name": "MARIA DEBORA CHRISTINA",
+      "username": "140088",
+      "jabatan": "A/R & COLLECTION STAFF",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140090",
+      "name": "DHITA RESTYO RINI",
+      "username": "140090",
+      "jabatan": "GA ADMINISTRATION STAFF",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140078",
+      "name": "SAMUDRA PUTI SEKAR SERUNI",
+      "username": "140078",
+      "jabatan": "MARKETING ADM STAFF",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140013",
+      "name": "DWI TITANI NOOR",
+      "username": "140013",
+      "jabatan": "DATA ENTRY STAFF",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140081",
+      "name": "MUH BAHRUL ILMI KHOIRUDDIN",
+      "username": "140081",
+      "jabatan": "DATA ENTRY STAFF",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140073",
+      "name": "ROSALIA AGUSTIN",
+      "username": "140073",
+      "jabatan": "DELIVERY ADMINISTRATION",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140004",
+      "name": "BUDIARTO",
+      "username": "140004",
+      "jabatan": "OFFICE DRIVER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140005",
+      "name": "SUDARTO",
+      "username": "140005",
+      "jabatan": "MESSENGER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140006",
+      "name": "PURBOYO",
+      "username": "140006",
+      "jabatan": "EXPEDITION DRIVER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140017",
+      "name": "SUPARTO",
+      "username": "140017",
+      "jabatan": "EXPEDITION DRIVER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140068",
+      "name": "SANI RIZAL FAHMI",
+      "username": "140068",
+      "jabatan": "EXPEDITION DRIVER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140069",
+      "name": "NOER MUQORROBIN",
+      "username": "140069",
+      "jabatan": "EXPEDITION DRIVER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140019",
+      "name": "FATCHUR ROCHMAN",
+      "username": "140019",
+      "jabatan": "FUMIGATION",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140008",
+      "name": "DWI EKO HERMONO",
+      "username": "140008",
+      "jabatan": "PENATA",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140080",
+      "name": "AKHMAD PARIANTO",
+      "username": "140080",
+      "jabatan": "PENATA",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140082",
+      "name": "ADI BAGUS CATUR IRAWANTO",
+      "username": "140082",
+      "jabatan": "PENATA",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140086",
+      "name": "ARIK FIRMANSYAH",
+      "username": "140086",
+      "jabatan": "RECEIVING CHECKER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140076",
+      "name": "EBIT DWIANTO",
+      "username": "140076",
+      "jabatan": "SHREDDER OPERATOR",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140077",
+      "name": "MOCHAMAD ANSORI",
+      "username": "140077",
+      "jabatan": "SHREDDER OPERATOR",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140025",
+      "name": "ARI SETYAWAN",
+      "username": "140025",
+      "jabatan": "DRIVER HELPER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140070",
+      "name": "ZAINUDDIN",
+      "username": "140070",
+      "jabatan": "DRIVER HELPER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140087",
+      "name": "DIQRUL DWI LENGGANI",
+      "username": "140087",
+      "jabatan": "DRIVER HELPER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140084",
+      "name": "MA'RUF EFENDI",
+      "username": "140084",
+      "jabatan": "DRIVER HELPER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140026",
+      "name": "GIRI PRASETYO",
+      "username": "140026",
+      "jabatan": "OFFICE BOY",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "140022",
+      "name": "ANANG DANI",
+      "username": "140022",
+      "jabatan": "KEBERSIHAN GUDANG",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 2
+    },
+    {
+      "nik": "150053",
+      "name": "RAHMAT DJUHA",
+      "username": "150053",
+      "jabatan": "BRANCH MANAGER",
+      "group_name": "Manager",
+      "division": "BRANCH",
+      "branch_id": 4
+    },
+    {
+      "nik": "150050",
+      "name": "ERVINA DIAN MONIKA",
+      "username": "150050",
+      "jabatan": "KEPALA BAGIAN FA & ADM",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "BRANCH",
+      "branch_id": 4
+    },
+    {
+      "nik": "150051",
+      "name": "HERMANTO",
+      "username": "150051",
+      "jabatan": "KEPALA BAGIAN REPOSITORY",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "BRANCH",
+      "branch_id": 4
+    },
+    {
+      "nik": "150043",
+      "name": "SIGIT AGUNG NUGRAHA",
+      "username": "150043",
+      "jabatan": "KEPALA BAGIAN SALES & MARKETING",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "BRANCH",
+      "branch_id": 4
+    },
+    {
+      "nik": "150054",
+      "name": "ZAHROTUL HABIBAH",
+      "username": "150054",
+      "jabatan": "SALES & MARKETING STAFF",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 4
+    },
+    {
+      "nik": "150040",
+      "name": "YOGA WIDIA",
+      "username": "150040",
+      "jabatan": "DATA ENTRY STAFF",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 4
+    },
+    {
+      "nik": "150006",
+      "name": "AYI BUDIMAN",
+      "username": "150006",
+      "jabatan": "FUMIGATION",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 4
+    },
+    {
+      "nik": "150042",
+      "name": "ENDANG KARTIWA",
+      "username": "150042",
+      "jabatan": "PENATA",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 4
+    },
+    {
+      "nik": "150052",
+      "name": "DUDI MUHAMMAD SYIHABUDDIN",
+      "username": "150052",
+      "jabatan": "PENATA",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 4
+    },
+    {
+      "nik": "150044",
+      "name": "RADEN ARIK NURWICAKSONO",
+      "username": "150044",
+      "jabatan": "SHREDDER OPERATOR",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 4
+    },
+    {
+      "nik": "150035",
+      "name": "CEPI RUDIANSYAH",
+      "username": "150035",
+      "jabatan": "EXPEDITION DRIVER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 4
+    },
+    {
+      "nik": "150046",
+      "name": "LUTFI HALWANI",
+      "username": "150046",
+      "jabatan": "EXPEDITION DRIVER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 4
+    },
+    {
+      "nik": "150005",
+      "name": "IKIN HIDAYAT",
+      "username": "150005",
+      "jabatan": "OFFICE BOY",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 4
+    },
+    {
+      "nik": "150047",
+      "name": "ARI NURWIJAYA",
+      "username": "150047",
+      "jabatan": "DRIVER HELPER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 4
+    },
+    {
+      "nik": "150055",
+      "name": "KAKA KURNIAWAN",
+      "username": "150055",
+      "jabatan": "DRIVER HELPER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 4
+    },
+    {
+      "nik": "160044",
+      "name": "MAKMUR MANSUR",
+      "username": "160044",
+      "jabatan": "BRANCH MANAGER",
+      "group_name": "Manager",
+      "division": "BRANCH",
+      "branch_id": 5
+    },
+    {
+      "nik": "160029",
+      "name": "MUHAMMAD ASSIDIQ",
+      "username": "160029",
+      "jabatan": "KEPALA BAGIAN FA & ADM",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "BRANCH",
+      "branch_id": 5
+    },
+    {
+      "nik": "160061",
+      "name": "DALE",
+      "username": "160061",
+      "jabatan": "KEPALA BAGIAN REPOSITORY",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "BRANCH",
+      "branch_id": 5
+    },
+    {
+      "nik": "160070",
+      "name": "ADAM BASTIAN ARIEF",
+      "username": "160070",
+      "jabatan": "SALES & MARKETING SECTION HEAD",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "BRANCH",
+      "branch_id": 5
+    },
+    {
+      "nik": "160069",
+      "name": "AHMAD AZMAN",
+      "username": "160069",
+      "jabatan": "SALES & MARKETING STAFF",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 5
+    },
+    {
+      "nik": "160060",
+      "name": "ROSMAWATI",
+      "username": "160060",
+      "jabatan": "GA ADMINISTRATION STAFF",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 5
+    },
+    {
+      "nik": "160018",
+      "name": "MULYANI",
+      "username": "160018",
+      "jabatan": "DATA ENTRY STAFF",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 5
+    },
+    {
+      "nik": "160062",
+      "name": "MUH IKSAN",
+      "username": "160062",
+      "jabatan": "PENATA",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 5
+    },
+    {
+      "nik": "160063",
+      "name": "MUHAMMAD FARID DUNI",
+      "username": "160063",
+      "jabatan": "FUMIGATION",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 5
+    },
+    {
+      "nik": "160071",
+      "name": "NUR SYAMSUL BACHTIAR",
+      "username": "160071",
+      "jabatan": "SHREDDER OPERATOR",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 5
+    },
+    {
+      "nik": "160068",
+      "name": "AL IMRAN",
+      "username": "160068",
+      "jabatan": "EXPEDITION DRIVER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 5
+    },
+    {
+      "nik": "160064",
+      "name": "MUH RENALDI",
+      "username": "160064",
+      "jabatan": "DRIVER HELPER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 5
+    },
+    {
+      "nik": "160067",
+      "name": "DIAN HERDIANSYAH",
+      "username": "160067",
+      "jabatan": "OFFICE BOY",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 5
+    },
+    {
+      "nik": "170052",
+      "name": "HARI MURTIADI",
+      "username": "170052",
+      "jabatan": "BRANCH MANAGER",
+      "group_name": "Manager",
+      "division": "BRANCH",
+      "branch_id": 6
+    },
+    {
+      "nik": "170010",
+      "name": "SUSI PENI HANDAYANI",
+      "username": "170010",
+      "jabatan": "KEPALA BAGIAN FA & ADM",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "BRANCH",
+      "branch_id": 6
+    },
+    {
+      "nik": "170032",
+      "name": "CB. MURRY TRI ARIESANTO",
+      "username": "170032",
+      "jabatan": "KEPALA BAGIAN REPOSITORY",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "BRANCH",
+      "branch_id": 6
+    },
+    {
+      "nik": "170054",
+      "name": "IRSAN WIDYAWAN",
+      "username": "170054",
+      "jabatan": "KEPALA BAGIAN SALES & MARKETING",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "BRANCH",
+      "branch_id": 6
+    },
+    {
+      "nik": "170046",
+      "name": "MILA ARUM SARI",
+      "username": "170046",
+      "jabatan": "FA ADMINISTRATION STAFF",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 6
+    },
+    {
+      "nik": "170047",
+      "name": "MONIKA DWI AGUSTYANI",
+      "username": "170047",
+      "jabatan": "SALES & MARKETING STAFF",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 6
+    },
+    {
+      "nik": "170004",
+      "name": "DHANIE HARRY SULISTYO",
+      "username": "170004",
+      "jabatan": "DATA ENTRY STAFF",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 6
+    },
+    {
+      "nik": "170015",
+      "name": "MOHAMAD NERYADI",
+      "username": "170015",
+      "jabatan": "PENATA",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 6
+    },
+    {
+      "nik": "170044",
+      "name": "HASAN NURI HIDAYATULLOH",
+      "username": "170044",
+      "jabatan": "PENATA",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 6
+    },
+    {
+      "nik": "170048",
+      "name": "AHMAD ZAENURI",
+      "username": "170048",
+      "jabatan": "SHREDDER OPERATOR",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 6
+    },
+    {
+      "nik": "170050",
+      "name": "EKO SUPRIYANTO",
+      "username": "170050",
+      "jabatan": "EXPEDITION DRIVER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 6
+    },
+    {
+      "nik": "170053",
+      "name": "SUGIYARTO",
+      "username": "170053",
+      "jabatan": "EXPEDITION DRIVER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 6
+    },
+    {
+      "nik": "170051",
+      "name": "SAIFUL MUNIR",
+      "username": "170051",
+      "jabatan": "DRIVER HELPER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 6
+    },
+    {
+      "nik": "170055",
+      "name": "ASWIN ERA FAHRIDZA",
+      "username": "170055",
+      "jabatan": "DRIVER HELPER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 6
+    },
+    {
+      "nik": "170040",
+      "name": "NOVIARTO DWI MAHARDI",
+      "username": "170040",
+      "jabatan": "OFFICE BOY",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 6
+    },
+    {
+      "nik": "180001",
+      "name": "ANUGRAH HANDOYO S. PUTRO",
+      "username": "180001",
+      "jabatan": "BRANCH MANAGER",
+      "group_name": "Manager",
+      "division": "BRANCH",
+      "branch_id": 7
+    },
+    {
+      "nik": "180016",
+      "name": "DEWI KUSUMANIGRUM",
+      "username": "180016",
+      "jabatan": "KEPALA BAGIAN FA & ADM",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "BRANCH",
+      "branch_id": 7
+    },
+    {
+      "nik": "180003",
+      "name": "AGUNG BUDIYANTO",
+      "username": "180003",
+      "jabatan": "KEPALA BAGIAN REPOSITORY",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "BRANCH",
+      "branch_id": 7
+    },
+    {
+      "nik": "180052",
+      "name": "SEPTIAN TEDI KURNIAWAN",
+      "username": "180052",
+      "jabatan": "KEPALA BAGIAN SALES & MARKETING",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "BRANCH",
+      "branch_id": 7
+    },
+    {
+      "nik": "180044",
+      "name": "YASIN MUSTOFA",
+      "username": "180044",
+      "jabatan": "GA & ADMINISTRATION STAFF",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 7
+    },
+    {
+      "nik": "180051",
+      "name": "SUGENG RIYADI",
+      "username": "180051",
+      "jabatan": "SALES & MARKETING STAFF",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 7
+    },
+    {
+      "nik": "180042",
+      "name": "SHELLY MELLANIA YUNIAR",
+      "username": "180042",
+      "jabatan": "DATA ENTRY STAFF",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 7
+    },
+    {
+      "nik": "180041",
+      "name": "AGUS CAHYO WIBOWO",
+      "username": "180041",
+      "jabatan": "PENATA",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 7
+    },
+    {
+      "nik": "180045",
+      "name": "RIYADI JOHAN SANTOSO",
+      "username": "180045",
+      "jabatan": "PENATA",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 7
+    },
+    {
+      "nik": "180048",
+      "name": "NOORSETO FACHRUROZI",
+      "username": "180048",
+      "jabatan": "SHREDDER OPERATOR",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 7
+    },
+    {
+      "nik": "180047",
+      "name": "UDIN SUSILO",
+      "username": "180047",
+      "jabatan": "EXPEDITION DRIVER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 7
+    },
+    {
+      "nik": "180050",
+      "name": "AGUS INDRO WIDYANTO",
+      "username": "180050",
+      "jabatan": "EXPEDITION DRIVER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 7
+    },
+    {
+      "nik": "180040",
+      "name": "AGIET YUONO",
+      "username": "180040",
+      "jabatan": "DRIVER HELPER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 7
+    },
+    {
+      "nik": "180043",
+      "name": "MUHAMMAD FIGAR SYAMHARI",
+      "username": "180043",
+      "jabatan": "DRIVER HELPER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 7
+    },
+    {
+      "nik": "180046",
+      "name": "RIYANTO",
+      "username": "180046",
+      "jabatan": "OFFICE BOY",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 7
+    },
+    {
+      "nik": "190016",
+      "name": "HENDRI FERDINAN BARUS",
+      "username": "190016",
+      "jabatan": "KEPALA BAGIAN FA & ADM",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "BRANCH",
+      "branch_id": 8
+    },
+    {
+      "nik": "190026",
+      "name": "BRAM DE RONDYLEE PARDEDE",
+      "username": "190026",
+      "jabatan": "KEPALA BAGIAN SALES & MARKETING",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "BRANCH",
+      "branch_id": 8
+    },
+    {
+      "nik": "190003",
+      "name": "AHMAD PARLAUNGAN HARAHAP",
+      "username": "190003",
+      "jabatan": "KEPALA BAGIAN REPOSITORY",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "BRANCH",
+      "branch_id": 8
+    },
+    {
+      "nik": "190027",
+      "name": "ELDINA",
+      "username": "190027",
+      "jabatan": "SALES & MARKETING STAFF",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 8
+    },
+    {
+      "nik": "190017",
+      "name": "FACHRI RAHMAN",
+      "username": "190017",
+      "jabatan": "DATA ENTRY STAFF",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 8
+    },
+    {
+      "nik": "190020",
+      "name": "AGUM PURNOMO",
+      "username": "190020",
+      "jabatan": "PENATA",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 8
+    },
+    {
+      "nik": "190019",
+      "name": "DEDI PUTRA",
+      "username": "190019",
+      "jabatan": "EXPEDITION DRIVER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 8
+    },
+    {
+      "nik": "190015",
+      "name": "MUHAMMAD ARIEF MEGANTORO",
+      "username": "190015",
+      "jabatan": "OFFICE BOY",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 8
+    },
+    {
+      "nik": "200004",
+      "name": "ANDRIE STEFANUS PONDAAG",
+      "username": "200004",
+      "jabatan": "BRANCH MANAGER",
+      "group_name": "Manager",
+      "division": "BRANCH",
+      "branch_id": 9
+    },
+    {
+      "nik": "200001",
+      "name": "SISKE SILVIA MARIA RATU",
+      "username": "200001",
+      "jabatan": "KEPALA BAGIAN SALES & MARKETING",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "BRANCH",
+      "branch_id": 9
+    },
+    {
+      "nik": "200002",
+      "name": "DON JUAN ALES CHANDRA PURBA",
+      "username": "200002",
+      "jabatan": "KEPALA BAGIAN REPOSITORY",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "BRANCH",
+      "branch_id": 9
+    },
+    {
+      "nik": "200003",
+      "name": "INDAH SARI AYU SAGUNE",
+      "username": "200003",
+      "jabatan": "KEPALA BAGIAN FA & ADM",
+      "group_name": "Kepala Bagian (Kabag)",
+      "division": "BRANCH",
+      "branch_id": 9
+    },
+    {
+      "nik": "200008",
+      "name": "HARIWANTO LANDE' KENDEKALLO",
+      "username": "200008",
+      "jabatan": "PENATA",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 9
+    },
+    {
+      "nik": "200006",
+      "name": "HANNY JANDY KAMBEY",
+      "username": "200006",
+      "jabatan": "EXPEDITION DRIVER",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 9
+    },
+    {
+      "nik": "200007",
+      "name": "MAIKEL RONDONUWU",
+      "username": "200007",
+      "jabatan": "OFFICE BOY",
+      "group_name": "Staff",
+      "division": "BRANCH",
+      "branch_id": 9
+    }
+  ]
+}

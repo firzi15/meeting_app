@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
 }
-if ($_SESSION['role'] !== 'admin') {
+if ($_SESSION['role'] !== 'superadmin') {
     header("Location: index.php");
     exit;
 }

@@ -7,8 +7,13 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-$has_dashboard = (isset($_SESSION['can_dashboard']) && $_SESSION['can_dashboard']) || ($_SESSION['role'] === 'admin');
-$is_admin = $has_dashboard;
+if ($_SESSION['role'] !== 'superadmin') {
+    header("Location: index.php");
+    exit;
+}
+
+$has_dashboard = true;
+$is_admin = true;
 $is_hr = (isset($_SESSION['division']) && $_SESSION['division'] === 'HR');
 
 // Handle Save PDF Link
@@ -324,9 +329,20 @@ $detail_id = $_GET['id'] ?? null;
                                      </td>
                                      <td style="text-align: center; vertical-align: middle;">
                                          <?php if ($is_finished): ?>
-                                             <button type="button" class="btn-action-text btn-pdf-link" style="background:#0ea5e9; color:white; border-radius:6px; padding:6px 12px; border:none; cursor:pointer; font-weight:500; font-family:inherit; display: inline-flex; align-items: center; justify-content: center; width: 105px; box-sizing: border-box;" onclick="openPdfModal(<?= $m['id'] ?>, '<?= htmlspecialchars(addslashes($m['pdf_link'] ?? '')) ?>')" title="Link Summary">
-                                                 <i class="fa-solid fa-file-lines" style="margin-right: 5px;"></i> Summary
-                                             </button>
+                                             <?php if (!empty($m['pdf_link'])): ?>
+                                                 <div style="display: inline-flex; gap: 4px; align-items: center; justify-content: center;">
+                                                     <button type="button" class="btn-action-text btn-pdf-link" style="background:#0ea5e9; color:white; border-radius:6px; padding:6px 10px; border:none; cursor:pointer; font-weight:500; font-family:inherit; display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box;" onclick="openPdfModal(<?= $m['id'] ?>, '<?= htmlspecialchars(addslashes($m['pdf_link'] ?? '')) ?>')" title="Edit Link Summary">
+                                                         <i class="fa-solid fa-file-lines" style="margin-right: 5px;"></i> Summary
+                                                     </button>
+                                                     <a href="<?= htmlspecialchars($m['pdf_link']) ?>" target="_blank" rel="noopener noreferrer" class="btn-action-text" style="background:#10b981; color:white; border-radius:6px; padding:6px 10px; text-decoration:none; display: inline-flex; align-items: center; justify-content: center;" title="Buka Link di Tab Baru">
+                                                         <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                                     </a>
+                                                 </div>
+                                             <?php else: ?>
+                                                 <button type="button" class="btn-action-text btn-pdf-link" style="background:#0ea5e9; color:white; border-radius:6px; padding:6px 12px; border:none; cursor:pointer; font-weight:500; font-family:inherit; display: inline-flex; align-items: center; justify-content: center; width: 105px; box-sizing: border-box;" onclick="openPdfModal(<?= $m['id'] ?>, '')" title="Input Link Summary">
+                                                     <i class="fa-solid fa-file-lines" style="margin-right: 5px;"></i> Summary
+                                                 </button>
+                                             <?php endif; ?>
                                          <?php else: ?>
                                              <span style="color:#94a3b8;">-</span>
                                          <?php endif; ?>
@@ -874,16 +890,19 @@ $detail_id = $_GET['id'] ?? null;
         function openPdfModal(meetingId, currentLink) {
             document.getElementById('pdf_meeting_id').value = meetingId;
             document.getElementById('pdf_input_link').value = currentLink;
-            
-            var visitBtn = document.getElementById('visit_pdf_btn');
-            if (currentLink && currentLink.trim() !== '') {
-                visitBtn.href = currentLink;
-                visitBtn.style.display = 'inline-flex';
-            } else {
-                visitBtn.style.display = 'none';
-            }
-            
             document.getElementById('pdfModal').classList.add('active');
+        }
+
+        function openPdfInNewTab() {
+            var url = document.getElementById('pdf_input_link').value.trim();
+            if (url) {
+                if (!/^https?:\/\//i.test(url)) {
+                    url = 'https://' + url;
+                }
+                window.open(url, '_blank', 'noopener,noreferrer');
+            } else {
+                Toast.fire({ icon: 'warning', title: 'Silakan masukkan link terlebih dahulu.' });
+            }
         }
         
         function closePdfModal() {
@@ -965,11 +984,11 @@ $detail_id = $_GET['id'] ?? null;
                     </div>
                     <div style="display:flex; gap:10px; margin-top: 15px;">
                         <button type="submit" name="save_pdf_link" class="btn-submit" style="flex:1; padding: 12px; border-radius: 8px; border:none; color:white; font-weight:600; cursor:pointer;">
-                            Simpan Link
+                            <i class="fa-solid fa-floppy-disk" style="margin-right:6px;"></i> Simpan Link
                         </button>
-                        <a href="#" id="visit_pdf_btn" target="_blank" class="btn-submit" style="background:#10b981; text-decoration:none; text-align:center; padding: 12px; border-radius: 8px; display:none; justify-content:center; align-items:center; color:white; font-weight:600;">
-                            <i class="fa-solid fa-external-link" style="margin-right:8px;"></i> Buka Link
-                        </a>
+                        <button type="button" onclick="openPdfInNewTab()" class="btn-submit" style="background:#10b981; border:none; padding: 12px 18px; border-radius: 8px; display:inline-flex; justify-content:center; align-items:center; color:white; font-weight:600; cursor:pointer;">
+                            <i class="fa-solid fa-arrow-up-right-from-square" style="margin-right:8px;"></i> Buka di Tab Baru
+                        </button>
                     </div>
                 </form>
             </div>

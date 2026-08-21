@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
 }
-if ($_SESSION['role'] !== 'admin' && !(isset($_SESSION['can_dashboard']) && $_SESSION['can_dashboard'])) {
+if ($_SESSION['role'] !== 'superadmin') {
     header("Location: index.php");
     exit;
 }

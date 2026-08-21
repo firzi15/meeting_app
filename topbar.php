@@ -15,7 +15,7 @@ $topbar_branch_name = $stmt_topbar_branch->fetchColumn() ?: 'Kantor Pusat';
         <span id="current-datetime"><?= date('d M Y H:i:s') ?></span><span> - <?= htmlspecialchars($topbar_branch_name) ?></span>
     </div>
     <div class="topbar-right" style="display: flex; align-items: center; gap: 15px;">
-        <?php if ($_SESSION['role'] === 'admin'): ?>
+        <?php if ($_SESSION['role'] === 'superadmin'): ?>
             <?php
                 // Fetch branches for admin switcher
                 $stmt_branches = $pdo->query("SELECT * FROM branches ORDER BY name ASC");

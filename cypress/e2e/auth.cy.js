@@ -26,6 +26,7 @@ describe('Authentication Scenarios', () => {
       cy.get('a[href="branches.php"]').should('exist');
       cy.get('a[href="rooms.php"]').should('exist');
       cy.get('a[href="employees.php"]').should('exist');
+      cy.get('a[href="groups.php"]').should('exist');
       cy.get('a[href="divisions.php"]').should('exist');
       cy.get('a[href="templates.php"]').should('exist');
     });
@@ -42,6 +43,7 @@ describe('Authentication Scenarios', () => {
       cy.get('a[href="branches.php"]').should('not.exist');
       cy.get('a[href="rooms.php"]').should('not.exist');
       cy.get('a[href="employees.php"]').should('not.exist');
+      cy.get('a[href="groups.php"]').should('not.exist');
       cy.get('a[href="divisions.php"]').should('not.exist');
       cy.get('a[href="templates.php"]').should('not.exist');
     });

@@ -1,7 +1,7 @@
 describe('Meeting Booking Scenarios & Validations', () => {
   beforeEach(() => {
     cy.resetDb();
-    cy.login('admin', 'admin');
+    cy.login('admin', 'password');
     cy.visit('/index.php');
   });
 
@@ -32,16 +32,18 @@ describe('Meeting Booking Scenarios & Validations', () => {
     cy.get('#scheduleModal input[name="time"]').type('13:00');
     cy.get('#scheduleModal input[name="end_time"]').type('14:00');
 
-    // 5. Select PIC & Participants using Select2 option click
-    cy.get('#picSelect').next('.select2-container').click();
-    cy.get('.select2-results__option').contains('Rizqi').click();
-
-    // Select multiple participants (dropdown stays open for multiple select2)
+    // 5. Select Participants first (dropdown stays open for multiple select2)
     cy.get('#participantSelect').next('.select2-container').click();
     cy.get('.select2-results__option').contains('Fathi').click();
     cy.get('.select2-results__option').contains('Firzi').click();
+    cy.get('.select2-results__option').contains('Rizqi').click();
 
-    // 6. Test snack, coffee details toggle, and zoom
+    // 6. Select PIC from selected participants
+    cy.get('#picSelect').should('not.be.disabled');
+    cy.get('#picSelect').next('.select2-container').click();
+    cy.get('.select2-results__option').contains('Rizqi').click();
+
+    // 7. Test snack, coffee details toggle, and zoom
     cy.get('#scheduleModal input[name="has_snack"]').check();
     cy.get('#coffeeOptionsContainer').should('have.css', 'display', 'none');
     
@@ -57,23 +59,41 @@ describe('Meeting Booking Scenarios & Validations', () => {
 
     cy.get('#scheduleModal input[name="is_hybrid_zoom"]').check();
 
-    // 7. Submit form
+    // 8. Submit form
     cy.get('#scheduleForm').submit();
 
-    // 8. Verify SweetAlert popup showing details & QR Code
+    // 9. Verify SweetAlert popup showing details & QR Code
     cy.get('.swal2-container').should('contain', 'Jadwal Berhasil Dibuat!');
     cy.get('.swal2-html-container img').should('have.attr', 'src').and('include', 'qrserver.com');
     
     // Refresh page explicitly to avoid location.reload race conditions
     cy.reload();
 
-    // 9. Verify the scheduled meeting appears in dashboard table
+    // 10. Verify the scheduled meeting appears in dashboard table
     cy.get('#tableSearch').type('Rapat Umum Pemegang Saham');
     cy.get('tbody').should('contain', 'Rapat Umum Pemegang Saham');
     cy.get('tbody').should('contain', 'Ruang Meeting Besar');
   });
 
-  it('should prevent booking meeting with duration not equal to 1 hour', () => {
+  it('should support Quick Group addition (+ Manager, + Kabag, + Staff, Kosongkan)', () => {
+    cy.get('.action-card').first().click();
+
+    // Click + Staff
+    cy.get('#scheduleModal button').contains('+ Staff').click();
+    cy.get('.swal2-container').should('contain', 'peserta grup Staff ditambahkan');
+
+    // PIC should be enabled
+    cy.get('#picSelect').should('not.be.disabled');
+
+    // Click Kosongkan
+    cy.get('#scheduleModal button').contains('Kosongkan').click();
+    cy.get('.swal2-container').should('contain', 'Daftar peserta telah dikosongkan');
+
+    // PIC should be disabled again
+    cy.get('#picSelect').should('be.disabled');
+  });
+
+  it('should prevent booking meeting with duration not equal to multiple of 1 hour', () => {
     cy.get('.action-card').first().click();
     cy.get('#meetingTitle').type('Invalid Duration Meeting');
     
@@ -92,6 +112,9 @@ describe('Meeting Booking Scenarios & Validations', () => {
     // Set duration to 1 hour 30 mins (13:00 to 14:30)
     cy.get('#scheduleModal input[name="time"]').type('13:00');
     cy.get('#scheduleModal input[name="end_time"]').type('14:30');
+
+    cy.get('#participantSelect').next('.select2-container').click();
+    cy.get('.select2-results__option').contains('Rizqi').click();
 
     cy.get('#picSelect').next('.select2-container').click();
     cy.get('.select2-results__option').contains('Rizqi').click();
@@ -121,6 +144,9 @@ describe('Meeting Booking Scenarios & Validations', () => {
     cy.get('#scheduleModal input[name="time"]').type('09:00');
     cy.get('#scheduleModal input[name="end_time"]').type('11:00');
 
+    cy.get('#participantSelect').next('.select2-container').click();
+    cy.get('.select2-results__option').contains('Rizqi').click();
+
     cy.get('#picSelect').next('.select2-container').click();
     cy.get('.select2-results__option').contains('Rizqi').click();
 
@@ -141,6 +167,9 @@ describe('Meeting Booking Scenarios & Validations', () => {
     cy.get('#scheduleModal input[name="time"]').type('10:00');
     cy.get('#scheduleModal input[name="end_time"]').type('11:00');
 
+    cy.get('#participantSelect').next('.select2-container').click();
+    cy.get('.select2-results__option').contains('Fathi').click();
+
     cy.get('#picSelect').next('.select2-container').click();
     cy.get('.select2-results__option').contains('Fathi').click();
 
@@ -148,6 +177,52 @@ describe('Meeting Booking Scenarios & Validations', () => {
 
     // Verify error toast or Swal message
     cy.get('.swal2-container').should('contain', 'Ruangan sudah dipesan untuk waktu tersebut.');
+  });
+
+  it('should prevent scheduling when a participant already has another overlapping meeting', () => {
+    const testDate = new Date();
+    testDate.setDate(testDate.getDate() + 3);
+    const year = testDate.getFullYear();
+    const month = String(testDate.getMonth() + 1).padStart(2, '0');
+    const day = String(testDate.getDate()).padStart(2, '0');
+    const dateStr = `${year}-${month}-${day}`;
+
+    // Book 1st meeting: Room Online, 09:00 - 11:00 with participant Firzi
+    cy.get('.action-card').first().click();
+    cy.get('#meetingTitle').type('Firzi Meeting 1');
+    cy.get('#meetingRoomSelect').next('.select2-container').click();
+    cy.get('.select2-results__option').contains('Online').click();
+    cy.get('#scheduleModal input[name="date"]').type(dateStr);
+    cy.get('#scheduleModal input[name="time"]').type('09:00');
+    cy.get('#scheduleModal input[name="end_time"]').type('11:00');
+
+    cy.get('#participantSelect').next('.select2-container').click();
+    cy.get('.select2-results__option').contains('Firzi').click();
+    cy.get('#picSelect').next('.select2-container').click();
+    cy.get('.select2-results__option').contains('Firzi').click();
+
+    cy.get('#scheduleForm').submit();
+    cy.get('.swal2-container').should('contain', 'Jadwal Berhasil Dibuat!');
+    cy.reload();
+
+    // Try to book 2nd meeting in different room (e.g. Ruang Meeting Besar) at 10:00 - 11:00 with Firzi as participant
+    cy.get('.action-card').first().click();
+    cy.get('#meetingTitle').type('Firzi Bentrok Meeting');
+    cy.get('#meetingRoomSelect').next('.select2-container').click();
+    cy.get('.select2-results__option').contains('Ruang Meeting Besar').click();
+    cy.get('#scheduleModal input[name="date"]').type(dateStr);
+    cy.get('#scheduleModal input[name="time"]').type('10:00');
+    cy.get('#scheduleModal input[name="end_time"]').type('11:00');
+
+    cy.get('#participantSelect').next('.select2-container').click();
+    cy.get('.select2-results__option').contains('Firzi').click();
+    cy.get('#picSelect').next('.select2-container').click();
+    cy.get('.select2-results__option').contains('Firzi').click();
+
+    cy.get('#scheduleForm').submit();
+
+    // Verify conflict warning
+    cy.get('.swal2-container').should('contain', 'sedang memiliki jadwal meeting lain');
   });
 
   it('should allow overlapping bookings for the Online room and hide consumption panel', () => {
@@ -173,6 +248,9 @@ describe('Meeting Booking Scenarios & Validations', () => {
     cy.get('#scheduleModal input[name="time"]').type('09:00');
     cy.get('#scheduleModal input[name="end_time"]').type('11:00');
 
+    cy.get('#participantSelect').next('.select2-container').click();
+    cy.get('.select2-results__option').contains('Rizqi').click();
+
     cy.get('#picSelect').next('.select2-container').click();
     cy.get('.select2-results__option').contains('Rizqi').click();
 
@@ -182,7 +260,7 @@ describe('Meeting Booking Scenarios & Validations', () => {
     // Refresh page explicitly to avoid location.reload race conditions
     cy.reload();
 
-    // 3. Book 2nd meeting in Online room at same time: 10:00 - 11:00 (should succeed!)
+    // 3. Book 2nd meeting in Online room at same time: 10:00 - 11:00 (should succeed with different participant!)
     cy.get('.action-card').first().click();
     
     cy.get('#meetingRoomSelect').next('.select2-container').click();
@@ -192,6 +270,9 @@ describe('Meeting Booking Scenarios & Validations', () => {
     cy.get('#scheduleModal input[name="date"]').type(dateStr);
     cy.get('#scheduleModal input[name="time"]').type('10:00');
     cy.get('#scheduleModal input[name="end_time"]').type('11:00');
+
+    cy.get('#participantSelect').next('.select2-container').click();
+    cy.get('.select2-results__option').contains('Fathi').click();
 
     cy.get('#picSelect').next('.select2-container').click();
     cy.get('.select2-results__option').contains('Fathi').click();

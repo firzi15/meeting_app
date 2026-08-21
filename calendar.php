@@ -13,7 +13,7 @@ $current_branch = getCurrentBranchId();
 $where_branch = $current_branch > 0 ? "WHERE branch_id = $current_branch" : "WHERE 1=1";
 $and_branch = $current_branch > 0 ? "AND branch_id = $current_branch" : "";
 
-if ($_SESSION['role'] === 'admin' || (isset($_SESSION['can_dashboard']) && $_SESSION['can_dashboard'])) {
+if (in_array($_SESSION['role'], ['superadmin', 'admin']) || !empty($_SESSION['can_dashboard'])) {
     $stmt = $pdo->query("SELECT * FROM meetings $where_branch ORDER BY scheduled_time ASC");
     $meetings = $stmt->fetchAll();
 } else {

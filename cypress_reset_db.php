@@ -9,6 +9,7 @@ require_once 'database.php';
 try {
     // Drop existing tables and sequences to ensure a clean slate
     $pdo->exec("
+        DROP TABLE IF EXISTS employee_groups CASCADE;
         DROP TABLE IF EXISTS attendances CASCADE;
         DROP TABLE IF EXISTS meeting_feedbacks CASCADE;
         DROP TABLE IF EXISTS meeting_participants CASCADE;
@@ -20,6 +21,7 @@ try {
         DROP TABLE IF EXISTS branches CASCADE;
         DROP TABLE IF EXISTS login_attempts CASCADE;
 
+        DROP SEQUENCE IF EXISTS employee_groups_id_seq CASCADE;
         DROP SEQUENCE IF EXISTS attendances_id_seq CASCADE;
         DROP SEQUENCE IF EXISTS meeting_feedbacks_id_seq CASCADE;
         DROP SEQUENCE IF EXISTS meetings_id_seq CASCADE;
@@ -30,6 +32,7 @@ try {
         DROP SEQUENCE IF EXISTS branches_id_seq CASCADE;
         DROP SEQUENCE IF EXISTS login_attempts_id_seq CASCADE;
 
+        CREATE SEQUENCE employee_groups_id_seq;
         CREATE SEQUENCE attendances_id_seq;
         CREATE SEQUENCE meeting_feedbacks_id_seq;
         CREATE SEQUENCE meetings_id_seq;
@@ -52,7 +55,24 @@ try {
 
     // Apply auto-migrations as in database.php to ensure all newer columns are active
     try {
+        $pdo->exec("
+            CREATE TABLE IF NOT EXISTS employee_groups (
+                id SERIAL PRIMARY KEY,
+                name VARCHAR(100) NOT NULL UNIQUE,
+                description TEXT,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+        ");
+        $pdo->exec("INSERT INTO employee_groups (name, description) VALUES 
+            ('Manager', 'Manajer Cabang / Departemen'),
+            ('Kepala Bagian (Kabag)', 'Kepala Bagian / Unit Kerja'),
+            ('Staff', 'Karyawan / Staff Operasional')
+            ON CONFLICT (name) DO NOTHING;
+        ");
         $pdo->exec("ALTER TABLE users ADD COLUMN IF NOT EXISTS is_owner BOOLEAN DEFAULT FALSE");
+        $pdo->exec("ALTER TABLE users ADD COLUMN IF NOT EXISTS group_name VARCHAR(100) DEFAULT 'Staff'");
+        $pdo->exec("ALTER TABLE users ADD COLUMN IF NOT EXISTS jabatan VARCHAR(150)");
+        $pdo->exec("ALTER TABLE users ADD COLUMN IF NOT EXISTS nik VARCHAR(50)");
         $pdo->exec("ALTER TABLE meetings ADD COLUMN IF NOT EXISTS has_snack BOOLEAN DEFAULT FALSE");
         $pdo->exec("ALTER TABLE meetings ADD COLUMN IF NOT EXISTS has_coffee BOOLEAN DEFAULT FALSE");
         $pdo->exec("ALTER TABLE meetings ADD COLUMN IF NOT EXISTS coffee_temp TEXT");

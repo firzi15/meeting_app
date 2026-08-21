@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
 }
-if ($_SESSION['role'] !== 'admin') {
+if ($_SESSION['role'] !== 'superadmin') {
     header("Location: index.php");
     exit;
 }
@@ -32,12 +32,12 @@ if (isset($_POST['user_id']) && isset($_POST['feature'])) {
 }
 
 $stmt_users = $pdo->query("
-    SELECT u.id, u.name, u.username, u.division,
+    SELECT u.id, u.name, u.username, u.division, u.role,
            u.can_schedule, u.can_export, u.can_dashboard, u.is_owner,
            b.name AS branch_name
     FROM users u
     LEFT JOIN branches b ON b.id = u.branch_id
-    WHERE u.role != 'admin'
+    WHERE u.role != 'superadmin'
     ORDER BY u.name ASC
 ");
 $users = $stmt_users->fetchAll();
