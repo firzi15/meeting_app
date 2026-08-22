@@ -43,15 +43,15 @@ $current_branch = getCurrentBranchId();
 $where_clauses = ["u.role != 'superadmin'"];
 $params = [];
 
-if ($current_branch > 0) {
-    $where_clauses[] = "u.branch_id = ?";
-    $params[] = $current_branch;
-}
-
 if ($search !== '') {
-    $where_clauses[] = "(u.name ILIKE ? OR u.username ILIKE ? OR u.division ILIKE ? OR u.nik ILIKE ? OR b.name ILIKE ?)";
+    $where_clauses[] = "(u.name ILIKE ? OR u.username ILIKE ? OR u.division ILIKE ? OR u.nik ILIKE ? OR u.jabatan ILIKE ? OR b.name ILIKE ?)";
     $term = "%$search%";
-    $params = array_merge($params, [$term, $term, $term, $term, $term]);
+    $params = [$term, $term, $term, $term, $term, $term];
+} else {
+    if ($current_branch > 0) {
+        $where_clauses[] = "u.branch_id = ?";
+        $params[] = $current_branch;
+    }
 }
 
 $where = "WHERE " . implode(' AND ', $where_clauses);

@@ -141,15 +141,15 @@ $filter_group = trim($_GET['filter_group'] ?? '');
 $where_clauses = ["u.role != 'superadmin'"];
 $params = [];
 
-if ($current_branch > 0) {
-    $where_clauses[] = "u.branch_id = ?";
-    $params[] = $current_branch;
-}
-
 if ($search !== '') {
-    $where_clauses[] = "(u.name ILIKE ? OR u.username ILIKE ? OR u.nik ILIKE ? OR u.jabatan ILIKE ? OR u.division ILIKE ?)";
+    $where_clauses[] = "(u.name ILIKE ? OR u.username ILIKE ? OR u.nik ILIKE ? OR u.jabatan ILIKE ? OR u.division ILIKE ? OR b.name ILIKE ?)";
     $search_param = "%$search%";
-    $params = array_merge($params, [$search_param, $search_param, $search_param, $search_param, $search_param]);
+    $params = [$search_param, $search_param, $search_param, $search_param, $search_param, $search_param];
+} else {
+    if ($current_branch > 0) {
+        $where_clauses[] = "u.branch_id = ?";
+        $params[] = $current_branch;
+    }
 }
 
 if ($filter_group !== '') {

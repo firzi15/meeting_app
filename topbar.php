@@ -29,24 +29,28 @@ $topbar_branch_name = $stmt_topbar_branch->fetchColumn() ?: 'Kantor Pusat';
                     exit;
                 }
                 
-                $current_admin_branch = $_SESSION['admin_branch_id'] ?? 1;
+                $current_admin_branch = isset($_SESSION['admin_branch_id']) ? (int)$_SESSION['admin_branch_id'] : 1;
             ?>
             <div class="profile-container">
                 <div class="profile-info" onclick="toggleBranchDropdown(event)">
                     <i class="fa-solid fa-building" style="color: #64748b;"></i>
                     <span class="profile-name">
                         <?php 
-                            $current_branch_name = '';
-                            foreach($all_branches as $br) {
-                                if ($current_admin_branch == $br['id']) {
-                                    $current_branch_name = $br['name'];
-                                    break;
+                            if ($current_admin_branch === 0) {
+                                $current_branch_name = 'Semua Cabang';
+                            } else {
+                                $current_branch_name = '';
+                                foreach($all_branches as $br) {
+                                    if ($current_admin_branch == $br['id']) {
+                                        $current_branch_name = $br['name'];
+                                        break;
+                                    }
                                 }
-                            }
-                            if (empty($current_branch_name) && !empty($all_branches)) {
-                                $current_branch_name = $all_branches[0]['name'];
-                                $current_admin_branch = $all_branches[0]['id'];
-                                $_SESSION['admin_branch_id'] = $current_admin_branch;
+                                if (empty($current_branch_name) && !empty($all_branches)) {
+                                    $current_branch_name = $all_branches[0]['name'];
+                                    $current_admin_branch = $all_branches[0]['id'];
+                                    $_SESSION['admin_branch_id'] = $current_admin_branch;
+                                }
                             }
                             echo htmlspecialchars($current_branch_name);
                         ?>
@@ -59,6 +63,11 @@ $topbar_branch_name = $stmt_topbar_branch->fetchColumn() ?: 'Kantor Pusat';
                     <form method="POST" id="switchBranchForm" style="display:none;">
                         <input type="hidden" name="switch_branch_id" id="switchBranchIdInput" value="">
                     </form>
+                    <a href="#" onclick="submitBranchSwitch(0); return false;" class="dropdown-item <?= $current_admin_branch === 0 ? 'active' : '' ?>">
+                        <i class="fa-solid fa-globe"></i>
+                        <span>Semua Cabang</span>
+                    </a>
+                    <div class="dropdown-divider" style="margin: 4px 0; border-top: 1px solid #f1f5f9;"></div>
                     <?php foreach($all_branches as $br): ?>
                         <a href="#" onclick="submitBranchSwitch(<?= $br['id'] ?>); return false;" class="dropdown-item <?= $current_admin_branch == $br['id'] ? 'active' : '' ?>">
                             <i class="fa-solid fa-map-pin"></i>
