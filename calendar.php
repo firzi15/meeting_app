@@ -89,34 +89,58 @@ $events_json = json_encode($events);
             min-height: 42px !important;
             padding: 4px !important;
         }
-        /* Calendar Theme Tweaks to match Inter font */
+        /* Calendar Theme Tweaks with Spacious Modern Layout */
         #calendar {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
             background: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 28px 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
             border: 1px solid #e2e8f0;
+        }
+        .fc .fc-toolbar.fc-header-toolbar {
+            margin-top: 4px;
+            margin-bottom: 24px;
+            padding: 2px 4px;
+            align-items: center;
+        }
+        .fc .fc-toolbar-chunk {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .fc .fc-button-group {
+            display: inline-flex;
+            gap: 6px;
+        }
+        .fc .fc-button-group > .fc-button {
+            border-radius: 8px !important;
+            margin: 0 !important;
         }
         .fc-theme-standard td, .fc-theme-standard th {
             border-color: #f1f5f9;
         }
         .fc .fc-toolbar-title {
-            font-size: 1.25rem;
+            font-size: 1.35rem;
             font-weight: 700;
             color: #1e293b;
+            letter-spacing: -0.01em;
         }
         .fc-button-primary {
             background-color: #4f46e5 !important;
             border-color: #4f46e5 !important;
             border-radius: 8px !important;
-            font-weight: 500 !important;
+            padding: 8px 16px !important;
+            font-size: 0.875rem !important;
+            font-weight: 600 !important;
             text-transform: capitalize !important;
             box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            transition: all 0.2s ease !important;
         }
         .fc-button-primary:hover {
             background-color: #4338ca !important;
             border-color: #4338ca !important;
+            transform: translateY(-1px);
         }
         .fc-button-primary:disabled {
             background-color: #94a3b8 !important;
@@ -128,7 +152,7 @@ $events_json = json_encode($events);
         .fc-event {
             border: none;
             border-radius: 6px;
-            padding: 2px 4px;
+            padding: 3px 6px;
             font-size: 0.85rem;
             font-weight: 500;
             box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
