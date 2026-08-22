@@ -39,8 +39,7 @@ body {
 
 .table-responsive {
     width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
     margin-bottom: 1rem;
 }
 
@@ -478,7 +477,7 @@ body {
 /* Tables */
 .table-container {
     width: 100%;
-    overflow-x: auto;
+    overflow-x: hidden;
     border-radius: 12px;
     border: 1px solid var(--border-color);
 }
@@ -492,18 +491,19 @@ body {
 
 .table th {
     background: #f9fafb;
-    padding: 12px 24px;
+    padding: 11px 14px;
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
     color: #4b5563;
     border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
 }
 
 .table td {
-    padding: 16px 24px;
-    font-size: 0.875rem;
+    padding: 12px 14px;
+    font-size: 0.85rem;
     color: #374151;
     border-bottom: 1px solid var(--border-color);
 }
