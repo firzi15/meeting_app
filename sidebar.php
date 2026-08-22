@@ -3,7 +3,7 @@
         <div class="logo">
             <img src="logo.png" alt="Logo" onerror="this.outerHTML='<span class=\'logo-text\'>INDO<span style=\'color:var(--red-brand)\'>A</span>RSIP</span>'">
         </div>
-        <button class="toggle-btn" onclick="document.querySelector('.sidebar').classList.toggle('collapsed');">
+        <button class="toggle-btn" onclick="if(typeof toggleSidebar==='function'){toggleSidebar();}else{document.querySelector('.sidebar').classList.toggle('collapsed');document.querySelector('.app-container')?.classList.toggle('sidebar-collapsed');}">
             <i class="fa-solid fa-bars-staggered"></i>
         </button>
     </div>

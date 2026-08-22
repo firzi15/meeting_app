@@ -163,6 +163,10 @@ $topbar_branch_name = $stmt_topbar_branch->fetchColumn() ?: 'Kantor Pusat';
             overlay.classList.toggle('active');
         } else {
             sidebar.classList.toggle('collapsed');
+            const appContainer = document.querySelector('.app-container');
+            if (appContainer) {
+                appContainer.classList.toggle('sidebar-collapsed');
+            }
         }
     }
 
