@@ -76,9 +76,19 @@ $events_json = json_encode($events);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- FullCalendar CSS and JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <style>
+        .select2-container--default .select2-selection--multiple {
+            background-color: #ffffff !important;
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 8px !important;
+            min-height: 42px !important;
+            padding: 4px !important;
+        }
         /* Calendar Theme Tweaks to match Inter font */
         #calendar {
             font-family: 'Inter', sans-serif;
@@ -88,37 +98,50 @@ $events_json = json_encode($events);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             border: 1px solid #e2e8f0;
         }
+        .fc-theme-standard td, .fc-theme-standard th {
+            border-color: #f1f5f9;
+        }
         .fc .fc-toolbar-title {
             font-size: 1.25rem;
             font-weight: 700;
             color: #1e293b;
         }
-        .fc .fc-button-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
+        .fc-button-primary {
+            background-color: #4f46e5 !important;
+            border-color: #4f46e5 !important;
+            border-radius: 8px !important;
+            font-weight: 500 !important;
+            text-transform: capitalize !important;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
         }
-        .fc .fc-button-primary:not(:disabled):active, .fc .fc-button-primary:not(:disabled).fc-button-active {
-            background-color: #303f9f;
-            border-color: #303f9f;
+        .fc-button-primary:hover {
+            background-color: #4338ca !important;
+            border-color: #4338ca !important;
         }
-        .fc .fc-button-primary:hover {
-            background-color: #4f63d6;
-            border-color: #4f63d6;
+        .fc-button-primary:disabled {
+            background-color: #94a3b8 !important;
+            border-color: #94a3b8 !important;
+        }
+        .fc-day-today {
+            background-color: #f8fafc !important;
         }
         .fc-event {
-            cursor: pointer;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
+            padding: 2px 4px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
         }
-        /* Fixed height for day cells and scrollable events */
-        .fc .fc-daygrid-day-frame {
-            height: 120px !important;
-            overflow: hidden;
+        .fc-event:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
         .fc .fc-daygrid-day-events {
-            max-height: 90px;
+            max-height: 110px;
             overflow-y: auto;
-            scrollbar-width: thin;
         }
         .fc .fc-daygrid-day-events::-webkit-scrollbar {
             width: 4px;
@@ -139,9 +162,14 @@ $events_json = json_encode($events);
             <?php include 'topbar.php'; ?>
 
             <main class="content">
-                <div style="margin-bottom: 20px;">
-                    <h1 class="page-title">Kalender Jadwal Meeting</h1>
-                    <p class="page-subtitle">Pantau seluruh agenda meeting Anda secara visual</p>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px; flex-wrap:wrap; gap:15px;">
+                    <div>
+                        <h1 class="page-title">Kalender Jadwal Meeting</h1>
+                        <p class="page-subtitle" style="margin-bottom:0;">Pantau seluruh agenda meeting Anda secara visual</p>
+                    </div>
+                    <button type="button" class="btn-submit" onclick="openScheduleModal()" style="padding: 10px 18px; border-radius: 8px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-plus"></i> Ajukan Meeting
+                    </button>
                 </div>
                 
                 <!-- Keterangan Warna -->
@@ -222,10 +250,14 @@ $events_json = json_encode($events);
                     confirmButtonText: 'Tutup',
                     confirmButtonColor: '#3f51b5'
                 });
+            },
+            dateClick: function(info) {
+                openScheduleModal(info.dateStr);
             }
         });
         calendar.render();
     });
     </script>
+    <?php include 'modal_schedule.php'; ?>
 </body>
 </html>

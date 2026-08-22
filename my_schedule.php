@@ -26,6 +26,8 @@ $branch_condition = $current_branch > 0 ? "WHERE branch_id = $current_branch" : 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <style>
         .table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         .table th, .table td { padding: 12px 15px; border-bottom: 1px solid var(--border-color); text-align: left; }
@@ -34,6 +36,14 @@ $branch_condition = $current_branch > 0 ? "WHERE branch_id = $current_branch" : 
         .btn-view { display:inline-block; background: var(--primary-color); color: white; padding: 8px 15px; border-radius: 4px; text-decoration: none; font-size: 0.9rem; font-weight: 500; }
         .btn-view:hover { background: #303f9f; }
         .btn-disabled { display:inline-block; background: #e0e0e0; color: #888; padding: 8px 15px; border-radius: 4px; text-decoration: none; font-size: 0.9rem; font-weight: 500; pointer-events: none; }
+        
+        .select2-container--default .select2-selection--multiple {
+            background-color: #ffffff !important;
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 8px !important;
+            min-height: 42px !important;
+            padding: 4px !important;
+        }
     </style>
 </head>
 <body>
@@ -45,8 +55,15 @@ $branch_condition = $current_branch > 0 ? "WHERE branch_id = $current_branch" : 
             <?php include 'topbar.php'; ?>
 
             <main class="content">
-                <h1 class="page-title">Jadwal Absensi Anda</h1>
-                <p class="page-subtitle">Daftar meeting di mana Anda diundang</p>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px; flex-wrap:wrap; gap:15px;">
+                    <div>
+                        <h1 class="page-title">Jadwal Absensi Anda</h1>
+                        <p class="page-subtitle" style="margin-bottom:0;">Daftar meeting di mana Anda diundang</p>
+                    </div>
+                    <button type="button" class="btn-submit" onclick="openScheduleModal()" style="padding: 10px 18px; border-radius: 8px; font-weight: 600; display: inline-flex; align-items: center; gap: 8px;">
+                        <i class="fa-solid fa-plus"></i> Ajukan Meeting
+                    </button>
+                </div>
                 
                 <div class="card">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
@@ -260,5 +277,6 @@ $branch_condition = $current_branch > 0 ? "WHERE branch_id = $current_branch" : 
         setInterval(checkMeetings, 1000);
 
     </script>
+    <?php include 'modal_schedule.php'; ?>
 </body>
 </html>

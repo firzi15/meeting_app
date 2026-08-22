@@ -173,4 +173,19 @@ function renderPagination($page, $total_pages, $params = []) {
     echo '</div>';
 }
 
+if (!function_exists('renderGroupedUserOptions')) {
+    function renderGroupedUserOptions($pdo, $current_branch, $include_empty = false, $empty_label = '-- Pilih Karyawan --') {
+        if ($include_empty) {
+            echo '<option value="">' . htmlspecialchars($empty_label) . '</option>';
+        }
+        $stmt = $pdo->query("SELECT * FROM users WHERE role != 'superadmin' ORDER BY CASE WHEN branch_id = $current_branch THEN 0 ELSE 1 END ASC, name ASC");
+        $users = $stmt->fetchAll();
+        
+        foreach ($users as $u) {
+            $grp = $u['group_name'] ?? 'Staff';
+            echo '<option value="' . $u['id'] . '" data-group="' . htmlspecialchars($grp) . '">' . htmlspecialchars($u['name']) . '</option>';
+        }
+    }
+}
+
 ?>
