@@ -508,6 +508,16 @@ body {
     border-bottom: 1px solid var(--border-color);
 }
 
+.table th:first-child,
+.table td:first-child {
+    padding-left: 18px;
+}
+
+.table th:last-child,
+.table td:last-child {
+    padding-right: 20px;
+}
+
 .table tr:last-child td {
     border-bottom: none;
 }
