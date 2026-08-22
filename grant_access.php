@@ -129,10 +129,10 @@ $users = $stmt_users->fetchAll();
         <div class="main-wrapper">
             <?php include 'topbar.php'; ?>
             <main class="content">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
                     <div>
                         <h1 class="page-title">Manajemen Hak Akses</h1>
-                        <p class="page-subtitle">Berikan hak Owner Privilege atau Full Dashboard Access kepada karyawan</p>
+                        <p class="page-subtitle" style="margin-bottom: 0;">Berikan hak Owner Privilege atau Full Dashboard Access kepada karyawan</p>
                     </div>
 
                     <!-- Search Filter Form -->
@@ -155,12 +155,12 @@ $users = $stmt_users->fetchAll();
                         <table class="table table-fixed">
                             <thead>
                                 <tr>
-                                    <th style="width: 50px; text-align: center;">No.</th>
-                                    <th style="width: 35%;">Nama Karyawan</th>
-                                    <th style="width: 25%;">Divisi</th>
-                                    <th style="width: 20%;">Cabang</th>
-                                    <th style="text-align:center; width: 120px;">Owner Privilege</th>
-                                    <th style="text-align:center; width: 120px;">Akses Dashboard</th>
+                                    <th style="width: 44px; text-align: center;">No.</th>
+                                    <th style="width: 30%;">Nama Karyawan</th>
+                                    <th style="width: 22%;">Divisi</th>
+                                    <th style="width: 16%;">Cabang</th>
+                                    <th style="text-align:center; width: 140px;">Owner Privilege</th>
+                                    <th style="text-align:center; width: 150px;">Akses Dashboard</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -179,9 +179,9 @@ $users = $stmt_users->fetchAll();
                                     <tr>
                                         <td style="text-align: center; color: #94a3b8; font-size: 0.85rem;"><?= $no++ ?></td>
                                         <td>
-                                            <strong class="name-truncate" title="<?= htmlspecialchars($u['name']) ?>"><?= htmlspecialchars($u['name']) ?></strong>
+                                            <div class="name-truncate" style="font-weight: 700; color: #1e293b; line-height: 1.3;" title="<?= htmlspecialchars($u['name']) ?>"><?= htmlspecialchars($u['name']) ?></div>
                                             <?php if (!empty($u['jabatan'])): ?>
-                                                <div class="truncate-cell" style="font-size: 0.75rem; color: #64748b; margin-top: 2px;" title="<?= htmlspecialchars($u['jabatan']) ?>"><?= htmlspecialchars($u['jabatan']) ?></div>
+                                                <div class="truncate-cell" style="font-size: 0.75rem; color: #64748b; margin-top: 3px; line-height: 1.3;" title="<?= htmlspecialchars($u['jabatan']) ?>"><?= htmlspecialchars($u['jabatan']) ?></div>
                                             <?php endif; ?>
                                         </td>
                                         <td><span class="badge badge-info badge-truncate" style="cursor:default;" title="<?= htmlspecialchars($u['division'] ?: 'Umum') ?>"><?= htmlspecialchars($u['division'] ?: 'Umum') ?></span></td>
@@ -189,7 +189,7 @@ $users = $stmt_users->fetchAll();
 
                                         <!-- Owner Privilege Toggle -->
                                         <td style="text-align:center;">
-                                            <form method="POST" style="margin:0;">
+                                            <form method="POST" style="margin:0; display:flex; justify-content:center;">
                                                 <input type="hidden" name="user_id" value="<?= $u['id'] ?>">
                                                 <input type="hidden" name="feature" value="is_owner">
                                                 <input type="hidden" name="page" value="<?= $page ?>">
@@ -205,7 +205,7 @@ $users = $stmt_users->fetchAll();
 
                                         <!-- Full Dashboard Access Toggle -->
                                         <td style="text-align:center;">
-                                            <form method="POST" style="margin:0;">
+                                            <form method="POST" style="margin:0; display:flex; justify-content:center;">
                                                 <input type="hidden" name="user_id" value="<?= $u['id'] ?>">
                                                 <input type="hidden" name="feature" value="full_access">
                                                 <input type="hidden" name="page" value="<?= $page ?>">
