@@ -160,7 +160,7 @@ if ($filter_group !== '') {
 $where_sql = implode(' AND ', $where_clauses);
 
 // Pagination logic
-$limit = 15;
+$limit = 10;
 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? (int)$_GET['page'] : 1;
 if ($page < 1) $page = 1;
 $offset = ($page - 1) * $limit;
