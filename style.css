@@ -541,6 +541,16 @@ body {
     vertical-align: middle;
 }
 
+.name-truncate {
+    max-width: 170px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: default;
+}
+
 .truncate-cell {
     max-width: 170px;
     white-space: nowrap;
@@ -548,6 +558,7 @@ body {
     text-overflow: ellipsis;
     display: inline-block;
     vertical-align: middle;
+    cursor: default;
 }
 
 .badge-success {

@@ -301,7 +301,7 @@ $divisions = $pdo->query("SELECT name FROM divisions WHERE 1=1 $branch_condition
                                                 <?= htmlspecialchars($no++) ?>
                                             </td>
                                             <td><code style="font-size:0.85rem; color:#475569; font-weight:600;"><?= htmlspecialchars($emp['nik'] ?: '-') ?></code></td>
-                                            <td><strong><?= htmlspecialchars($emp['name']) ?></strong></td>
+                                            <td><strong class="name-truncate" title="<?= htmlspecialchars($emp['name']) ?>"><?= htmlspecialchars($emp['name']) ?></strong></td>
                                             <td><code><?= htmlspecialchars($emp['username']) ?></code></td>
                                             <td><?= $role_badge ?></td>
                                             <td><span class="truncate-cell" style="font-size:0.85rem; color:#334155; font-weight:500;" title="<?= htmlspecialchars($emp['jabatan'] ?: '-') ?>"><?= htmlspecialchars($emp['jabatan'] ?: '-') ?></span></td>

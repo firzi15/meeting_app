@@ -179,9 +179,9 @@ $users = $stmt_users->fetchAll();
                                     <tr>
                                         <td style="text-align: center; color: #94a3b8; font-size: 0.85rem;"><?= $no++ ?></td>
                                         <td>
-                                            <strong><?= htmlspecialchars($u['name']) ?></strong>
+                                            <strong class="name-truncate" title="<?= htmlspecialchars($u['name']) ?>"><?= htmlspecialchars($u['name']) ?></strong>
                                             <?php if (!empty($u['jabatan'])): ?>
-                                                <div style="font-size: 0.75rem; color: #64748b; margin-top: 2px;"><?= htmlspecialchars($u['jabatan']) ?></div>
+                                                <div class="truncate-cell" style="font-size: 0.75rem; color: #64748b; margin-top: 2px;" title="<?= htmlspecialchars($u['jabatan']) ?>"><?= htmlspecialchars($u['jabatan']) ?></div>
                                             <?php endif; ?>
                                         </td>
                                         <td><span class="badge badge-info badge-truncate" style="cursor:default;" title="<?= htmlspecialchars($u['division'] ?: 'Umum') ?>"><?= htmlspecialchars($u['division'] ?: 'Umum') ?></span></td>
