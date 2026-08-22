@@ -286,6 +286,7 @@ $divisions = $pdo->query("SELECT name FROM divisions WHERE 1=1 $branch_condition
                                                 $grp_bg = '#d1fae5';
                                                 $grp_icon = 'fa-id-badge';
                                             }
+                                            $grp_display = ($grp === 'Kepala Bagian (Kabag)') ? 'Kabag' : $grp;
 
                                             $role_badge = '<span class="badge" style="background:#f1f5f9; color:#475569;">User</span>';
                                             if ($emp['role'] === 'superadmin') {
@@ -303,13 +304,13 @@ $divisions = $pdo->query("SELECT name FROM divisions WHERE 1=1 $branch_condition
                                             <td><strong><?= htmlspecialchars($emp['name']) ?></strong></td>
                                             <td><code><?= htmlspecialchars($emp['username']) ?></code></td>
                                             <td><?= $role_badge ?></td>
-                                            <td><span style="font-size:0.85rem; color:#334155; font-weight:500;"><?= htmlspecialchars($emp['jabatan'] ?: '-') ?></span></td>
+                                            <td><span class="truncate-cell" style="font-size:0.85rem; color:#334155; font-weight:500;" title="<?= htmlspecialchars($emp['jabatan'] ?: '-') ?>"><?= htmlspecialchars($emp['jabatan'] ?: '-') ?></span></td>
                                             <td>
-                                                <span class="badge" style="background:<?= $grp_bg ?>; color:<?= $grp_color ?>; font-weight:600; display:inline-flex; align-items:center; gap:5px;">
-                                                    <i class="fa-solid <?= $grp_icon ?>"></i> <?= htmlspecialchars($grp) ?>
+                                                <span class="badge" title="<?= htmlspecialchars($grp) ?>" style="background:<?= $grp_bg ?>; color:<?= $grp_color ?>; font-weight:600; cursor:default;">
+                                                    <i class="fa-solid <?= $grp_icon ?>"></i> <?= htmlspecialchars($grp_display) ?>
                                                 </span>
                                             </td>
-                                            <td><span class="badge" style="background:#e0e7ff; color:#4338ca;"><?= htmlspecialchars($emp['division'] ?: '-') ?></span></td>
+                                            <td><span class="badge badge-truncate" style="background:#e0e7ff; color:#4338ca; cursor:default;" title="<?= htmlspecialchars($emp['division'] ?: '-') ?>"><?= htmlspecialchars($emp['division'] ?: '-') ?></span></td>
                                             <td style="text-align: center;">
                                                 <button type="button" class="btn-action-text" style="background:#f59e0b; color:white; border-radius:6px; padding:6px 12px;" 
                                                     onclick="editEmployee(<?= $emp['id'] ?>, '<?= htmlspecialchars(addslashes($emp['nik'] ?? ''), ENT_QUOTES) ?>', '<?= htmlspecialchars(addslashes($emp['name']), ENT_QUOTES) ?>', '<?= htmlspecialchars(addslashes($emp['username']), ENT_QUOTES) ?>', '<?= htmlspecialchars(addslashes($emp['role'] ?? 'user'), ENT_QUOTES) ?>', '<?= htmlspecialchars(addslashes($emp['jabatan'] ?? ''), ENT_QUOTES) ?>', '<?= htmlspecialchars(addslashes($emp['group_name'] ?? 'Staff'), ENT_QUOTES) ?>', '<?= htmlspecialchars(addslashes($emp['division'] ?: ''), ENT_QUOTES) ?>', <?= (int)($emp['branch_id'] ?? 1) ?>)" title="Edit Karyawan">

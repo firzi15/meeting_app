@@ -184,7 +184,7 @@ $users = $stmt_users->fetchAll();
                                                 <div style="font-size: 0.75rem; color: #64748b; margin-top: 2px;"><?= htmlspecialchars($u['jabatan']) ?></div>
                                             <?php endif; ?>
                                         </td>
-                                        <td><span class="badge badge-info"><?= htmlspecialchars($u['division'] ?: 'Umum') ?></span></td>
+                                        <td><span class="badge badge-info badge-truncate" style="cursor:default;" title="<?= htmlspecialchars($u['division'] ?: 'Umum') ?>"><?= htmlspecialchars($u['division'] ?: 'Umum') ?></span></td>
                                         <td><span style="font-size: 0.82rem; color: #475569; font-weight: 500;"><?= htmlspecialchars($u['branch_name'] ?? '-') ?></span></td>
 
                                         <!-- Owner Privilege Toggle -->
