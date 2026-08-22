@@ -1,0 +1,857 @@
+               
+               
+┌─────────────┐
+│ Scan Status │
+└─────────────┘
+  Scanning 64 files tracked by git with 2360 Code rules:
+                                                                                                                        
+  Language      Rules   Files          Origin      Rules                                                                
+ ─────────────────────────────        ───────────────────                                                               
+  <multilang>       6      64          Pro rules    1800                                                                
+  php              49      37          Community     560                                                                
+  js              233      11                                                                                           
+  yaml             24       3                                                                                           
+  json              3       2                                                                                           
+  dockerfile        4       1                                                                                           
+                                                                                                                        
+Warning: 1 timeout error(s) in meeting.css when running the following rules: [generic.secrets.security.detected-
+username-and-password-in-uri.detected-username-and-password-in-uri]
+                
+                
+┌──────────────┐
+│ Scan Summary │
+└──────────────┘
+✅ Scan completed successfully.
+ • Findings: 96 (96 blocking)
+ • Rules run: 319
+ • Targets scanned: 64
+ • Parsed lines: ~100.0%
+ • Scan was limited to files tracked by git
+ • For a detailed list of skipped files and lines, run semgrep with the --verbose flag
+Ran 319 rules on 64 files: 96 findings.
+
+📢 Too many findings? Try Semgrep Pro for more powerful queries and less noise.
+   See https://sg.run/false-positives.
+                    
+                    
+┌──────────────────┐
+│ 96 Code Findings │
+└──────────────────┘
+                
+    branches.php
+    ❯❱ php.lang.security.injection.tainted-callable.tainted-callable
+          ❰❰ Blocking ❱❱
+          Callable based on user input risks remote code execution.
+          Details: https://sg.run/YGb33                            
+                                                                   
+           81┆ $stmt = $pdo->prepare("SELECT name FROM branches WHERE id IN ($inQuery)");
+   
+   ❯❯❱ php.lang.security.injection.tainted-sql-string.tainted-sql-string
+          ❰❰ Blocking ❱❱
+          User data flows into this manually-constructed SQL string. User data can be safely inserted into SQL
+          strings using prepared statements or an object-relational mapper (ORM). Manually-constructed SQL    
+          strings is a possible indicator of SQL injection, which could let an attacker steal or manipulate   
+          data from the database. Instead, use prepared statements (`$mysqli->prepare("INSERT INTO test(id,   
+          label) VALUES (?, ?)");`) or a safe library.                                                        
+          Details: https://sg.run/lZYG                                                                        
+                                                                                                              
+           81┆ $stmt = $pdo->prepare("SELECT name FROM branches WHERE id IN ($inQuery)");
+   
+    ❯❱ php.lang.security.injection.tainted-callable.tainted-callable
+          ❰❰ Blocking ❱❱
+          Callable based on user input risks remote code execution.
+          Details: https://sg.run/YGb33                            
+                                                                   
+           86┆ $check = $pdo->prepare("SELECT DISTINCT branch_id FROM users WHERE branch_id IN
+               ($inQuery)");                                                                  
+   
+   ❯❯❱ php.lang.security.injection.tainted-sql-string.tainted-sql-string
+          ❰❰ Blocking ❱❱
+          User data flows into this manually-constructed SQL string. User data can be safely inserted into SQL
+          strings using prepared statements or an object-relational mapper (ORM). Manually-constructed SQL    
+          strings is a possible indicator of SQL injection, which could let an attacker steal or manipulate   
+          data from the database. Instead, use prepared statements (`$mysqli->prepare("INSERT INTO test(id,   
+          label) VALUES (?, ?)");`) or a safe library.                                                        
+          Details: https://sg.run/lZYG                                                                        
+                                                                                                              
+           86┆ $check = $pdo->prepare("SELECT DISTINCT branch_id FROM users WHERE branch_id IN
+               ($inQuery)");                                                                  
+   
+    ❯❱ php.lang.security.injection.tainted-callable.tainted-callable
+          ❰❰ Blocking ❱❱
+          Callable based on user input risks remote code execution.
+          Details: https://sg.run/YGb33                            
+                                                                   
+           94┆ $stmt = $pdo->prepare("DELETE FROM branches WHERE id IN ($inQuery)");
+   
+   ❯❯❱ php.lang.security.injection.tainted-sql-string.tainted-sql-string
+          ❰❰ Blocking ❱❱
+          User data flows into this manually-constructed SQL string. User data can be safely inserted into SQL
+          strings using prepared statements or an object-relational mapper (ORM). Manually-constructed SQL    
+          strings is a possible indicator of SQL injection, which could let an attacker steal or manipulate   
+          data from the database. Instead, use prepared statements (`$mysqli->prepare("INSERT INTO test(id,   
+          label) VALUES (?, ?)");`) or a safe library.                                                        
+          Details: https://sg.run/lZYG                                                                        
+                                                                                                              
+           94┆ $stmt = $pdo->prepare("DELETE FROM branches WHERE id IN ($inQuery)");
+   
+    ❯❱ php.lang.security.taint-unsafe-echo-tag.taint-unsafe-echo-tag
+          ❰❰ Blocking ❱❱
+          Found direct access to a PHP variable wihout HTML escaping inside an inline PHP statement setting   
+          data from `$_REQUEST[...]`. When untrusted input can be used to tamper with a web page rendering, it
+          can lead to a Cross-site scripting (XSS) vulnerability. XSS vulnerabilities occur when untrusted    
+          input executes malicious JavaScript code, leading to issues such as account compromise and sensitive
+          information leakage. To prevent this vulnerability, validate the user input, perform contextual     
+          output encoding or sanitize the input. In PHP you can encode or sanitize user input with            
+          `htmlspecialchars` or use automatic context-aware escaping with a template engine such as Latte.    
+          Details: https://sg.run/RlGe                                                                        
+                                                                                                              
+          176┆ <?= $no++ ?>
+            ⋮┆----------------------------------------
+          380┆ Toast.fire({ icon: 'success', title: '<?= $success ?>' });
+            ⋮┆----------------------------------------
+          385┆ Toast.fire({ icon: 'error', title: '<?= $error ?>' });
+                 
+    divisions.php
+    ❯❱ php.lang.security.injection.tainted-callable.tainted-callable
+          ❰❰ Blocking ❱❱
+          Callable based on user input risks remote code execution.
+          Details: https://sg.run/YGb33                            
+                                                                   
+           85┆ $stmt = $pdo->prepare("SELECT name FROM divisions WHERE id IN ($inQuery)");
+   
+   ❯❯❱ php.lang.security.injection.tainted-sql-string.tainted-sql-string
+          ❰❰ Blocking ❱❱
+          User data flows into this manually-constructed SQL string. User data can be safely inserted into SQL
+          strings using prepared statements or an object-relational mapper (ORM). Manually-constructed SQL    
+          strings is a possible indicator of SQL injection, which could let an attacker steal or manipulate   
+          data from the database. Instead, use prepared statements (`$mysqli->prepare("INSERT INTO test(id,   
+          label) VALUES (?, ?)");`) or a safe library.                                                        
+          Details: https://sg.run/lZYG                                                                        
+                                                                                                              
+           85┆ $stmt = $pdo->prepare("SELECT name FROM divisions WHERE id IN ($inQuery)");
+   
+    ❯❱ php.lang.security.injection.tainted-callable.tainted-callable
+          ❰❰ Blocking ❱❱
+          Callable based on user input risks remote code execution.
+          Details: https://sg.run/YGb33                            
+                                                                   
+           91┆ $check = $pdo->prepare("SELECT DISTINCT division FROM users WHERE division IN
+               ($inQueryNames)");                                                           
+   
+   ❯❯❱ php.lang.security.injection.tainted-sql-string.tainted-sql-string
+          ❰❰ Blocking ❱❱
+          User data flows into this manually-constructed SQL string. User data can be safely inserted into SQL
+          strings using prepared statements or an object-relational mapper (ORM). Manually-constructed SQL    
+          strings is a possible indicator of SQL injection, which could let an attacker steal or manipulate   
+          data from the database. Instead, use prepared statements (`$mysqli->prepare("INSERT INTO test(id,   
+          label) VALUES (?, ?)");`) or a safe library.                                                        
+          Details: https://sg.run/lZYG                                                                        
+                                                                                                              
+           91┆ $check = $pdo->prepare("SELECT DISTINCT division FROM users WHERE division IN
+               ($inQueryNames)");                                                           
+   
+    ❯❱ php.lang.security.injection.tainted-callable.tainted-callable
+          ❰❰ Blocking ❱❱
+          Callable based on user input risks remote code execution.
+          Details: https://sg.run/YGb33                            
+                                                                   
+           99┆ $stmt = $pdo->prepare("DELETE FROM divisions WHERE id IN ($inQuery) $branch_condition");
+   
+   ❯❯❱ php.lang.security.injection.tainted-sql-string.tainted-sql-string
+          ❰❰ Blocking ❱❱
+          User data flows into this manually-constructed SQL string. User data can be safely inserted into SQL
+          strings using prepared statements or an object-relational mapper (ORM). Manually-constructed SQL    
+          strings is a possible indicator of SQL injection, which could let an attacker steal or manipulate   
+          data from the database. Instead, use prepared statements (`$mysqli->prepare("INSERT INTO test(id,   
+          label) VALUES (?, ?)");`) or a safe library.                                                        
+          Details: https://sg.run/lZYG                                                                        
+                                                                                                              
+           99┆ $stmt = $pdo->prepare("DELETE FROM divisions WHERE id IN ($inQuery) $branch_condition");
+   
+   ❯❯❱ php.lang.security.injection.echoed-request.echoed-request
+          ❰❰ Blocking ❱❱
+          `Echo`ing user input risks cross-site scripting vulnerability. You should use `htmlentities()` when
+          showing data to users.                                                                             
+          Details: https://sg.run/Bqqb                                                                       
+                                                                                                             
+           ▶▶┆ Autofix ▶ echo htmlentities($no++);
+          181┆ <?= $no++ ?>
+            ⋮┆----------------------------------------
+           ▶▶┆ Autofix ▶ echo htmlentities($success);
+          385┆ Toast.fire({ icon: 'success', title: '<?= $success ?>' });
+            ⋮┆----------------------------------------
+           ▶▶┆ Autofix ▶ echo htmlentities($error);
+          390┆ Toast.fire({ icon: 'error', title: '<?= $error ?>' });
+                 
+    employees.php
+    ❯❱ php.lang.security.injection.tainted-callable.tainted-callable
+          ❰❰ Blocking ❱❱
+          Callable based on user input risks remote code execution.
+          Details: https://sg.run/YGb33                            
+                                                                   
+           91┆ $check = $pdo->prepare("SELECT COUNT(*) FROM meetings WHERE created_by IN ($inQuery) OR
+               pic_id IN ($inQuery)");                                                                
+   
+   ❯❯❱ php.lang.security.injection.tainted-sql-string.tainted-sql-string
+          ❰❰ Blocking ❱❱
+          User data flows into this manually-constructed SQL string. User data can be safely inserted into SQL
+          strings using prepared statements or an object-relational mapper (ORM). Manually-constructed SQL    
+          strings is a possible indicator of SQL injection, which could let an attacker steal or manipulate   
+          data from the database. Instead, use prepared statements (`$mysqli->prepare("INSERT INTO test(id,   
+          label) VALUES (?, ?)");`) or a safe library.                                                        
+          Details: https://sg.run/lZYG                                                                        
+                                                                                                              
+           91┆ $check = $pdo->prepare("SELECT COUNT(*) FROM meetings WHERE created_by IN ($inQuery) OR
+               pic_id IN ($inQuery)");                                                                
+   
+    ❯❱ php.lang.security.injection.tainted-callable.tainted-callable
+          ❰❰ Blocking ❱❱
+          Callable based on user input risks remote code execution.
+          Details: https://sg.run/YGb33                            
+                                                                   
+           95┆ $checkPart = $pdo->prepare("SELECT COUNT(*) FROM meeting_participants WHERE user_id IN
+               ($inQuery)");                                                                         
+   
+   ❯❯❱ php.lang.security.injection.tainted-sql-string.tainted-sql-string
+          ❰❰ Blocking ❱❱
+          User data flows into this manually-constructed SQL string. User data can be safely inserted into SQL
+          strings using prepared statements or an object-relational mapper (ORM). Manually-constructed SQL    
+          strings is a possible indicator of SQL injection, which could let an attacker steal or manipulate   
+          data from the database. Instead, use prepared statements (`$mysqli->prepare("INSERT INTO test(id,   
+          label) VALUES (?, ?)");`) or a safe library.                                                        
+          Details: https://sg.run/lZYG                                                                        
+                                                                                                              
+           95┆ $checkPart = $pdo->prepare("SELECT COUNT(*) FROM meeting_participants WHERE user_id IN
+               ($inQuery)");                                                                         
+   
+    ❯❱ php.lang.security.injection.tainted-callable.tainted-callable
+          ❰❰ Blocking ❱❱
+          Callable based on user input risks remote code execution.
+          Details: https://sg.run/YGb33                            
+                                                                   
+          102┆ $stmt = $pdo->prepare("DELETE FROM users WHERE id IN ($inQuery) AND role != 'admin'
+               $branch_condition");                                                               
+   
+   ❯❯❱ php.lang.security.injection.tainted-sql-string.tainted-sql-string
+          ❰❰ Blocking ❱❱
+          User data flows into this manually-constructed SQL string. User data can be safely inserted into SQL
+          strings using prepared statements or an object-relational mapper (ORM). Manually-constructed SQL    
+          strings is a possible indicator of SQL injection, which could let an attacker steal or manipulate   
+          data from the database. Instead, use prepared statements (`$mysqli->prepare("INSERT INTO test(id,   
+          label) VALUES (?, ?)");`) or a safe library.                                                        
+          Details: https://sg.run/lZYG                                                                        
+                                                                                                              
+          102┆ $stmt = $pdo->prepare("DELETE FROM users WHERE id IN ($inQuery) AND role != 'admin'
+               $branch_condition");                                                               
+   
+   ❯❯❱ php.lang.security.injection.echoed-request.echoed-request
+          ❰❰ Blocking ❱❱
+          `Echo`ing user input risks cross-site scripting vulnerability. You should use `htmlentities()` when
+          showing data to users.                                                                             
+          Details: https://sg.run/Bqqb                                                                       
+                                                                                                             
+           ▶▶┆ Autofix ▶ echo htmlentities($no++);
+          193┆ <?= $no++ ?>
+            ⋮┆----------------------------------------
+           ▶▶┆ Autofix ▶ echo htmlentities(json_encode($success));
+          416┆ Toast.fire({ icon: 'success', title: <?= json_encode($success) ?> });
+                
+    feedback.php
+   ❯❯❱ php.lang.security.injection.echoed-request.echoed-request
+          ❰❰ Blocking ❱❱
+          `Echo`ing user input risks cross-site scripting vulnerability. You should use `htmlentities()` when
+          showing data to users.                                                                             
+          Details: https://sg.run/Bqqb                                                                       
+                                                                                                             
+           ▶▶┆ Autofix ▶ echo htmlentities($token);
+          297┆ <a href="attendance.php?token=<?= $token ?>" style="color: #64748b; text-decoration: none;
+               font-weight: 600;">Kembali</a>                                                            
+   
+    ❯❱ php.lang.security.taint-unsafe-echo-tag.taint-unsafe-echo-tag
+          ❰❰ Blocking ❱❱
+          Found direct access to a PHP variable wihout HTML escaping inside an inline PHP statement setting   
+          data from `$_REQUEST[...]`. When untrusted input can be used to tamper with a web page rendering, it
+          can lead to a Cross-site scripting (XSS) vulnerability. XSS vulnerabilities occur when untrusted    
+          input executes malicious JavaScript code, leading to issues such as account compromise and sensitive
+          information leakage. To prevent this vulnerability, validate the user input, perform contextual     
+          output encoding or sanitize the input. In PHP you can encode or sanitize user input with            
+          `htmlspecialchars` or use automatic context-aware escaping with a template engine such as Latte.    
+          Details: https://sg.run/RlGe                                                                        
+                                                                                                              
+          297┆ <a href="attendance.php?token=<?= $token ?>" style="color: #64748b; text-decoration: none;
+               font-weight: 600;">Kembali</a>                                                            
+             
+    index.php
+   ❯❯❱ php.lang.security.injection.echoed-request.echoed-request
+          ❰❰ Blocking ❱❱
+          `Echo`ing user input risks cross-site scripting vulnerability. You should use `htmlentities()` when
+          showing data to users.                                                                             
+          Details: https://sg.run/Bqqb                                                                       
+                                                                                                             
+           ▶▶┆ Autofix ▶ echo htmlentities($prev_month);
+          157┆ <a href="index.php?month=<?= $prev_month ?>&year=<?= $prev_year ?>" class="calendar-nav-
+               btn" style="text-decoration: none; color: #ffffff; display: inline-flex; align-items:   
+               center; justify-content: center;"><i class="fa-solid fa-chevron-left"></i></a>          
+   
+    ❯❱ php.lang.security.taint-unsafe-echo-tag.taint-unsafe-echo-tag
+          ❰❰ Blocking ❱❱
+          Found direct access to a PHP variable wihout HTML escaping inside an inline PHP statement setting   
+          data from `$_REQUEST[...]`. When untrusted input can be used to tamper with a web page rendering, it
+          can lead to a Cross-site scripting (XSS) vulnerability. XSS vulnerabilities occur when untrusted    
+          input executes malicious JavaScript code, leading to issues such as account compromise and sensitive
+          information leakage. To prevent this vulnerability, validate the user input, perform contextual     
+          output encoding or sanitize the input. In PHP you can encode or sanitize user input with            
+          `htmlspecialchars` or use automatic context-aware escaping with a template engine such as Latte.    
+          Details: https://sg.run/RlGe                                                                        
+                                                                                                              
+          157┆ <a href="index.php?month=<?= $prev_month ?>&year=<?= $prev_year ?>" class="calendar-nav-
+               btn" style="text-decoration: none; color: #ffffff; display: inline-flex; align-items:   
+               center; justify-content: center;"><i class="fa-solid fa-chevron-left"></i></a>          
+   
+   ❯❯❱ php.lang.security.injection.echoed-request.echoed-request
+          ❰❰ Blocking ❱❱
+          `Echo`ing user input risks cross-site scripting vulnerability. You should use `htmlentities()` when
+          showing data to users.                                                                             
+          Details: https://sg.run/Bqqb                                                                       
+                                                                                                             
+           ▶▶┆ Autofix ▶ echo htmlentities($prev_year);
+          157┆ <a href="index.php?month=<?= $prev_month ?>&year=<?= $prev_year ?>" class="calendar-nav-
+               btn" style="text-decoration: none; color: #ffffff; display: inline-flex; align-items:   
+               center; justify-content: center;"><i class="fa-solid fa-chevron-left"></i></a>          
+   
+    ❯❱ php.lang.security.taint-unsafe-echo-tag.taint-unsafe-echo-tag
+          ❰❰ Blocking ❱❱
+          Found direct access to a PHP variable wihout HTML escaping inside an inline PHP statement setting   
+          data from `$_REQUEST[...]`. When untrusted input can be used to tamper with a web page rendering, it
+          can lead to a Cross-site scripting (XSS) vulnerability. XSS vulnerabilities occur when untrusted    
+          input executes malicious JavaScript code, leading to issues such as account compromise and sensitive
+          information leakage. To prevent this vulnerability, validate the user input, perform contextual     
+          output encoding or sanitize the input. In PHP you can encode or sanitize user input with            
+          `htmlspecialchars` or use automatic context-aware escaping with a template engine such as Latte.    
+          Details: https://sg.run/RlGe                                                                        
+                                                                                                              
+          157┆ <a href="index.php?month=<?= $prev_month ?>&year=<?= $prev_year ?>" class="calendar-nav-
+               btn" style="text-decoration: none; color: #ffffff; display: inline-flex; align-items:   
+               center; justify-content: center;"><i class="fa-solid fa-chevron-left"></i></a>          
+   
+   ❯❯❱ php.lang.security.injection.echoed-request.echoed-request
+          ❰❰ Blocking ❱❱
+          `Echo`ing user input risks cross-site scripting vulnerability. You should use `htmlentities()` when
+          showing data to users.                                                                             
+          Details: https://sg.run/Bqqb                                                                       
+                                                                                                             
+           ▶▶┆ Autofix ▶ echo htmlentities($month_name);
+          158┆ <span><?= $month_name ?></span>
+   
+    ❯❱ php.lang.security.taint-unsafe-echo-tag.taint-unsafe-echo-tag
+          ❰❰ Blocking ❱❱
+          Found direct access to a PHP variable wihout HTML escaping inside an inline PHP statement setting   
+          data from `$_REQUEST[...]`. When untrusted input can be used to tamper with a web page rendering, it
+          can lead to a Cross-site scripting (XSS) vulnerability. XSS vulnerabilities occur when untrusted    
+          input executes malicious JavaScript code, leading to issues such as account compromise and sensitive
+          information leakage. To prevent this vulnerability, validate the user input, perform contextual     
+          output encoding or sanitize the input. In PHP you can encode or sanitize user input with            
+          `htmlspecialchars` or use automatic context-aware escaping with a template engine such as Latte.    
+          Details: https://sg.run/RlGe                                                                        
+                                                                                                              
+          158┆ <span><?= $month_name ?></span>
+   
+   ❯❯❱ php.lang.security.injection.echoed-request.echoed-request
+          ❰❰ Blocking ❱❱
+          `Echo`ing user input risks cross-site scripting vulnerability. You should use `htmlentities()` when
+          showing data to users.                                                                             
+          Details: https://sg.run/Bqqb                                                                       
+                                                                                                             
+           ▶▶┆ Autofix ▶ echo htmlentities($next_month);
+          159┆ <a href="index.php?month=<?= $next_month ?>&year=<?= $next_year ?>" class="calendar-nav-
+               btn" style="text-decoration: none; color: #ffffff; display: inline-flex; align-items:   
+               center; justify-content: center;"><i class="fa-solid fa-chevron-right"></i></a>         
+   
+    ❯❱ php.lang.security.taint-unsafe-echo-tag.taint-unsafe-echo-tag
+          ❰❰ Blocking ❱❱
+          Found direct access to a PHP variable wihout HTML escaping inside an inline PHP statement setting   
+          data from `$_REQUEST[...]`. When untrusted input can be used to tamper with a web page rendering, it
+          can lead to a Cross-site scripting (XSS) vulnerability. XSS vulnerabilities occur when untrusted    
+          input executes malicious JavaScript code, leading to issues such as account compromise and sensitive
+          information leakage. To prevent this vulnerability, validate the user input, perform contextual     
+          output encoding or sanitize the input. In PHP you can encode or sanitize user input with            
+          `htmlspecialchars` or use automatic context-aware escaping with a template engine such as Latte.    
+          Details: https://sg.run/RlGe                                                                        
+                                                                                                              
+          159┆ <a href="index.php?month=<?= $next_month ?>&year=<?= $next_year ?>" class="calendar-nav-
+               btn" style="text-decoration: none; color: #ffffff; display: inline-flex; align-items:   
+               center; justify-content: center;"><i class="fa-solid fa-chevron-right"></i></a>         
+   
+   ❯❯❱ php.lang.security.injection.echoed-request.echoed-request
+          ❰❰ Blocking ❱❱
+          `Echo`ing user input risks cross-site scripting vulnerability. You should use `htmlentities()` when
+          showing data to users.                                                                             
+          Details: https://sg.run/Bqqb                                                                       
+                                                                                                             
+           ▶▶┆ Autofix ▶ echo htmlentities($next_year);
+          159┆ <a href="index.php?month=<?= $next_month ?>&year=<?= $next_year ?>" class="calendar-nav-
+               btn" style="text-decoration: none; color: #ffffff; display: inline-flex; align-items:   
+               center; justify-content: center;"><i class="fa-solid fa-chevron-right"></i></a>         
+   
+    ❯❱ php.lang.security.taint-unsafe-echo-tag.taint-unsafe-echo-tag
+          ❰❰ Blocking ❱❱
+          Found direct access to a PHP variable wihout HTML escaping inside an inline PHP statement setting   
+          data from `$_REQUEST[...]`. When untrusted input can be used to tamper with a web page rendering, it
+          can lead to a Cross-site scripting (XSS) vulnerability. XSS vulnerabilities occur when untrusted    
+          input executes malicious JavaScript code, leading to issues such as account compromise and sensitive
+          information leakage. To prevent this vulnerability, validate the user input, perform contextual     
+          output encoding or sanitize the input. In PHP you can encode or sanitize user input with            
+          `htmlspecialchars` or use automatic context-aware escaping with a template engine such as Latte.    
+          Details: https://sg.run/RlGe                                                                        
+                                                                                                              
+          159┆ <a href="index.php?month=<?= $next_month ?>&year=<?= $next_year ?>" class="calendar-nav-
+               btn" style="text-decoration: none; color: #ffffff; display: inline-flex; align-items:   
+               center; justify-content: center;"><i class="fa-solid fa-chevron-right"></i></a>         
+            ⋮┆----------------------------------------
+          184┆ echo '<div class="' . $class . '" data-date="' . $cell_date . '" style="cursor: pointer;"
+               onclick="filterTableByDate(\'' . $cell_date . '\', this)">';                             
+   
+    ❯❱ php.lang.security.injection.tainted-callable.tainted-callable
+          ❰❰ Blocking ❱❱
+          Callable based on user input risks remote code execution.
+          Details: https://sg.run/YGb33                            
+                                                                   
+          261┆ $stmt_schedule = $pdo->prepare("
+          262┆     SELECT m.*, b.name as branch_name
+          263┆     FROM meetings m
+          264┆     LEFT JOIN branches b ON m.branch_id = b.id
+          265┆     WHERE 1=1 $and_branch_m
+          266┆     ORDER BY m.scheduled_time DESC
+          267┆     LIMIT $limit OFFSET $offset
+          268┆ ");
+   
+   ❯❯❱ php.lang.security.injection.tainted-sql-string.tainted-sql-string
+          ❰❰ Blocking ❱❱
+          User data flows into this manually-constructed SQL string. User data can be safely inserted into SQL
+          strings using prepared statements or an object-relational mapper (ORM). Manually-constructed SQL    
+          strings is a possible indicator of SQL injection, which could let an attacker steal or manipulate   
+          data from the database. Instead, use prepared statements (`$mysqli->prepare("INSERT INTO test(id,   
+          label) VALUES (?, ?)");`) or a safe library.                                                        
+          Details: https://sg.run/lZYG                                                                        
+                                                                                                              
+          261┆ $stmt_schedule = $pdo->prepare("
+          262┆     SELECT m.*, b.name as branch_name
+          263┆     FROM meetings m
+          264┆     LEFT JOIN branches b ON m.branch_id = b.id
+          265┆     WHERE 1=1 $and_branch_m
+          266┆     ORDER BY m.scheduled_time DESC
+          267┆     LIMIT $limit OFFSET $offset
+          268┆ ");
+   
+    ❯❱ php.lang.security.injection.tainted-callable.tainted-callable
+          ❰❰ Blocking ❱❱
+          Callable based on user input risks remote code execution.
+          Details: https://sg.run/YGb33                            
+                                                                   
+          271┆ $stmt_schedule = $pdo->prepare("
+          272┆     SELECT m.*, b.name as branch_name
+          273┆     FROM meetings m
+          274┆     LEFT JOIN branches b ON m.branch_id = b.id
+          275┆     WHERE 1=1 $and_branch_m
+          276┆     AND (m.status = 'approved' OR m.created_by = ?)
+          277┆     ORDER BY m.scheduled_time DESC
+          278┆     LIMIT $limit OFFSET $offset
+          279┆ ");
+   
+   ❯❯❱ php.lang.security.injection.tainted-sql-string.tainted-sql-string
+          ❰❰ Blocking ❱❱
+          User data flows into this manually-constructed SQL string. User data can be safely inserted into SQL
+          strings using prepared statements or an object-relational mapper (ORM). Manually-constructed SQL    
+          strings is a possible indicator of SQL injection, which could let an attacker steal or manipulate   
+          data from the database. Instead, use prepared statements (`$mysqli->prepare("INSERT INTO test(id,   
+          label) VALUES (?, ?)");`) or a safe library.                                                        
+          Details: https://sg.run/lZYG                                                                        
+                                                                                                              
+          271┆ $stmt_schedule = $pdo->prepare("
+          272┆     SELECT m.*, b.name as branch_name
+          273┆     FROM meetings m
+          274┆     LEFT JOIN branches b ON m.branch_id = b.id
+          275┆     WHERE 1=1 $and_branch_m
+          276┆     AND (m.status = 'approved' OR m.created_by = ?)
+          277┆     ORDER BY m.scheduled_time DESC
+          278┆     LIMIT $limit OFFSET $offset
+          279┆ ");
+                   
+    my_schedule.php
+    ❯❱ php.lang.security.injection.tainted-callable.tainted-callable
+          ❰❰ Blocking ❱❱
+          Callable based on user input risks remote code execution.
+          Details: https://sg.run/YGb33                            
+                                                                   
+          104┆ $stmt = $pdo->prepare("
+          105┆     SELECT m.*
+          106┆     FROM meetings m
+          107┆     JOIN meeting_participants mp ON m.id = mp.meeting_id
+          108┆     $where_clause
+          109┆     ORDER BY m.scheduled_time DESC
+          110┆     LIMIT $limit OFFSET $offset
+          111┆ ");
+   
+   ❯❯❱ php.lang.security.injection.tainted-sql-string.tainted-sql-string
+          ❰❰ Blocking ❱❱
+          User data flows into this manually-constructed SQL string. User data can be safely inserted into SQL
+          strings using prepared statements or an object-relational mapper (ORM). Manually-constructed SQL    
+          strings is a possible indicator of SQL injection, which could let an attacker steal or manipulate   
+          data from the database. Instead, use prepared statements (`$mysqli->prepare("INSERT INTO test(id,   
+          label) VALUES (?, ?)");`) or a safe library.                                                        
+          Details: https://sg.run/lZYG                                                                        
+                                                                                                              
+          104┆ $stmt = $pdo->prepare("
+          105┆     SELECT m.*
+          106┆     FROM meetings m
+          107┆     JOIN meeting_participants mp ON m.id = mp.meeting_id
+          108┆     $where_clause
+          109┆     ORDER BY m.scheduled_time DESC
+          110┆     LIMIT $limit OFFSET $offset
+          111┆ ");
+   
+    ❯❱ php.lang.security.taint-unsafe-echo-tag.taint-unsafe-echo-tag
+          ❰❰ Blocking ❱❱
+          Found direct access to a PHP variable wihout HTML escaping inside an inline PHP statement setting   
+          data from `$_REQUEST[...]`. When untrusted input can be used to tamper with a web page rendering, it
+          can lead to a Cross-site scripting (XSS) vulnerability. XSS vulnerabilities occur when untrusted    
+          input executes malicious JavaScript code, leading to issues such as account compromise and sensitive
+          information leakage. To prevent this vulnerability, validate the user input, perform contextual     
+          output encoding or sanitize the input. In PHP you can encode or sanitize user input with            
+          `htmlspecialchars` or use automatic context-aware escaping with a template engine such as Latte.    
+          Details: https://sg.run/RlGe                                                                        
+                                                                                                              
+          158┆ <td><?= $no++ ?></td>
+            ⋮┆----------------------------------------
+          160┆ <div style="font-size: 0.85rem; font-weight: 700; color: #1e293b;"><?= date('d M Y',
+               $start_time) ?></div>                                                               
+            ⋮┆----------------------------------------
+          164┆ <td><span style="font-weight: 600; color: #1e293b;"><?= date('H:i', $start_time) ?> - <?=
+               date('H:i', $end_time) ?></span></td>                                                    
+            ⋮┆----------------------------------------
+          164┆ <td><span style="font-weight: 600; color: #1e293b;"><?= date('H:i', $start_time) ?> - <?=
+               date('H:i', $end_time) ?></span></td>                                                    
+            ⋮┆----------------------------------------
+          172┆ <a href="<?= $link ?>"
+            ⋮┆----------------------------------------
+          174┆ id="btn-<?= $meeting_id ?>"
+            ⋮┆----------------------------------------
+          175┆ data-start="<?= $start_time ?>"
+            ⋮┆----------------------------------------
+          176┆ data-end="<?= $end_time ?>">
+            ⋮┆----------------------------------------
+          191┆ <span class="btn-status" id="fb-status-<?= $meeting_id ?>" data-end="<?= $end_time
+               ?>">Feedback: Belum Waktunya</span>                                               
+            ⋮┆----------------------------------------
+          191┆ <span class="btn-status" id="fb-status-<?= $meeting_id ?>" data-end="<?= $end_time
+               ?>">Feedback: Belum Waktunya</span>                                               
+            ⋮┆----------------------------------------
+          193┆ <a href="feedback.php?id=<?= $meeting_id ?>" class="btn-view" style="text-
+               decoration:none;">Beri Feedback</a>                                       
+            ⋮┆----------------------------------------
+          210┆ <a href="my_schedule.php?page=<?= $i ?><?= $room_filter ? '&room='.urlencode($room_filter)
+               : '' ?>" class="page-link <?= ($page == $i) ? 'active' : '' ?>"><?= $i ?></a>             
+              
+    report.php
+    ❯❱ php.lang.security.injection.tainted-callable.tainted-callable
+          ❰❰ Blocking ❱❱
+          Callable based on user input risks remote code execution.
+          Details: https://sg.run/YGb33                            
+                                                                   
+           97┆ $stmt = $pdo->prepare("DELETE FROM meetings WHERE id IN ($inQuery)");
+   
+   ❯❯❱ php.lang.security.injection.tainted-sql-string.tainted-sql-string
+          ❰❰ Blocking ❱❱
+          User data flows into this manually-constructed SQL string. User data can be safely inserted into SQL
+          strings using prepared statements or an object-relational mapper (ORM). Manually-constructed SQL    
+          strings is a possible indicator of SQL injection, which could let an attacker steal or manipulate   
+          data from the database. Instead, use prepared statements (`$mysqli->prepare("INSERT INTO test(id,   
+          label) VALUES (?, ?)");`) or a safe library.                                                        
+          Details: https://sg.run/lZYG                                                                        
+                                                                                                              
+           97┆ $stmt = $pdo->prepare("DELETE FROM meetings WHERE id IN ($inQuery)");
+   
+    ❯❱ php.lang.security.injection.tainted-callable.tainted-callable
+          ❰❰ Blocking ❱❱
+          Callable based on user input risks remote code execution.
+          Details: https://sg.run/YGb33                            
+                                                                   
+          103┆ $stmt = $pdo->prepare("DELETE FROM meetings WHERE created_by = ? AND id IN ($inQuery)");
+   
+   ❯❯❱ php.lang.security.injection.tainted-sql-string.tainted-sql-string
+          ❰❰ Blocking ❱❱
+          User data flows into this manually-constructed SQL string. User data can be safely inserted into SQL
+          strings using prepared statements or an object-relational mapper (ORM). Manually-constructed SQL    
+          strings is a possible indicator of SQL injection, which could let an attacker steal or manipulate   
+          data from the database. Instead, use prepared statements (`$mysqli->prepare("INSERT INTO test(id,   
+          label) VALUES (?, ?)");`) or a safe library.                                                        
+          Details: https://sg.run/lZYG                                                                        
+                                                                                                              
+          103┆ $stmt = $pdo->prepare("DELETE FROM meetings WHERE created_by = ? AND id IN ($inQuery)");
+   
+    ❯❱ php.lang.security.injection.tainted-callable.tainted-callable
+          ❰❰ Blocking ❱❱
+          Callable based on user input risks remote code execution.
+          Details: https://sg.run/YGb33                            
+                                                                   
+          254┆ $stmt = $pdo->prepare("SELECT meetings.*, rooms.id as room_id FROM meetings JOIN rooms ON  
+               rooms.name = meetings.room AND rooms.branch_id = meetings.branch_id " . $where . " ORDER BY
+               meetings.id DESC LIMIT $limit OFFSET $offset");                                            
+   
+   ❯❯❱ php.lang.security.injection.tainted-sql-string.tainted-sql-string
+          ❰❰ Blocking ❱❱
+          User data flows into this manually-constructed SQL string. User data can be safely inserted into SQL
+          strings using prepared statements or an object-relational mapper (ORM). Manually-constructed SQL    
+          strings is a possible indicator of SQL injection, which could let an attacker steal or manipulate   
+          data from the database. Instead, use prepared statements (`$mysqli->prepare("INSERT INTO test(id,   
+          label) VALUES (?, ?)");`) or a safe library.                                                        
+          Details: https://sg.run/lZYG                                                                        
+                                                                                                              
+          254┆ $stmt = $pdo->prepare("SELECT meetings.*, rooms.id as room_id FROM meetings JOIN rooms ON  
+               rooms.name = meetings.room AND rooms.branch_id = meetings.branch_id " . $where . " ORDER BY
+               meetings.id DESC LIMIT $limit OFFSET $offset");                                            
+   
+    ❯❱ php.lang.security.injection.tainted-url-host.tainted-url-host
+          ❰❰ Blocking ❱❱
+          User data flows into the host portion of this manually-constructed URL. This could allow an attacker
+          to send data to their own server, potentially exposing sensitive data such as cookies or            
+          authorization information sent with this request. They could also probe internal servers or other   
+          resources that the server running this code can access. (This is called server-side request forgery,
+          or SSRF.) Do not allow arbitrary hosts. Instead, create an allowlist for approved hosts, or hardcode
+          the correct host.                                                                                   
+          Details: https://sg.run/Y8no                                                                        
+                                                                                                              
+          270┆ $link = $protocol . "://" . $_SERVER['HTTP_HOST'] . $basePath . "/attendance.php?room_id="
+               . $m['room_id'];                                                                          
+   
+   ❯❯❱ php.lang.security.injection.echoed-request.echoed-request
+          ❰❰ Blocking ❱❱
+          `Echo`ing user input risks cross-site scripting vulnerability. You should use `htmlentities()` when
+          showing data to users.                                                                             
+          Details: https://sg.run/Bqqb                                                                       
+                                                                                                             
+           ▶▶┆ Autofix ▶ echo htmlentities($m['id']);
+          279┆ <input type="checkbox" name="bulk_ids[]" value="<?= $m['id'] ?>" class="row-checkbox"
+               style="display:none;">                                                               
+            ⋮┆----------------------------------------
+           ▶▶┆ Autofix ▶ echo htmlentities($no++);
+          280┆ <?= $no++ ?>
+            ⋮┆----------------------------------------
+           ▶▶┆ Autofix ▶ echo htmlentities(date('d M Y', strtotime($m['scheduled_time'])));
+          282┆ <td><span style="white-space: nowrap; font-weight: 500; color: #475569;"><?= date('d M Y',
+               strtotime($m['scheduled_time'])) ?></span></td>                                           
+            ⋮┆----------------------------------------
+           ▶▶┆ Autofix ▶ echo htmlentities(ucfirst($m['coffee_temp'] ?? ''));
+          290┆ <span style="font-size: 0.7rem; background: #fef3c7; color: #b45309; padding: 2px 6px;     
+               border-radius: 4px; font-weight: 600;"><i class="fa-solid fa-coffee"></i> Kopi (<?=        
+               ucfirst($m['coffee_temp'] ?? '') ?> - <?= ($m['coffee_type'] ?? '') === 'bikin' ? 'Bikin' :
+               'Beli' ?>)</span>                                                                          
+            ⋮┆----------------------------------------
+           ▶▶┆ Autofix ▶ echo htmlentities(date('H:i', strtotime($m['scheduled_time'])));
+          299┆ <span style="white-space: nowrap;"><?= date('H:i', strtotime($m['scheduled_time'])) ?> -
+               <?= date('H:i', strtotime($m['end_time'])) ?></span>                                    
+            ⋮┆----------------------------------------
+           ▶▶┆ Autofix ▶ echo htmlentities(date('H:i', strtotime($m['end_time'])));
+          299┆ <span style="white-space: nowrap;"><?= date('H:i', strtotime($m['scheduled_time'])) ?> -
+               <?= date('H:i', strtotime($m['end_time'])) ?></span>                                    
+            ⋮┆----------------------------------------
+           ▶▶┆ Autofix ▶ echo htmlentities($link);
+          305┆ <button type="button" class="btn-action-text" style="background:#3b82f6; color:white;
+               border-radius:6px; padding:6px 12px;" onclick="showAccess('<?= $link ?>', '<?=       
+               htmlspecialchars(addslashes($m['title'])) ?>')" title="Lihat Akses Absen">           
+            ⋮┆----------------------------------------
+           ▶▶┆ Autofix ▶ echo htmlentities($m['id']);
+          315┆ <button type="button" class="btn-action-text" style="background:#f59e0b; color:white;
+               border-radius:6px; padding:6px 12px;" onclick="confirmEnd(<?= $m['id'] ?>)">         
+            ⋮┆----------------------------------------
+           ▶▶┆ Autofix ▶ echo htmlentities($m['id']);
+          320┆ <a href="report.php?id=<?= $m['id'] ?>" class="btn-action-text" style="background:#8b5cf6; 
+               color:white; border-radius:6px; padding:6px 12px; text-decoration:none; display: inline-   
+               flex; align-items: center; justify-content: center; width: 105px; box-sizing: border-box;">
+            ⋮┆----------------------------------------
+           ▶▶┆ Autofix ▶ echo htmlentities($m['id']);
+          327┆ <button type="button" class="btn-action-text btn-pdf-link" style="background:#0ea5e9;     
+               color:white; border-radius:6px; padding:6px 12px; border:none; cursor:pointer; font-      
+               weight:500; font-family:inherit; display: inline-flex; align-items: center; justify-      
+               content: center; width: 105px; box-sizing: border-box;" onclick="openPdfModal(<?= $m['id']
+               ?>, '<?= htmlspecialchars(addslashes($m['pdf_link'] ?? '')) ?>')" title="Link Summary">   
+            ⋮┆----------------------------------------
+           ▶▶┆ Autofix ▶ echo htmlentities($room_filter ? '&room='.urlencode($room_filter) : '');
+          343┆ <a href="report.php?page=<?= $i ?><?= $room_filter ? '&room='.urlencode($room_filter) : ''
+               ?>" class="page-link <?= ($page == $i) ? 'active' : '' ?>"><?= $i ?></a>                  
+            ⋮┆----------------------------------------
+           ▶▶┆ Autofix ▶ echo htmlentities($detail_id);
+          392┆ <a href="export_excel.php?type=detail&id=<?= $detail_id ?>" id="exportDetailBtn"
+               class="btn-excel">                                                              
+            ⋮┆----------------------------------------
+           ▶▶┆ Autofix ▶ echo htmlentities($detail_id);
+          408┆ <input type="hidden" name="meeting_id" value="<?= $detail_id ?>">
+            ⋮┆----------------------------------------
+           ▶▶┆ Autofix ▶ echo htmlentities($detail_id);
+          427┆ <input type="hidden" name="meeting_id" value="<?= $detail_id ?>">
+            ⋮┆----------------------------------------
+           ▶▶┆ Autofix ▶ echo htmlentities($detail_id);
+          534┆ <input type="hidden" name="meeting_id" value="<?= $detail_id ?>">
+            ⋮┆----------------------------------------
+           ▶▶┆ Autofix ▶ echo htmlentities($detail_id);
+          787┆ const baseUrl = 'export_excel.php?type=detail&id=<?= $detail_id ?>';
+             
+    rooms.php
+    ❯❱ php.lang.security.injection.tainted-callable.tainted-callable
+          ❰❰ Blocking ❱❱
+          Callable based on user input risks remote code execution.
+          Details: https://sg.run/YGb33                            
+                                                                   
+           85┆ $stmt = $pdo->prepare("SELECT name FROM rooms WHERE id IN ($inQuery)");
+   
+   ❯❯❱ php.lang.security.injection.tainted-sql-string.tainted-sql-string
+          ❰❰ Blocking ❱❱
+          User data flows into this manually-constructed SQL string. User data can be safely inserted into SQL
+          strings using prepared statements or an object-relational mapper (ORM). Manually-constructed SQL    
+          strings is a possible indicator of SQL injection, which could let an attacker steal or manipulate   
+          data from the database. Instead, use prepared statements (`$mysqli->prepare("INSERT INTO test(id,   
+          label) VALUES (?, ?)");`) or a safe library.                                                        
+          Details: https://sg.run/lZYG                                                                        
+                                                                                                              
+           85┆ $stmt = $pdo->prepare("SELECT name FROM rooms WHERE id IN ($inQuery)");
+   
+    ❯❱ php.lang.security.injection.tainted-callable.tainted-callable
+          ❰❰ Blocking ❱❱
+          Callable based on user input risks remote code execution.
+          Details: https://sg.run/YGb33                            
+                                                                   
+           91┆ $check = $pdo->prepare("SELECT DISTINCT room FROM meetings WHERE room IN ($inQueryNames)");
+   
+   ❯❯❱ php.lang.security.injection.tainted-sql-string.tainted-sql-string
+          ❰❰ Blocking ❱❱
+          User data flows into this manually-constructed SQL string. User data can be safely inserted into SQL
+          strings using prepared statements or an object-relational mapper (ORM). Manually-constructed SQL    
+          strings is a possible indicator of SQL injection, which could let an attacker steal or manipulate   
+          data from the database. Instead, use prepared statements (`$mysqli->prepare("INSERT INTO test(id,   
+          label) VALUES (?, ?)");`) or a safe library.                                                        
+          Details: https://sg.run/lZYG                                                                        
+                                                                                                              
+           91┆ $check = $pdo->prepare("SELECT DISTINCT room FROM meetings WHERE room IN ($inQueryNames)");
+   
+    ❯❱ php.lang.security.injection.tainted-callable.tainted-callable
+          ❰❰ Blocking ❱❱
+          Callable based on user input risks remote code execution.
+          Details: https://sg.run/YGb33                            
+                                                                   
+           99┆ $stmt = $pdo->prepare("DELETE FROM rooms WHERE id IN ($inQuery) $branch_condition");
+   
+   ❯❯❱ php.lang.security.injection.tainted-sql-string.tainted-sql-string
+          ❰❰ Blocking ❱❱
+          User data flows into this manually-constructed SQL string. User data can be safely inserted into SQL
+          strings using prepared statements or an object-relational mapper (ORM). Manually-constructed SQL    
+          strings is a possible indicator of SQL injection, which could let an attacker steal or manipulate   
+          data from the database. Instead, use prepared statements (`$mysqli->prepare("INSERT INTO test(id,   
+          label) VALUES (?, ?)");`) or a safe library.                                                        
+          Details: https://sg.run/lZYG                                                                        
+                                                                                                              
+           99┆ $stmt = $pdo->prepare("DELETE FROM rooms WHERE id IN ($inQuery) $branch_condition");
+   
+   ❯❯❱ php.lang.security.injection.echoed-request.echoed-request
+          ❰❰ Blocking ❱❱
+          `Echo`ing user input risks cross-site scripting vulnerability. You should use `htmlentities()` when
+          showing data to users.                                                                             
+          Details: https://sg.run/Bqqb                                                                       
+                                                                                                             
+           ▶▶┆ Autofix ▶ echo htmlentities($no++);
+          181┆ <?= $no++ ?>
+                     
+    save_schedule.php
+   ❯❯❱ php.lang.security.injection.echoed-request.echoed-request
+          ❰❰ Blocking ❱❱
+          `Echo`ing user input risks cross-site scripting vulnerability. You should use `htmlentities()` when
+          showing data to users.                                                                             
+          Details: https://sg.run/Bqqb                                                                       
+                                                                                                             
+           ▶▶┆ Autofix ▶ echo htmlentities(json_encode([ 'success' => true, 'link' => $attendance_link, 'title' =>
+              $title, 'room' => $room ]));                                                                        
+          109┆ echo json_encode([
+          110┆     'success' => true,
+          111┆     'link' => $attendance_link,
+          112┆     'title' => $title,
+          113┆     'room' => $room
+          114┆ ]);
+                 
+    templates.php
+    ❯❱ php.lang.security.injection.tainted-callable.tainted-callable
+          ❰❰ Blocking ❱❱
+          Callable based on user input risks remote code execution.
+          Details: https://sg.run/YGb33                            
+                                                                   
+           90┆ $stmt = $pdo->prepare("DELETE FROM meeting_templates WHERE id IN ($inQuery)
+               $branch_condition");                                                       
+   
+   ❯❯❱ php.lang.security.injection.tainted-sql-string.tainted-sql-string
+          ❰❰ Blocking ❱❱
+          User data flows into this manually-constructed SQL string. User data can be safely inserted into SQL
+          strings using prepared statements or an object-relational mapper (ORM). Manually-constructed SQL    
+          strings is a possible indicator of SQL injection, which could let an attacker steal or manipulate   
+          data from the database. Instead, use prepared statements (`$mysqli->prepare("INSERT INTO test(id,   
+          label) VALUES (?, ?)");`) or a safe library.                                                        
+          Details: https://sg.run/lZYG                                                                        
+                                                                                                              
+           90┆ $stmt = $pdo->prepare("DELETE FROM meeting_templates WHERE id IN ($inQuery)
+               $branch_condition");                                                       
+   
+   ❯❯❱ php.lang.security.injection.echoed-request.echoed-request
+          ❰❰ Blocking ❱❱
+          `Echo`ing user input risks cross-site scripting vulnerability. You should use `htmlentities()` when
+          showing data to users.                                                                             
+          Details: https://sg.run/Bqqb                                                                       
+                                                                                                             
+           ▶▶┆ Autofix ▶ echo htmlentities($no++);
+          192┆ <?= $no++ ?>
+            ⋮┆----------------------------------------
+           ▶▶┆ Autofix ▶ echo htmlentities($success);
+          445┆ Toast.fire({ icon: 'success', title: '<?= $success ?>' });
+              
+    thanks.php
+   ❯❯❱ php.lang.security.injection.echoed-request.echoed-request
+          ❰❰ Blocking ❱❱
+          `Echo`ing user input risks cross-site scripting vulnerability. You should use `htmlentities()` when
+          showing data to users.                                                                             
+          Details: https://sg.run/Bqqb                                                                       
+                                                                                                             
+           ▶▶┆ Autofix ▶ echo htmlentities($meeting_id);
+          110┆ window.location.href = 'feedback.php?id=<?= $meeting_id ?>&token=<?= $token ?>';
+   
+    ❯❱ php.lang.security.taint-unsafe-echo-tag.taint-unsafe-echo-tag
+          ❰❰ Blocking ❱❱
+          Found direct access to a PHP variable wihout HTML escaping inside an inline PHP statement setting   
+          data from `$_REQUEST[...]`. When untrusted input can be used to tamper with a web page rendering, it
+          can lead to a Cross-site scripting (XSS) vulnerability. XSS vulnerabilities occur when untrusted    
+          input executes malicious JavaScript code, leading to issues such as account compromise and sensitive
+          information leakage. To prevent this vulnerability, validate the user input, perform contextual     
+          output encoding or sanitize the input. In PHP you can encode or sanitize user input with            
+          `htmlspecialchars` or use automatic context-aware escaping with a template engine such as Latte.    
+          Details: https://sg.run/RlGe                                                                        
+                                                                                                              
+          110┆ window.location.href = 'feedback.php?id=<?= $meeting_id ?>&token=<?= $token ?>';
+   
+   ❯❯❱ php.lang.security.injection.echoed-request.echoed-request
+          ❰❰ Blocking ❱❱
+          `Echo`ing user input risks cross-site scripting vulnerability. You should use `htmlentities()` when
+          showing data to users.                                                                             
+          Details: https://sg.run/Bqqb                                                                       
+                                                                                                             
+           ▶▶┆ Autofix ▶ echo htmlentities($token);
+          110┆ window.location.href = 'feedback.php?id=<?= $meeting_id ?>&token=<?= $token ?>';
+   
+    ❯❱ php.lang.security.taint-unsafe-echo-tag.taint-unsafe-echo-tag
+          ❰❰ Blocking ❱❱
+          Found direct access to a PHP variable wihout HTML escaping inside an inline PHP statement setting   
+          data from `$_REQUEST[...]`. When untrusted input can be used to tamper with a web page rendering, it
+          can lead to a Cross-site scripting (XSS) vulnerability. XSS vulnerabilities occur when untrusted    
+          input executes malicious JavaScript code, leading to issues such as account compromise and sensitive
+          information leakage. To prevent this vulnerability, validate the user input, perform contextual     
+          output encoding or sanitize the input. In PHP you can encode or sanitize user input with            
+          `htmlspecialchars` or use automatic context-aware escaping with a template engine such as Latte.    
+          Details: https://sg.run/RlGe                                                                        
+                                                                                                              
+          110┆ window.location.href = 'feedback.php?id=<?= $meeting_id ?>&token=<?= $token ?>';
+

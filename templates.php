@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
 }
-if ($_SESSION['role'] !== 'admin' && !(isset($_SESSION['can_dashboard']) && $_SESSION['can_dashboard'])) {
+if ($_SESSION['role'] !== 'superadmin') {
     header("Location: index.php");
     exit;
 }
@@ -19,7 +19,7 @@ $branch_condition = $current_branch > 0 ? "AND branch_id = $current_branch" : ""
 $where_branch = $current_branch > 0 ? "WHERE branch_id = $current_branch" : "WHERE 1=1";
 
 // Fetch users for dropdowns
-$stmt_users = $pdo->query("SELECT * FROM users WHERE role != 'admin' ORDER BY CASE WHEN branch_id = $current_branch THEN 0 ELSE 1 END ASC, name ASC");
+$stmt_users = $pdo->query("SELECT * FROM users WHERE role != 'superadmin' ORDER BY CASE WHEN branch_id = $current_branch THEN 0 ELSE 1 END ASC, name ASC");
 $users = $stmt_users->fetchAll();
 
 // Add Template
@@ -121,7 +121,7 @@ $templates = $stmt->fetchAll();
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Template Meeting - Indoarsip</title>
+    <title>Master Template Meeting - Indoarsip</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -132,11 +132,156 @@ $templates = $stmt->fetchAll();
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
-        .select2-container--default .select2-selection--multiple,
+        /* Select2 Modern Multi-select & Scrollable Box Styling */
+        .select2-container--default .select2-selection--multiple {
+            background-color: #ffffff !important;
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 8px !important;
+            min-height: 44px !important;
+            max-height: 150px !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            padding: 6px !important;
+            display: block !important;
+            box-sizing: border-box !important;
+        }
+        .select2-container--default.select2-container--focus .select2-selection--multiple {
+            border-color: var(--primary-color, #4f46e5) !important;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12) !important;
+        }
+        .select2-container--default .select2-selection--multiple .select2-selection__rendered {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            align-items: flex-start !important;
+            gap: 6px !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            list-style: none !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+        }
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            position: relative !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            background-color: #f1f5f9 !important;
+            border: 1px solid #cbd5e1 !important;
+            color: #1e293b !important;
+            border-radius: 6px !important;
+            padding: 3px 8px 3px 6px !important;
+            margin: 0 !important;
+            font-size: 0.8125rem !important;
+            font-weight: 500 !important;
+            line-height: 1.4 !important;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03) !important;
+            box-sizing: border-box !important;
+        }
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__display {
+            padding-left: 4px !important;
+            padding-right: 2px !important;
+            white-space: normal !important;
+        }
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+            position: static !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            background: transparent !important;
+            border: none !important;
+            border-right: none !important;
+            color: #94a3b8 !important;
+            border-radius: 50% !important;
+            width: 16px !important;
+            height: 16px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            line-height: 1 !important;
+            cursor: pointer !important;
+            transition: all 0.15s ease !important;
+        }
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+            background: #fee2e2 !important;
+            color: #ef4444 !important;
+        }
+        .select2-container--default .select2-selection--multiple .select2-search--inline {
+            display: inline-flex !important;
+            align-items: center !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        .select2-container--default .select2-selection--multiple .select2-search--inline .select2-search__field {
+            margin: 0 !important;
+            padding: 4px 6px !important;
+            font-family: inherit !important;
+            font-size: 0.85rem !important;
+            min-width: 120px !important;
+            border: none !important;
+            outline: none !important;
+            background: transparent !important;
+        }
+        .select2-container--default .select2-selection--multiple .select2-selection__clear {
+            display: none !important;
+        }
         .select2-container--default .select2-selection--single {
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            padding: 5px;
+            height: 44px !important;
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 8px !important;
+            background-color: #ffffff !important;
+            display: flex !important;
+            align-items: center !important;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #1e293b !important;
+            font-family: inherit !important;
+            font-size: 0.875rem !important;
+            padding-left: 14px !important;
+            padding-right: 28px !important;
+            line-height: 42px !important;
+            font-weight: 500 !important;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__placeholder {
+            color: #94a3b8 !important;
+            font-family: inherit !important;
+            font-size: 0.875rem !important;
+            font-weight: 400 !important;
+        }
+        .select2-container--default.select2-container--disabled .select2-selection--single {
+            background-color: #f8fafc !important;
+            border-color: #e2e8f0 !important;
+            cursor: not-allowed !important;
+        }
+        .select2-container--default.select2-container--disabled .select2-selection--single .select2-selection__rendered {
+            color: #94a3b8 !important;
+            font-family: inherit !important;
+            font-size: 0.875rem !important;
+            font-weight: 400 !important;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 42px !important;
+            right: 10px !important;
+        }
+        .select2-dropdown {
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 8px !important;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+            z-index: 99999 !important;
+        }
+        .select2-container--default .select2-results__option--highlighted[aria-selected] {
+            background-color: var(--primary-color, #4f46e5) !important;
+            color: white !important;
+        }
+        .selectable-row {
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.15s ease;
+        }
+        .selectable-row.selected {
+            background-color: #e2e8f0 !important;
+        }
+        .selectable-row:hover:not(.selected) {
+            background-color: #f8fafc;
         }
     </style>
 </head>
@@ -197,7 +342,7 @@ $templates = $stmt->fetchAll();
                                         <td style="text-align: center;">
                                             <div style="display: flex; justify-content: center; gap: 8px;">
                                                 <button type="button" class="btn-action-text" style="background:#f59e0b; color:white; border-radius:6px; padding:6px 12px;" 
-                                                        onclick='editTemplate(<?= $t['id'] ?>, <?= json_encode($t['name']) ?>, <?= json_encode($t['title']) ?>, <?= $t['pic_id'] ?>, <?= json_encode($parts) ?>)' title="Edit Template">
+                                                        onclick='editTemplate(<?= $t['id'] ?>, <?= json_encode($t['name']) ?>, <?= json_encode($t['title']) ?>, <?= (int)$t['pic_id'] ?>, <?= json_encode($parts) ?>)' title="Edit Template">
                                                     <i class="fa-solid fa-pen-to-square" style="margin-right: 5px;"></i> Edit
                                                 </button>
                                                 <button type="button" class="btn-action-text" style="background:#ef4444; color:white; border-radius:6px; padding:6px 12px;" onclick="deleteTemplate(<?= $t['id'] ?>)" title="Hapus Template">
@@ -212,13 +357,7 @@ $templates = $stmt->fetchAll();
                         </table>
                     </div>
                     
-                    <?php if ($total_pages > 1): ?>
-                    <div style="padding: 15px; display: flex; justify-content: center; gap: 10px;">
-                        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                            <a href="?page=<?= $i ?>" class="btn-action-text <?= $i === $page ? 'btn-view-blue' : '' ?>" style="text-decoration: none; border: 1px solid #e2e8f0; padding: 5px 10px;"><?= $i ?></a>
-                        <?php endfor; ?>
-                    </div>
-                    <?php endif; ?>
+                    <?php renderPagination($page, $total_pages); ?>
                 </div>
                 </form>
 
@@ -244,28 +383,44 @@ $templates = $stmt->fetchAll();
                     <input type="hidden" name="template_id" id="form_template_id">
                     <input type="hidden" name="action_type" id="form_action_type" value="add_template">
                     
-                    <div class="form-group">
-                        <label class="form-label">Nama Template (Internal)</label>
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label class="form-label">Nama Template</label>
                         <input type="text" name="name" id="form_name" class="form-control" required placeholder="Contoh: Template Rapat Bulanan IT">
                     </div>
                     
                     <input type="hidden" name="title" id="form_title">
 
-                    <div class="form-group">
-                        <label class="form-label">PIC Meeting Bawaan</label>
-                        <select name="pic_id[]" id="form_pic_id" class="select2" required style="width: 100%;" multiple="multiple">
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label class="form-label"><i class="fa-solid fa-users" style="margin-right: 8px; color: var(--primary-color);"></i> Peserta Diundang</label>
+                        
+                        <!-- Quick Group Selection Bar -->
+                        <div style="display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; align-items: center; background: #f8fafc; padding: 8px 10px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                            <span style="font-size: 0.8rem; font-weight: 600; color: #475569;">Tambah Cepat:</span>
+                            <button type="button" onclick="addParticipantsByGroup('form_participants', 'Manager')" style="background: #fef3c7; color: #b45309; border: 1px solid #fde68a; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; cursor: pointer;">
+                                + Manager
+                            </button>
+                            <button type="button" onclick="addParticipantsByGroup('form_participants', 'Kepala Bagian (Kabag)')" style="background: #d1fae5; color: #047857; border: 1px solid #a7f3d0; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; cursor: pointer;">
+                                + Kabag
+                            </button>
+                            <button type="button" onclick="addParticipantsByGroup('form_participants', 'Staff')" style="background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; cursor: pointer;">
+                                + Staff
+                            </button>
+                            <button type="button" onclick="clearParticipants('form_participants')" style="background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; cursor: pointer; margin-left: auto;">
+                                Kosongkan
+                            </button>
+                        </div>
+
+                        <select name="participants[]" id="form_participants" class="form-control" multiple="multiple" style="width: 100%;">
                             <?php foreach($users as $u): ?>
-                                <option value="<?= $u['id'] ?>"><?= htmlspecialchars($u['name']) ?></option>
+                                <option value="<?= $u['id'] ?>" data-group="<?= htmlspecialchars($u['group_name'] ?? 'Staff') ?>"><?= htmlspecialchars($u['name']) ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label class="form-label">Peserta Diundang Bawaan</label>
-                        <select name="participants[]" id="form_participants" class="select2" multiple="multiple" style="width: 100%;">
-                            <?php foreach($users as $u): ?>
-                                <option value="<?= $u['id'] ?>"><?= htmlspecialchars($u['name']) ?></option>
-                            <?php endforeach; ?>
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label class="form-label"><i class="fa-solid fa-user-tie" style="margin-right: 8px; color: var(--primary-color);"></i> PIC Meeting</label>
+                        <select name="pic_id" id="form_pic_id" class="form-control" required style="width: 100%;" disabled>
+                            <option value="">Pilih Peserta Diundang Terlebih Dahulu</option>
                         </select>
                     </div>
 
@@ -278,43 +433,87 @@ $templates = $stmt->fetchAll();
     </div>
 
     <script>
+        // Dynamically populate PIC options based on selected participants
+        window.updateTemplatePicOptions = function(participantSelectId, picSelectId, forcedPicId) {
+            var $part = $('#' + participantSelectId);
+            var $pic = $('#' + picSelectId);
+            var selectedValues = $part.val() || [];
+            if (!Array.isArray(selectedValues)) selectedValues = [selectedValues];
+            
+            var currentPicVal = (forcedPicId !== undefined) ? forcedPicId : $pic.val();
+            
+            $pic.empty();
+            
+            if (selectedValues.length === 0) {
+                $pic.append(new Option('Pilih Peserta Diundang Terlebih Dahulu', '', true, true));
+                $pic.prop('disabled', true);
+                $pic.val('').trigger('change.select2');
+            } else {
+                $pic.prop('disabled', false);
+                $pic.append(new Option('Pilih PIC Meeting', '', true, !currentPicVal));
+                
+                var picStillValid = false;
+                selectedValues.forEach(function(val) {
+                    var opt = $part.find('option[value="' + val + '"]');
+                    var text = opt.text();
+                    var isSelected = (String(val) === String(currentPicVal));
+                    if (isSelected) picStillValid = true;
+                    $pic.append(new Option(text, val, false, isSelected));
+                });
+                
+                if (picStillValid && currentPicVal) {
+                    $pic.val(currentPicVal);
+                } else {
+                    $pic.val('');
+                }
+                $pic.trigger('change.select2');
+            }
+        };
+
         $(document).ready(function() {
             $('#form_pic_id').select2({
-                placeholder: "Pilih PIC Bawaan",
+                placeholder: "Pilih PIC Meeting",
                 allowClear: true,
                 dropdownParent: $('#templateModal'),
-                maximumSelectionLength: 1
+                width: '100%'
             });
 
             $('#form_participants').select2({
-                placeholder: "Pilih Peserta Bawaan",
+                placeholder: "Pilih Peserta Diundang",
                 allowClear: true,
-                dropdownParent: $('#templateModal')
+                dropdownParent: $('#templateModal'),
+                width: '100%',
+                closeOnSelect: false
             });
 
-            // Prevent PIC from being in participants
-            $('#form_pic_id').on('change', function() {
-                const picId = $(this).val();
-                const $participantSelect = $('#form_participants');
+            // Prevent dropdown opening & preserve scroll position when removing tags
+            $('#form_participants').on('select2:unselect', function (e) {
+                var selectEl = this;
+                var $container = $(selectEl).next('.select2-container').find('.select2-selection--multiple');
+                var currentScroll = $container.scrollTop();
                 
-                $participantSelect.find('option').prop('disabled', false);
-                if (picId && picId.length > 0) {
-                    $participantSelect.find(`option[value="${picId[0]}"]`).prop('disabled', true);
-                    const currentParticipants = $participantSelect.val() || [];
-                    const newParticipants = currentParticipants.filter(id => id !== picId[0]);
-                    $participantSelect.val(newParticipants).trigger('change.select2');
-                }
-                
-                $participantSelect.select2({
-                    placeholder: "Pilih Peserta Bawaan",
-                    allowClear: true,
-                    dropdownParent: $('#templateModal')
-                });
+                setTimeout(function() {
+                    $(selectEl).select2('close');
+                    $container.scrollTop(currentScroll);
+                    $container.find('.select2-search__field').blur();
+                }, 0);
+            });
+
+            $(document).on('mousedown click', '.select2-selection__choice__remove', function(e) {
+                var $container = $(this).closest('.select2-selection--multiple');
+                var currentScroll = $container.scrollTop();
+                setTimeout(function() {
+                    $container.scrollTop(currentScroll);
+                    $container.find('.select2-search__field').blur();
+                }, 10);
+            });
+
+            $('#form_participants').on('change', function() {
+                updateTemplatePicOptions('form_participants', 'form_pic_id');
             });
 
             // Handle action_type switching
             $('#templateForm').on('submit', function(e) {
-                // Prepopulate default meeting title with the template name
                 $('#form_title').val($('#form_name').val());
                 
                 const actionType = $('#form_action_type').val();
@@ -326,14 +525,52 @@ $templates = $stmt->fetchAll();
             });
         });
 
+        function addParticipantsByGroup(selectId, groupName) {
+            var $select = $('#' + selectId);
+            var currentValues = $select.val() || [];
+            if (!Array.isArray(currentValues)) currentValues = [currentValues];
+            
+            var addedCount = 0;
+            $select.find('option').each(function() {
+                if ($(this).data('group') === groupName) {
+                    var val = $(this).val();
+                    if (val && currentValues.indexOf(val) === -1) {
+                        currentValues.push(val);
+                        addedCount++;
+                    }
+                }
+            });
+            
+            $select.val(currentValues).trigger('change');
+            if (addedCount > 0) {
+                Toast.fire({
+                    icon: 'info',
+                    title: addedCount + ' peserta grup ' + groupName + ' ditambahkan'
+                });
+            } else {
+                Toast.fire({
+                    icon: 'info',
+                    title: 'Semua peserta grup ' + groupName + ' sudah ada dalam daftar'
+                });
+            }
+        }
+
+        function clearParticipants(selectId) {
+            $('#' + selectId).val([]).trigger('change');
+            Toast.fire({
+                icon: 'info',
+                title: 'Daftar peserta telah dikosongkan'
+            });
+        }
+
         function openAddModal() {
             document.getElementById('modalTitle').textContent = 'Tambah Template Baru';
             document.getElementById('form_template_id').value = '';
             document.getElementById('form_action_type').value = 'add_template';
             document.getElementById('form_name').value = '';
             document.getElementById('form_title').value = '';
-            $('#form_pic_id').val(null).trigger('change');
-            $('#form_participants').val(null).trigger('change');
+            $('#form_participants').val([]).trigger('change');
+            updateTemplatePicOptions('form_participants', 'form_pic_id');
             document.getElementById('templateModal').classList.add('active');
         }
 
@@ -343,8 +580,8 @@ $templates = $stmt->fetchAll();
             document.getElementById('form_action_type').value = 'edit_template';
             document.getElementById('form_name').value = name;
             document.getElementById('form_title').value = title;
-            $('#form_pic_id').val([picId]).trigger('change');
             $('#form_participants').val(participants).trigger('change');
+            updateTemplatePicOptions('form_participants', 'form_pic_id', picId);
             document.getElementById('templateModal').classList.add('active');
         }
 
@@ -356,7 +593,8 @@ $templates = $stmt->fetchAll();
                 showCancelButton: true,
                 confirmButtonColor: '#ef4444',
                 cancelButtonColor: '#94a3b8',
-                confirmButtonText: 'Ya, hapus!'
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
             }).then((result) => {
                 if (result.isConfirmed) {
                     document.getElementById('delete_template_id').value = id;
@@ -426,28 +664,15 @@ $templates = $stmt->fetchAll();
             }
         }
     </script>
-    <style>
-        .selectable-row {
-            cursor: pointer;
-            user-select: none;
-            transition: background 0.15s ease;
-        }
-        .selectable-row.selected {
-            background-color: #e2e8f0 !important;
-        }
-        .selectable-row:hover:not(.selected) {
-            background-color: #f8fafc;
-        }
-    </style>
 
     <?php if ($success): ?>
     <script>
-        Toast.fire({ icon: 'success', title: '<?= $success ?>' });
+        Toast.fire({ icon: 'success', title: '<?= htmlspecialchars(addslashes($success)) ?>' });
     </script>
     <?php endif; ?>
     <?php if ($error): ?>
     <script>
-        Toast.fire({ icon: 'error', title: '<?= $error ?>' });
+        Toast.fire({ icon: 'error', title: '<?= htmlspecialchars(addslashes($error)) ?>' });
     </script>
     <?php endif; ?>
 </body>

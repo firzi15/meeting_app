@@ -15,12 +15,27 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-$is_admin = ($_SESSION['role'] === 'admin');
-$has_dashboard = (isset($_SESSION['can_dashboard']) && $_SESSION['can_dashboard']) || $is_admin;
+$role = $_SESSION['role'] ?? 'user';
+$is_superadmin = ($role === 'superadmin');
+$is_admin = ($role === 'admin');
+$has_dashboard = $is_superadmin || $is_admin || !empty($_SESSION['can_dashboard']);
 
 if (!$has_dashboard) {
     header("Location: my_schedule.php");
     exit;
+}
+
+function renderGroupedUserOptions($pdo, $current_branch, $include_empty = false, $empty_label = '-- Pilih Karyawan --') {
+    if ($include_empty) {
+        echo '<option value="">' . htmlspecialchars($empty_label) . '</option>';
+    }
+    $stmt = $pdo->query("SELECT * FROM users WHERE role != 'superadmin' ORDER BY CASE WHEN branch_id = $current_branch THEN 0 ELSE 1 END ASC, name ASC");
+    $users = $stmt->fetchAll();
+    
+    foreach ($users as $u) {
+        $grp = $u['group_name'] ?? 'Staff';
+        echo '<option value="' . $u['id'] . '" data-group="' . htmlspecialchars($grp) . '">' . htmlspecialchars($u['name']) . '</option>';
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -35,6 +50,158 @@ if (!$has_dashboard) {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <style>
+        /* Select2 Modern Multi-select & Scrollable Box Styling */
+        .select2-container--default .select2-selection--multiple {
+            background-color: #ffffff !important;
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 8px !important;
+            min-height: 44px !important;
+            max-height: 150px !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            padding: 6px !important;
+            display: block !important;
+            box-sizing: border-box !important;
+        }
+        .select2-container--default.select2-container--focus .select2-selection--multiple {
+            border-color: var(--primary-color, #4f46e5) !important;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12) !important;
+        }
+        .select2-container--default .select2-selection--multiple .select2-selection__rendered {
+            display: flex !important;
+            flex-wrap: wrap !important;
+            align-items: flex-start !important;
+            gap: 6px !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            list-style: none !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+        }
+        .select2-container--default .select2-selection--multiple .select2-selection__choice {
+            position: relative !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            background-color: #f1f5f9 !important;
+            border: 1px solid #cbd5e1 !important;
+            color: #1e293b !important;
+            border-radius: 6px !important;
+            padding: 3px 8px 3px 6px !important;
+            margin: 0 !important;
+            font-size: 0.8125rem !important;
+            font-weight: 500 !important;
+            line-height: 1.4 !important;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.03) !important;
+            box-sizing: border-box !important;
+        }
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__display {
+            padding-left: 4px !important;
+            padding-right: 2px !important;
+            white-space: normal !important;
+        }
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+            position: static !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            background: transparent !important;
+            border: none !important;
+            border-right: none !important;
+            color: #94a3b8 !important;
+            border-radius: 50% !important;
+            width: 16px !important;
+            height: 16px !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            line-height: 1 !important;
+            cursor: pointer !important;
+            transition: all 0.15s ease !important;
+        }
+        .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+            background: #fee2e2 !important;
+            color: #ef4444 !important;
+        }
+        .select2-container--default .select2-selection--multiple .select2-search--inline {
+            display: inline-flex !important;
+            align-items: center !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+        .select2-container--default .select2-selection--multiple .select2-search--inline .select2-search__field {
+            margin: 0 !important;
+            padding: 4px 6px !important;
+            font-family: inherit !important;
+            font-size: 0.85rem !important;
+            min-width: 120px !important;
+            border: none !important;
+            outline: none !important;
+            background: transparent !important;
+        }
+        .select2-container--default .select2-selection--multiple .select2-selection__clear {
+            display: none !important;
+        }
+        .select2-container--default .select2-selection--single {
+            height: 44px !important;
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 8px !important;
+            background-color: #ffffff !important;
+            display: flex !important;
+            align-items: center !important;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #1e293b !important;
+            font-family: inherit !important;
+            font-size: 0.875rem !important;
+            padding-left: 14px !important;
+            padding-right: 28px !important;
+            line-height: 42px !important;
+            font-weight: 500 !important;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__placeholder {
+            color: #94a3b8 !important;
+            font-family: inherit !important;
+            font-size: 0.875rem !important;
+            font-weight: 400 !important;
+        }
+        .select2-container--default.select2-container--disabled .select2-selection--single {
+            background-color: #f8fafc !important;
+            border-color: #e2e8f0 !important;
+            cursor: not-allowed !important;
+        }
+        .select2-container--default.select2-container--disabled .select2-selection--single .select2-selection__rendered {
+            color: #94a3b8 !important;
+            font-family: inherit !important;
+            font-size: 0.875rem !important;
+            font-weight: 400 !important;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 42px !important;
+            right: 10px !important;
+        }
+        .select2-dropdown {
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 8px !important;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+            z-index: 99999 !important;
+        }
+        .select2-container--default .select2-results__group {
+            font-weight: 700 !important;
+            color: #1e293b !important;
+            background: #f8fafc !important;
+            padding: 6px 10px !important;
+            border-bottom: 1px solid #e2e8f0 !important;
+            border-top: 1px solid #e2e8f0 !important;
+            font-size: 0.85rem !important;
+        }
+        .select2-container--default .select2-results__option--highlighted[aria-selected] {
+            background-color: var(--primary-color, #4f46e5) !important;
+            color: white !important;
+        }
+    </style>
 </head>
 <body>
     <div class="app-container">
@@ -63,7 +230,7 @@ if (!$has_dashboard) {
                     <div>
                         <div class="action-cards-grid">
                             <!-- Card 1: Buat Meeting (modal trigger) -->
-                            <div class="action-card primary-border" onclick="document.getElementById('scheduleModal').classList.add('active')">
+                            <div class="action-card primary-border" onclick="openScheduleModal()">
                                 <div class="icon-circle-btn">
                                     <i class="fa-solid fa-plus"></i>
                                 </div>
@@ -431,7 +598,7 @@ if (!$has_dashboard) {
                                                 <button type="button"
                                                     class="btn-icon-outline"
                                                     title="Lihat QR Absensi"
-                                                    onclick="showQRModal('<?= htmlspecialchars(addslashes($rm['title'])) ?>', '<?= htmlspecialchars(rtrim(str_replace(['http://','https://'], '//', (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME'])), '/') . '/attendance.php?token=' . $rm['token']) ?>')">
+                                                    onclick="showQRModal('<?= htmlspecialchars(addslashes($rm['title'])) ?>', '<?= htmlspecialchars(rtrim((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']), '/') . '/attendance.php?token=' . $rm['token']) ?>')">
                                                     <i class="fa-solid fa-qrcode"></i>
                                                 </button>
                                                 <?php if ($has_dashboard): ?>
@@ -460,13 +627,7 @@ if (!$has_dashboard) {
                             </tbody>
                         </table>
                     </div>
-                    <?php if ($total_pages > 1): ?>
-                    <div class="pagination" style="display:flex; justify-content:center; gap:8px; margin-top:20px; padding-bottom:20px;">
-                        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                            <a href="index.php?page=<?= $i ?>" class="page-link <?= ($page == $i) ? 'active' : '' ?>" style="text-decoration:none; padding: 8px 12px; border-radius: 6px; border: 1px solid #e2e8f0; color: #475569; font-weight: 600; font-size: 0.9rem; <?= ($page == $i) ? 'background:#8b5cf6; color:white; border-color:#8b5cf6;' : 'background:white;' ?>"><?= $i ?></a>
-                        <?php endfor; ?>
-                    </div>
-                    <?php endif; ?>
+                    <?php renderPagination($page, $total_pages); ?>
                 </div>
             </main>
 
@@ -542,28 +703,34 @@ if (!$has_dashboard) {
                     </div>
 
                     <div class="form-group" style="margin-bottom: 20px;">
-                        <label class="form-label"><i class="fa-solid fa-user-tie" style="margin-right: 8px; color: var(--primary-color);"></i> PIC Meeting (Penanggung Jawab)</label>
-                        <select name="pic_id[]" id="picSelect" required style="width: 100%;" multiple="multiple">
-                            <?php
-                            $current_branch = getCurrentBranchId();
-                            $stmt_pic = $pdo->query("SELECT * FROM users WHERE role != 'admin' ORDER BY CASE WHEN branch_id = $current_branch THEN 0 ELSE 1 END ASC, name ASC");
-                            while($u = $stmt_pic->fetch()) {
-                                echo "<option value=\"{$u['id']}\">".htmlspecialchars($u['name'])."</option>";
-                            }
-                            ?>
+                        <label class="form-label"><i class="fa-solid fa-users" style="margin-right: 8px; color: var(--primary-color);"></i> Peserta Diundang</label>
+                        
+                        <!-- Quick Group Selection Bar -->
+                        <div style="display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; align-items: center; background: #f8fafc; padding: 8px 10px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                            <span style="font-size: 0.8rem; font-weight: 600; color: #475569;">Tambah Cepat:</span>
+                            <button type="button" onclick="addParticipantsByGroup('participantSelect', 'Manager')" style="background: #fef3c7; color: #b45309; border: 1px solid #fde68a; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; cursor: pointer;">
+                                + Manager
+                            </button>
+                            <button type="button" onclick="addParticipantsByGroup('participantSelect', 'Kepala Bagian (Kabag)')" style="background: #d1fae5; color: #047857; border: 1px solid #a7f3d0; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; cursor: pointer;">
+                                + Kabag
+                            </button>
+                            <button type="button" onclick="addParticipantsByGroup('participantSelect', 'Staff')" style="background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; cursor: pointer;">
+                                + Staff
+                            </button>
+                            <button type="button" onclick="clearParticipants('participantSelect')" style="background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; cursor: pointer; margin-left: auto;">
+                                Kosongkan
+                            </button>
+                        </div>
+
+                        <select name="participants[]" id="participantSelect" class="form-control" multiple="multiple" style="width: 100%;">
+                            <?php renderGroupedUserOptions($pdo, $current_branch, false); ?>
                         </select>
                     </div>
 
                     <div class="form-group" style="margin-bottom: 20px;">
-                        <label class="form-label"><i class="fa-solid fa-users" style="margin-right: 8px; color: var(--primary-color);"></i> Peserta Diundang (Anggota)</label>
-                        <select name="participants[]" id="participantSelect" multiple="multiple" style="width: 100%;">
-                            <?php
-                            $current_branch = getCurrentBranchId();
-                            $stmt_u = $pdo->query("SELECT * FROM users WHERE role != 'admin' ORDER BY CASE WHEN branch_id = $current_branch THEN 0 ELSE 1 END ASC, name ASC");
-                            while($u = $stmt_u->fetch()) {
-                                echo "<option value=\"{$u['id']}\">".htmlspecialchars($u['name'])."</option>";
-                            }
-                            ?>
+                        <label class="form-label"><i class="fa-solid fa-user-tie" style="margin-right: 8px; color: var(--primary-color);"></i> PIC Meeting</label>
+                        <select name="pic_id" id="picSelect" class="form-control" required style="width: 100%;" disabled>
+                            <option value="">Pilih Peserta Diundang Terlebih Dahulu</option>
                         </select>
                     </div>
 
@@ -669,28 +836,34 @@ if (!$has_dashboard) {
                     </div>
 
                     <div class="form-group" style="margin-bottom: 20px;">
-                        <label class="form-label"><i class="fa-solid fa-user-tie" style="margin-right: 8px; color: var(--primary-color);"></i> PIC Meeting (Penanggung Jawab)</label>
-                        <select name="pic_id[]" id="editPicSelect" required style="width: 100%;" multiple="multiple">
-                            <?php
-                            $current_branch = getCurrentBranchId();
-                            $stmt_pic_edit = $pdo->query("SELECT * FROM users WHERE role != 'admin' ORDER BY CASE WHEN branch_id = $current_branch THEN 0 ELSE 1 END ASC, name ASC");
-                            while($u = $stmt_pic_edit->fetch()) {
-                                echo "<option value=\"{$u['id']}\">".htmlspecialchars($u['name'])."</option>";
-                            }
-                            ?>
+                        <label class="form-label"><i class="fa-solid fa-users" style="margin-right: 8px; color: var(--primary-color);"></i> Peserta Diundang</label>
+                        
+                        <!-- Quick Group Selection Bar -->
+                        <div style="display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; align-items: center; background: #f8fafc; padding: 8px 10px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                            <span style="font-size: 0.8rem; font-weight: 600; color: #475569;">Tambah Cepat:</span>
+                            <button type="button" onclick="addParticipantsByGroup('editParticipantSelect', 'Manager')" style="background: #fef3c7; color: #b45309; border: 1px solid #fde68a; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; cursor: pointer;">
+                                + Manager
+                            </button>
+                            <button type="button" onclick="addParticipantsByGroup('editParticipantSelect', 'Kepala Bagian (Kabag)')" style="background: #d1fae5; color: #047857; border: 1px solid #a7f3d0; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; cursor: pointer;">
+                                + Kabag
+                            </button>
+                            <button type="button" onclick="addParticipantsByGroup('editParticipantSelect', 'Staff')" style="background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; cursor: pointer;">
+                                + Staff
+                            </button>
+                            <button type="button" onclick="clearParticipants('editParticipantSelect')" style="background: #fee2e2; color: #dc2626; border: 1px solid #fecaca; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; cursor: pointer; margin-left: auto;">
+                                Kosongkan
+                            </button>
+                        </div>
+
+                        <select name="participants[]" id="editParticipantSelect" class="form-control" multiple="multiple" style="width: 100%;">
+                            <?php renderGroupedUserOptions($pdo, $current_branch, false); ?>
                         </select>
                     </div>
 
                     <div class="form-group" style="margin-bottom: 20px;">
-                        <label class="form-label"><i class="fa-solid fa-users" style="margin-right: 8px; color: var(--primary-color);"></i> Peserta Diundang (Anggota)</label>
-                        <select name="participants[]" id="editParticipantSelect" multiple="multiple" style="width: 100%;">
-                            <?php
-                            $current_branch = getCurrentBranchId();
-                            $stmt_u_edit = $pdo->query("SELECT * FROM users WHERE role != 'admin' ORDER BY CASE WHEN branch_id = $current_branch THEN 0 ELSE 1 END ASC, name ASC");
-                            while($u = $stmt_u_edit->fetch()) {
-                                echo "<option value=\"{$u['id']}\">".htmlspecialchars($u['name'])."</option>";
-                            }
-                            ?>
+                        <label class="form-label"><i class="fa-solid fa-user-tie" style="margin-right: 8px; color: var(--primary-color);"></i> PIC Meeting</label>
+                        <select name="pic_id" id="editPicSelect" class="form-control" required style="width: 100%;" disabled>
+                            <option value="">Pilih Peserta Diundang Terlebih Dahulu</option>
                         </select>
                     </div>
 
@@ -926,30 +1099,52 @@ if (!$has_dashboard) {
                 placeholder: "Pilih PIC Meeting",
                 allowClear: true,
                 dropdownParent: $('#scheduleModal'),
-                width: '100%',
-                maximumSelectionLength: 1
+                width: '100%'
             });
 
             $('#participantSelect').select2({
                 placeholder: "Pilih Peserta Diundang",
                 allowClear: true,
                 dropdownParent: $('#scheduleModal'),
-                width: '100%'
+                width: '100%',
+                closeOnSelect: false
             });
 
             $('#editPicSelect').select2({
                 placeholder: "Pilih PIC Meeting",
                 allowClear: true,
                 dropdownParent: $('#editMeetingModal'),
-                width: '100%',
-                maximumSelectionLength: 1
+                width: '100%'
             });
 
             $('#editParticipantSelect').select2({
                 placeholder: "Pilih Peserta Diundang",
                 allowClear: true,
                 dropdownParent: $('#editMeetingModal'),
-                width: '100%'
+                width: '100%',
+                closeOnSelect: false
+            });
+
+            // Prevent dropdown opening & preserve scroll position when removing tags (prevents jumping to bottom search field)
+            $('#participantSelect, #editParticipantSelect').on('select2:unselect', function (e) {
+                var selectEl = this;
+                var $container = $(selectEl).next('.select2-container').find('.select2-selection--multiple');
+                var currentScroll = $container.scrollTop();
+                
+                setTimeout(function() {
+                    $(selectEl).select2('close');
+                    $container.scrollTop(currentScroll);
+                    $container.find('.select2-search__field').blur();
+                }, 0);
+            });
+
+            $(document).on('mousedown click', '.select2-selection__choice__remove', function(e) {
+                var $container = $(this).closest('.select2-selection--multiple');
+                var currentScroll = $container.scrollTop();
+                setTimeout(function() {
+                    $container.scrollTop(currentScroll);
+                    $container.find('.select2-search__field').blur();
+                }, 10);
             });
 
             $('#coffeeTempSelect, #coffeeTypeSelect').select2({
@@ -997,37 +1192,50 @@ if (!$has_dashboard) {
                 }
             });
 
-            // Exclude PIC from Participants
-            $('#picSelect').on('change', function() {
-                const picId = $(this).val();
-                const $participantSelect = $('#participantSelect');
+            // Function to dynamically populate PIC options based on selected participants
+            window.updatePicOptions = function(participantSelectId, picSelectId, forcedPicId) {
+                var $part = $('#' + participantSelectId);
+                var $pic = $('#' + picSelectId);
+                var selectedValues = $part.val() || [];
+                if (!Array.isArray(selectedValues)) selectedValues = [selectedValues];
                 
-                // Reset all options first
-                $participantSelect.find('option').prop('disabled', false);
+                var currentPicVal = (forcedPicId !== undefined) ? forcedPicId : $pic.val();
                 
-                if (picId) {
-                    // Disable the PIC option in participants
-                    $participantSelect.find(`option[value="${picId}"]`).prop('disabled', true);
+                $pic.empty();
+                
+                if (selectedValues.length === 0) {
+                    $pic.append(new Option('Pilih Peserta Diundang Terlebih Dahulu', '', true, true));
+                    $pic.prop('disabled', true);
+                    $pic.val('').trigger('change.select2');
+                } else {
+                    $pic.prop('disabled', false);
+                    $pic.append(new Option('Pilih PIC Meeting', '', true, !currentPicVal));
                     
-                    // If the PIC was already selected as a participant, remove them
-                    const currentParticipants = $participantSelect.val() || [];
-                    const newParticipants = currentParticipants.filter(id => id !== picId);
-                    $participantSelect.val(newParticipants).trigger('change');
+                    var picStillValid = false;
+                    selectedValues.forEach(function(val) {
+                        var opt = $part.find('option[value="' + val + '"]');
+                        var text = opt.text();
+                        var isSelected = (String(val) === String(currentPicVal));
+                        if (isSelected) picStillValid = true;
+                        $pic.append(new Option(text, val, false, isSelected));
+                    });
+                    
+                    if (picStillValid && currentPicVal) {
+                        $pic.val(currentPicVal);
+                    } else {
+                        $pic.val('');
+                    }
+                    $pic.trigger('change.select2');
                 }
-                
-                // Refresh Select2 to show disabled state
-                $participantSelect.select2({
-                    placeholder: "Pilih Peserta Diundang",
-                    allowClear: true,
-                    dropdownParent: $('#scheduleModal')
-                });
+            };
+
+            $('#participantSelect').on('change', function() {
+                updatePicOptions('participantSelect', 'picSelect');
             });
 
-            // Auto-open if redirected from sidebar
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('action') === 'create') {
-                document.getElementById('scheduleModal').classList.add('active');
-            }
+            $('#editParticipantSelect').on('change', function() {
+                updatePicOptions('editParticipantSelect', 'editPicSelect');
+            });
 
             // Template selection logic
             $('#templateSelect').on('change', function() {
@@ -1042,11 +1250,11 @@ if (!$has_dashboard) {
                             if (response.success) {
                                 $('#meetingTitle').val(response.title);
                                 
-                                // Set PIC and Participants
-                                $('#picSelect').val([response.pic_id]).trigger('change');
+                                // Set Participants first, then PIC
+                                $('#participantSelect').val(response.participants).trigger('change');
                                 setTimeout(() => {
-                                    $('#participantSelect').val(response.participants).trigger('change');
-                                }, 100); // Small delay to ensure PIC change event runs first
+                                    updatePicOptions('participantSelect', 'picSelect', response.pic_id);
+                                }, 50);
                                 
                                 Toast.fire({ icon: 'success', title: 'Template berhasil dimuat.' });
                             } else {
@@ -1059,8 +1267,8 @@ if (!$has_dashboard) {
                     });
                 } else {
                     $('#meetingTitle').val('');
-                    $('#picSelect').val(null).trigger('change');
-                    $('#participantSelect').val(null).trigger('change');
+                    $('#participantSelect').val([]).trigger('change');
+                    updatePicOptions('participantSelect', 'picSelect');
                 }
             });
         });
@@ -1235,6 +1443,10 @@ if (!$has_dashboard) {
             }
         }
 
+        function openScheduleModal() {
+            document.getElementById('scheduleModal').classList.add('active');
+        }
+
         function openEditModal(id) {
             fetch('get_meeting.php?id=' + id)
                 .then(r => r.json())
@@ -1256,8 +1468,8 @@ if (!$has_dashboard) {
                         document.getElementById('editMeetingTime').value = data.time;
                         document.getElementById('editMeetingEndTime').value = data.end_time_formatted;
 
-                        $('#editPicSelect').val([data.pic_id]).trigger('change');
                         $('#editParticipantSelect').val(data.participants).trigger('change');
+                        updatePicOptions('editParticipantSelect', 'editPicSelect', data.pic_id);
 
                         document.getElementById('editHasSnack').checked = (data.has_snack == 1);
                         document.getElementById('editHasCoffeeCheckbox').checked = (data.has_coffee == 1);
@@ -1305,6 +1517,44 @@ if (!$has_dashboard) {
                 btn.innerHTML = '<i class="fa-solid fa-save" style="margin-right: 8px;"></i> Simpan Perubahan';
             });
         });
+
+        function addParticipantsByGroup(selectId, groupName) {
+            var $select = $('#' + selectId);
+            var currentValues = $select.val() || [];
+            if (!Array.isArray(currentValues)) currentValues = [currentValues];
+            
+            var addedCount = 0;
+            $select.find('option').each(function() {
+                if ($(this).data('group') === groupName) {
+                    var val = $(this).val();
+                    if (val && currentValues.indexOf(val) === -1) {
+                        currentValues.push(val);
+                        addedCount++;
+                    }
+                }
+            });
+            
+            $select.val(currentValues).trigger('change');
+            if (addedCount > 0) {
+                Toast.fire({
+                    icon: 'info',
+                    title: addedCount + ' peserta grup ' + groupName + ' ditambahkan'
+                });
+            } else {
+                Toast.fire({
+                    icon: 'info',
+                    title: 'Semua peserta grup ' + groupName + ' sudah ada dalam daftar'
+                });
+            }
+        }
+
+        function clearParticipants(selectId) {
+            $('#' + selectId).val([]).trigger('change');
+            Toast.fire({
+                icon: 'info',
+                title: 'Daftar peserta telah dikosongkan'
+            });
+        }
     </script>
 </body>
 </html>

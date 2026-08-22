@@ -101,7 +101,40 @@ describe('Master Data CRUD Scenarios', () => {
     cy.get('tbody').should('contain', 'Andi Wijaya Sukses');
   });
 
-  it('should manage Templates and check Select2 dropdown exclusions', () => {
+  it('should manage Employee Groups (Master Group)', () => {
+    cy.visit('/groups.php');
+
+    // 1. Create Group
+    cy.get('button').contains('Tambah Group').click();
+    cy.get('#addModal').should('be.visible');
+    cy.get('#addModal input[name="name"]').type('Supervisor');
+    cy.get('#addModal textarea[name="description"]').type('Pengawas operasional lapangan');
+    cy.get('#addModal button[type="submit"]').click();
+
+    // Verify toast & listing
+    cy.get('.swal2-container').should('contain', 'Grup karyawan berhasil ditambahkan!');
+    cy.get('tbody').should('contain', 'Supervisor');
+
+    // 2. Edit Group
+    cy.get('tbody tr').contains('Supervisor').parents('tr').find('button').contains('Edit').click();
+    cy.get('#editModal').should('be.visible');
+    cy.get('#edit_group_name').clear().type('Supervisor Senior');
+    cy.get('#editModal button[type="submit"]').click();
+
+    // Verify toast & listing
+    cy.get('.swal2-container').should('contain', 'Grup karyawan berhasil diperbarui!');
+    cy.get('tbody').should('contain', 'Supervisor Senior');
+
+    // 3. Delete Group
+    cy.get('tbody tr').contains('Supervisor Senior').parents('tr').find('button').contains('Hapus').click();
+    cy.get('.swal2-confirm').click();
+
+    // Verify deletion
+    cy.get('.swal2-container').should('contain', 'Grup karyawan berhasil dihapus!');
+    cy.get('tbody').should('not.contain', 'Supervisor Senior');
+  });
+
+  it('should manage Templates and verify dynamic PIC from selected participants', () => {
     cy.visit('/templates.php');
 
     // 1. Open template modal
@@ -110,27 +143,22 @@ describe('Master Data CRUD Scenarios', () => {
     // 2. Input template name
     cy.get('#form_name').type('Daily Sync Scrum');
 
-    // Log options for debugging
-    cy.get('#form_pic_id').then(($select) => {
-      const options = Array.from($select.find('option')).map(o => `${o.value}: ${o.text}`);
-      cy.log('Available PIC options:', JSON.stringify(options));
-    });
+    // 3. Verify PIC is initially disabled before participants are selected
+    cy.get('#form_pic_id').should('be.disabled');
 
-    // PIC: Rizqi (User ID: 3)
-    cy.get('#form_pic_id').next('.select2-container').click();
-    cy.get('.select2-results__option').contains('Rizqi').click();
-
-    // Participants: Since Rizqi is PIC, he should be disabled in participants
-    cy.get('#form_participants').find('option[value="3"]').should('be.disabled');
-    
-    // Choose Firzi (ID 2) and Fathi (ID 4) instead
+    // 4. Select Participants first
     cy.get('#form_participants').next('.select2-container').click();
     cy.get('.select2-results__option').contains('Firzi').click();
 
     cy.get('#form_participants').next('.select2-container').click();
     cy.get('.select2-results__option').contains('Fathi').click();
 
-    // Submit Template Form
+    // 5. PIC should now be enabled and contain selected participants
+    cy.get('#form_pic_id').should('not.be.disabled');
+    cy.get('#form_pic_id').next('.select2-container').click();
+    cy.get('.select2-results__option').contains('Firzi').click();
+
+    // 6. Submit Template Form
     cy.get('#btnSubmit').click();
 
     // Verify template created

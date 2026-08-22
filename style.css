@@ -39,8 +39,7 @@ body {
 
 .table-responsive {
     width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
     margin-bottom: 1rem;
 }
 
@@ -478,7 +477,7 @@ body {
 /* Tables */
 .table-container {
     width: 100%;
-    overflow-x: auto;
+    overflow-x: hidden;
     border-radius: 12px;
     border: 1px solid var(--border-color);
 }
@@ -492,20 +491,31 @@ body {
 
 .table th {
     background: #f9fafb;
-    padding: 12px 24px;
+    padding: 11px 14px;
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
     color: #4b5563;
     border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
 }
 
 .table td {
-    padding: 16px 24px;
-    font-size: 0.875rem;
+    padding: 12px 14px;
+    font-size: 0.85rem;
     color: #374151;
     border-bottom: 1px solid var(--border-color);
+}
+
+.table th:first-child,
+.table td:first-child {
+    padding-left: 18px;
+}
+
+.table th:last-child,
+.table td:last-child {
+    padding-right: 20px;
 }
 
 .table tr:last-child td {
@@ -522,13 +532,59 @@ body {
 
 /* Badges */
 .badge {
-    padding: 4px 10px;
+    padding: 3px 9px;
     border-radius: 9999px;
     font-size: 0.75rem;
     font-weight: 600;
     display: inline-flex;
     align-items: center;
     gap: 4px;
+    white-space: nowrap;
+    line-height: 1.4;
+}
+
+/* Auto-Fitting Truncation Rules (Adapts 100% to Column Width and Sidebar State) */
+.name-truncate {
+    max-width: 100%;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    cursor: default;
+    box-sizing: border-box;
+}
+
+.truncate-cell {
+    max-width: 100%;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    cursor: default;
+    box-sizing: border-box;
+}
+
+.badge-truncate {
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: default;
+    box-sizing: border-box;
+}
+
+.table-fixed {
+    table-layout: fixed !important;
+    width: 100% !important;
+}
+
+.table-fixed th,
+.table-fixed td {
+    vertical-align: middle;
 }
 
 .badge-success {
@@ -851,35 +907,144 @@ select.form-control {
     background-color: #fff !important;
 }
 
+.select2-container--default .select2-selection--multiple {
+    background-color: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    min-height: 44px !important;
+    max-height: 150px !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding: 6px !important;
+    display: block !important;
+    box-sizing: border-box !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__rendered {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: flex-start !important;
+    gap: 6px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    list-style: none !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
-    background-color: var(--primary-color) !important;
-    border: none !important;
-    color: white !important;
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    background-color: #f1f5f9 !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #1e293b !important;
     border-radius: 6px !important;
-    padding: 6px 12px !important;
-    margin-top: 4px !important;
-    font-size: 0.85rem !important;
+    padding: 3px 8px 3px 6px !important;
+    margin: 0 !important;
+    font-size: 0.8125rem !important;
     font-weight: 500 !important;
+    line-height: 1.4 !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.03) !important;
+    box-sizing: border-box !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__display {
+    padding-left: 4px !important;
+    padding-right: 2px !important;
+    white-space: normal !important;
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
-    color: white !important;
-    margin-right: 8px !important;
-    border-right: 1px solid rgba(255,255,255,0.2) !important;
-    padding-right: 6px !important;
+    position: static !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: transparent !important;
+    border: none !important;
+    border-right: none !important;
+    color: #94a3b8 !important;
+    border-radius: 50% !important;
+    width: 16px !important;
+    height: 16px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    cursor: pointer !important;
+    transition: all 0.15s ease !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover {
+    background: #fee2e2 !important;
+    color: #ef4444 !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-search--inline {
+    display: inline-flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-search--inline .select2-search__field {
+    margin: 0 !important;
+    padding: 4px 6px !important;
+    font-family: inherit !important;
+    font-size: 0.85rem !important;
+    min-width: 120px !important;
+    border: none !important;
+    outline: none !important;
+    background: transparent !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__clear {
+    display: none !important;
+}
+
+.select2-container--default .select2-selection--single {
+    height: 44px !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 8px !important;
+    background-color: #ffffff !important;
+    display: flex !important;
+    align-items: center !important;
 }
 
 .select2-container--default .select2-selection--single .select2-selection__rendered {
     color: #1e293b !important;
-    font-size: 0.9375rem !important;
-    padding-left: 16px !important;
-    line-height: 46px !important;
+    font-family: inherit !important;
+    font-size: 0.875rem !important;
+    padding-left: 14px !important;
+    padding-right: 28px !important;
+    line-height: 42px !important;
     font-weight: 500 !important;
 }
 
+.select2-container--default .select2-selection--single .select2-selection__placeholder {
+    color: #94a3b8 !important;
+    font-family: inherit !important;
+    font-size: 0.875rem !important;
+    font-weight: 400 !important;
+}
+
+.select2-container--default.select2-container--disabled .select2-selection--single {
+    background-color: #f8fafc !important;
+    border-color: #e2e8f0 !important;
+    cursor: not-allowed !important;
+}
+
+.select2-container--default.select2-container--disabled .select2-selection--single .select2-selection__rendered {
+    color: #94a3b8 !important;
+    font-family: inherit !important;
+    font-size: 0.875rem !important;
+    font-weight: 400 !important;
+}
+
 .select2-container--default .select2-selection--single .select2-selection__arrow {
-    height: 46px !important;
-    right: 12px !important;
+    height: 42px !important;
+    right: 10px !important;
 }
 
 .select2-dropdown {
@@ -1790,3 +1955,15 @@ button.btn-icon-outline {
     background: #ffffff;
     outline: none;
 }
+
+/* Universal Pagination Component Styling */
+.pagination-wrapper {
+    user-select: none;
+}
+.pagination-nav-btn:hover:not(.disabled),
+.pagination-num-btn:hover:not(.active) {
+    background-color: #f8fafc !important;
+    border-color: #94a3b8 !important;
+    color: var(--primary-color, #4f46e5) !important;
+}
+

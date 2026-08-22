@@ -3,15 +3,19 @@
         <div class="logo">
             <img src="logo.png" alt="Logo" onerror="this.outerHTML='<span class=\'logo-text\'>INDO<span style=\'color:var(--red-brand)\'>A</span>RSIP</span>'">
         </div>
-        <button class="toggle-btn" onclick="document.querySelector('.sidebar').classList.toggle('collapsed');">
+        <button class="toggle-btn" onclick="if(typeof toggleSidebar==='function'){toggleSidebar();}else{document.querySelector('.sidebar').classList.toggle('collapsed');document.querySelector('.app-container')?.classList.toggle('sidebar-collapsed');}">
             <i class="fa-solid fa-bars-staggered"></i>
         </button>
     </div>
     
     <nav class="sidebar-nav">
         <?php 
-        $is_admin = ($_SESSION['role'] === 'admin');
-        $has_dashboard = (isset($_SESSION['can_dashboard']) && $_SESSION['can_dashboard']) || $is_admin;
+        $role = $_SESSION['role'] ?? 'user';
+        $is_superadmin = ($role === 'superadmin');
+        $is_admin = ($role === 'admin');
+        $has_dashboard = $is_superadmin || $is_admin || !empty($_SESSION['can_dashboard']);
+        $can_master = $is_superadmin;
+        $can_reports = $is_superadmin;
         ?>
 
         <div class="nav-section">Utama</div>
@@ -26,14 +30,14 @@
             <span>Kalender</span>
         </a>
 
-        <?php if (!$is_admin): ?>
+        <?php if (!$is_superadmin): ?>
         <a href="my_schedule.php" class="nav-item <?= basename($_SERVER['PHP_SELF']) == 'my_schedule.php' ? 'active' : '' ?>">
             <i class="fa-solid fa-clock-rotate-left"></i>
             <span><?= $has_dashboard ? 'Riwayat Absen' : 'Presensi' ?></span>
         </a>
         <?php endif; ?>
 
-        <?php if ($has_dashboard): ?>
+        <?php if ($can_reports): ?>
         <div class="nav-section" onclick="this.classList.toggle('closed'); this.nextElementSibling.classList.toggle('closed');">
             <span>Manajemen Meeting</span>
             <i class="fa-solid fa-chevron-down section-chevron"></i>
@@ -44,26 +48,25 @@
                 <span>Laporan</span>
             </a>
 
-            <?php if ($is_admin): ?>
+            <?php if ($is_superadmin): ?>
             <a href="grant_access.php" class="nav-item <?= basename($_SERVER['PHP_SELF']) == 'grant_access.php' ? 'active' : '' ?>">
                 <i class="fa-solid fa-user-lock"></i>
                 <span>Grant Access</span>
             </a>
             <?php endif; ?>
         </div>
+        <?php endif; ?>
 
-        <?php if ($has_dashboard): ?>
+        <?php if ($can_master): ?>
         <div class="nav-section" onclick="this.classList.toggle('closed'); this.nextElementSibling.classList.toggle('closed');">
             <span>Data Master</span>
             <i class="fa-solid fa-chevron-down section-chevron"></i>
         </div>
         <div class="nav-group">
-            <?php if ($is_admin): ?>
             <a href="branches.php" class="nav-item <?= basename($_SERVER['PHP_SELF']) == 'branches.php' ? 'active' : '' ?>">
                 <i class="fa-solid fa-building"></i>
                 <span>Master Cabang</span>
             </a>
-            <?php endif; ?>
             <a href="rooms.php" class="nav-item <?= basename($_SERVER['PHP_SELF']) == 'rooms.php' ? 'active' : '' ?>">
                 <i class="fa-solid fa-door-open"></i>
                 <span>Master Ruangan</span>
@@ -71,6 +74,10 @@
             <a href="employees.php" class="nav-item <?= basename($_SERVER['PHP_SELF']) == 'employees.php' ? 'active' : '' ?>">
                 <i class="fa-solid fa-user-gear"></i>
                 <span>Master Karyawan</span>
+            </a>
+            <a href="groups.php" class="nav-item <?= basename($_SERVER['PHP_SELF']) == 'groups.php' ? 'active' : '' ?>">
+                <i class="fa-solid fa-layer-group"></i>
+                <span>Master Group</span>
             </a>
             <a href="divisions.php" class="nav-item <?= basename($_SERVER['PHP_SELF']) == 'divisions.php' ? 'active' : '' ?>">
                 <i class="fa-solid fa-sitemap"></i>
@@ -81,7 +88,6 @@
                 <span>Master Template</span>
             </a>
         </div>
-        <?php endif; ?>
         <?php endif; ?>
     </nav>
 </aside>

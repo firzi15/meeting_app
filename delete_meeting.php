@@ -4,7 +4,7 @@ require_once 'database.php';
 
 header('Content-Type: application/json');
 
-if (!isset($_SESSION['user_id']) || ($_SESSION['role'] !== 'admin' && !(isset($_SESSION['can_dashboard']) && $_SESSION['can_dashboard']))) {
+if (!isset($_SESSION['user_id']) || ($_SESSION['role'] !== 'superadmin' && $_SESSION['role'] !== 'admin' && empty($_SESSION['can_dashboard']))) {
     echo json_encode(['success' => false, 'message' => 'Akses ditolak']);
     exit;
 }

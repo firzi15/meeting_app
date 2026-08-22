@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
 }
-if ($_SESSION['role'] !== 'admin') {
+if ($_SESSION['role'] !== 'superadmin') {
     header("Location: index.php");
     exit;
 }
@@ -77,13 +77,13 @@ if (isset($_POST['bulk_delete_branch'])) {
     $ids = $_POST['bulk_ids'] ?? [];
     if (!empty($ids)) {
         try {
-            $inQuery = implode(',', array_fill(0, count($ids), '?'));
-            $stmt = $pdo->prepare("SELECT name FROM branches WHERE id IN ($inQuery)");
+            $placeholders = implode(',', array_fill(0, count($ids), '?'));
+            $stmt = $pdo->prepare("SELECT name FROM branches WHERE id IN ($placeholders)");
             $stmt->execute($ids);
             $names = $stmt->fetchAll(PDO::FETCH_COLUMN);
             
             if ($names) {
-                $check = $pdo->prepare("SELECT DISTINCT branch_id FROM users WHERE branch_id IN ($inQuery)");
+                $check = $pdo->prepare("SELECT DISTINCT branch_id FROM users WHERE branch_id IN ($placeholders)");
                 $check->execute($ids);
                 $used = $check->fetchAll(PDO::FETCH_COLUMN);
                 
@@ -91,7 +91,7 @@ if (isset($_POST['bulk_delete_branch'])) {
                     $usedStr = implode(", ", $used);
                     $error = "Aman DB: Beberapa Cabang (ID: $usedStr) masih terkait dengan karyawan. Silakan ubah/hapus karyawan tersebut di Master Karyawan.";
                 } else {
-                    $stmt = $pdo->prepare("DELETE FROM branches WHERE id IN ($inQuery)");
+                    $stmt = $pdo->prepare("DELETE FROM branches WHERE id IN ($placeholders)");
                     $stmt->execute($ids);
                     $success = count($ids) . " Cabang berhasil dihapus!";
                 }
@@ -173,7 +173,7 @@ $branches = $stmt->fetchAll();
                                     <tr class="selectable-row">
                                         <td style="text-align: center; color: #94a3b8; font-size: 0.8rem;">
                                             <input type="checkbox" name="bulk_ids[]" value="<?= $branch['id'] ?>" class="row-checkbox" style="display:none;">
-                                            <?= $no++ ?>
+                                            <?= htmlspecialchars($no++) ?>
                                         </td>
                                         <td><strong><?= htmlspecialchars($branch['name']) ?></strong></td>
                                         <td style="text-align: center;">
@@ -190,13 +190,7 @@ $branches = $stmt->fetchAll();
                         </table>
                     </div>
                     
-                    <?php if ($total_pages > 1): ?>
-                    <div style="padding: 15px; display: flex; justify-content: center; gap: 10px;">
-                        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                            <a href="?page=<?= $i ?>" class="btn-action-text <?= $i === $page ? 'btn-view-blue' : '' ?>" style="text-decoration: none; border: 1px solid #e2e8f0; padding: 5px 10px;"><?= $i ?></a>
-                        <?php endfor; ?>
-                    </div>
-                    <?php endif; ?>
+                    <?php renderPagination($page, $total_pages); ?>
                 </div>
                 </form>
             </main>
@@ -377,12 +371,12 @@ $branches = $stmt->fetchAll();
 
     <?php if ($success): ?>
     <script>
-        Toast.fire({ icon: 'success', title: '<?= $success ?>' });
+        Toast.fire({ icon: 'success', title: '<?= htmlspecialchars($success) ?>' });
     </script>
     <?php endif; ?>
     <?php if ($error): ?>
     <script>
-        Toast.fire({ icon: 'error', title: '<?= $error ?>' });
+        Toast.fire({ icon: 'error', title: '<?= htmlspecialchars($error) ?>' });
     </script>
     <?php endif; ?>
 </body>

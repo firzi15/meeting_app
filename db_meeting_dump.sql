@@ -79,15 +79,35 @@ INSERT INTO "rooms" ("id", "name", "created_at", "branch_id") VALUES (5, 'Online
 INSERT INTO "rooms" ("id", "name", "created_at", "branch_id") VALUES (6, 'Online', NOW(), 2);
 
 -- =============================================
+-- TABLE: employee_groups
+-- =============================================
+DROP TABLE IF EXISTS "employee_groups" CASCADE;
+CREATE TABLE "employee_groups" (
+    "id" serial PRIMARY KEY,
+    "name" character varying(100) NOT NULL UNIQUE,
+    "description" text,
+    "created_at" timestamp without time zone DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO "employee_groups" ("name", "description") VALUES 
+('Manager', 'Kelompok Managerial & Kepala Divisi/Cabang'),
+('Kepala Bagian (Kabag)', 'Kelompok Kepala Bagian / Section Head'),
+('Staff', 'Kelompok Staff Karyawan')
+ON CONFLICT ("name") DO NOTHING;
+
+-- =============================================
 -- TABLE: users
 -- =============================================
 DROP TABLE IF EXISTS "users" CASCADE;
 CREATE TABLE "users" (
     "id" integer NOT NULL DEFAULT nextval('users_id_seq'::regclass),
+    "nik" text,
     "name" text NOT NULL,
     "username" text NOT NULL,
     "password" text NOT NULL,
     "role" text NOT NULL DEFAULT 'user'::text,
+    "jabatan" text,
+    "group_name" text DEFAULT 'Staff',
     "division" text,
     "can_schedule" boolean DEFAULT false,
     "can_export" boolean DEFAULT false,
@@ -101,25 +121,25 @@ CREATE TABLE "users" (
 -- PENTING: Ganti password setelah pertama login!
 -- Semua password sudah di-hash dengan bcrypt.
 -- Hash di bawah ini adalah hasil dari password_hash('password_asli', PASSWORD_BCRYPT)
--- admin       -> 'admin'
--- finance     -> 'password123'
--- it          -> 'password123'
--- hr          -> 'password123'
+-- admin       -> 'admin' (superadmin)
+-- finance     -> 'password123' (admin request meeting)
+-- it          -> 'password123' (user)
+-- hr          -> 'password123' (user)
 -- asri        -> 'asri'
-INSERT INTO "users" ("id", "name", "username", "password", "role", "division", "can_schedule", "can_export", "can_dashboard", "photo", "branch_id", "is_owner")
-VALUES (1, 'Administrator', 'admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', 'IT', true, true, false, NULL, 1, false);
+INSERT INTO "users" ("id", "nik", "name", "username", "password", "role", "jabatan", "group_name", "division", "can_schedule", "can_export", "can_dashboard", "photo", "branch_id", "is_owner")
+VALUES (1, '100001', 'Super Administrator', 'admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'superadmin', 'HEAD OF IT', 'Manager', 'IT', true, true, true, NULL, 1, false);
 
-INSERT INTO "users" ("id", "name", "username", "password", "role", "division", "can_schedule", "can_export", "can_dashboard", "photo", "branch_id", "is_owner")
-VALUES (2, 'Firzi', 'finance', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'user', 'Finance', false, false, false, NULL, 1, false);
+INSERT INTO "users" ("id", "nik", "name", "username", "password", "role", "jabatan", "group_name", "division", "can_schedule", "can_export", "can_dashboard", "photo", "branch_id", "is_owner")
+VALUES (2, '120004', 'Umi Damayanti', 'finance', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', 'FA MANAGER', 'Manager', 'Finance', true, false, true, NULL, 1, false);
 
-INSERT INTO "users" ("id", "name", "username", "password", "role", "division", "can_schedule", "can_export", "can_dashboard", "photo", "branch_id", "is_owner")
-VALUES (3, 'Rizqi', 'it', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'user', 'IT', false, false, false, NULL, 1, false);
+INSERT INTO "users" ("id", "nik", "name", "username", "password", "role", "jabatan", "group_name", "division", "can_schedule", "can_export", "can_dashboard", "photo", "branch_id", "is_owner")
+VALUES (3, '120041', 'Dwi Prasetya', 'it', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'user', 'IT MANAGER', 'Manager', 'IT', false, false, false, NULL, 1, false);
 
-INSERT INTO "users" ("id", "name", "username", "password", "role", "division", "can_schedule", "can_export", "can_dashboard", "photo", "branch_id", "is_owner")
-VALUES (4, 'Fathi', 'hr', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'user', 'HR', false, false, false, NULL, 1, false);
+INSERT INTO "users" ("id", "nik", "name", "username", "password", "role", "jabatan", "group_name", "division", "can_schedule", "can_export", "can_dashboard", "photo", "branch_id", "is_owner")
+VALUES (4, '120163', 'Yahya Sabil', 'hr', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'user', 'HR & GA MANAGER', 'Manager', 'HR', false, false, false, NULL, 1, false);
 
-INSERT INTO "users" ("id", "name", "username", "password", "role", "division", "can_schedule", "can_export", "can_dashboard", "photo", "branch_id", "is_owner")
-VALUES (85, 'Asri', 'asri', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'user', 'General Affairs', true, true, true, NULL, 2, false);
+INSERT INTO "users" ("id", "nik", "name", "username", "password", "role", "jabatan", "group_name", "division", "can_schedule", "can_export", "can_dashboard", "photo", "branch_id", "is_owner")
+VALUES (85, '140066', 'Asri Stia Rini Maliek', 'asri', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', 'KEPALA BAGIAN FA & ADM', 'Kepala Bagian (Kabag)', 'General Affairs', true, true, true, NULL, 2, false);
 
 -- =============================================
 -- TABLE: meetings (kolom lengkap termasuk yg di-auto-migrate database.php)

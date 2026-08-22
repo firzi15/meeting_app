@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     if ($meeting_id) {
         try {
-            $is_admin = (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') || (isset($_SESSION['can_dashboard']) && $_SESSION['can_dashboard']);
+            $is_admin = (isset($_SESSION['role']) && in_array($_SESSION['role'], ['superadmin', 'admin'])) || !empty($_SESSION['can_dashboard']);
             $is_hr = (isset($_SESSION['division']) && $_SESSION['division'] === 'HR');
             $user_id = (int)$_SESSION['user_id'];
             

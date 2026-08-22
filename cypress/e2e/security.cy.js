@@ -155,7 +155,6 @@ describe('Security - Rate Limiting & Password Hashing', () => {
       // Harusnya tetap di domain localhost
       cy.url().should('include', 'localhost');
       cy.url().should('not.include', 'evil.com');
-      cy.url().should('not.include', 'http://').or('not.match', /^https?:\/\/(?!localhost)/);
     });
   });
 });

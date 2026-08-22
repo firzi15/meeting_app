@@ -2,13 +2,13 @@
 session_start();
 require_once 'database.php';
 
-// Access Control: Admin or Granted User
-if (!isset($_SESSION['user_id']) || ($_SESSION['role'] !== 'admin' && !$_SESSION['can_export'])) {
+// Access Control: Superadmin or Granted User
+if (!isset($_SESSION['user_id']) || ($_SESSION['role'] !== 'superadmin' && empty($_SESSION['can_export']))) {
     die("Akses ditolak. Anda tidak memiliki izin untuk mengekspor laporan.");
 }
 
 $user_id = $_SESSION['user_id'];
-$is_admin = ($_SESSION['role'] === 'admin');
+$is_admin = ($_SESSION['role'] === 'superadmin');
 $is_hr_role = (isset($_SESSION['division']) && $_SESSION['division'] === 'HR');
 
 // User-driven export preference (Admin/HR can include HR data)

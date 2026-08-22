@@ -294,7 +294,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="footer-actions">
                 <?php if ($token): ?>
-                    <a href="attendance.php?token=<?= $token ?>" style="color: #64748b; text-decoration: none; font-weight: 600;">Kembali</a>
+                    <a href="attendance.php?token=<?= urlencode($token) ?>" style="color: #64748b; text-decoration: none; font-weight: 600;">Kembali</a>
                 <?php else: ?>
                     <a href="my_schedule.php" style="color: #64748b; text-decoration: none; font-weight: 600;">Kembali</a>
                 <?php endif; ?>

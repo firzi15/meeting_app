@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$is_locked) {
         $_SESSION['photo']         = $user['photo'];
         $_SESSION['branch_id']     = $user['branch_id'] ?? 1;
 
-        if ($user['role'] === 'admin') {
+        if ($user['role'] === 'superadmin' || $user['role'] === 'admin') {
             $_SESSION['admin_branch_id'] = $_SESSION['branch_id'];
         }
 
@@ -109,10 +109,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$is_locked) {
                 header("Location: " . $redirect);
             }
         } else {
-            if ($_SESSION['role'] !== 'admin' && !$_SESSION['can_dashboard']) {
-                header("Location: my_schedule.php");
-            } else {
+            if ($_SESSION['role'] === 'superadmin' || $_SESSION['role'] === 'admin' || !empty($_SESSION['can_dashboard'])) {
                 header("Location: index.php");
+            } else {
+                header("Location: my_schedule.php");
             }
         }
         exit;
