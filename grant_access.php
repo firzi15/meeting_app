@@ -39,13 +39,22 @@ if (isset($_POST['user_id']) && isset($_POST['feature'])) {
     exit;
 }
 
-$where = "WHERE u.role != 'superadmin'";
+$current_branch = getCurrentBranchId();
+$where_clauses = ["u.role != 'superadmin'"];
 $params = [];
-if ($search !== '') {
-    $where .= " AND (u.name ILIKE ? OR u.username ILIKE ? OR u.division ILIKE ? OR u.nik ILIKE ? OR b.name ILIKE ?)";
-    $term = "%$search%";
-    $params = [$term, $term, $term, $term, $term];
+
+if ($current_branch > 0) {
+    $where_clauses[] = "u.branch_id = ?";
+    $params[] = $current_branch;
 }
+
+if ($search !== '') {
+    $where_clauses[] = "(u.name ILIKE ? OR u.username ILIKE ? OR u.division ILIKE ? OR u.nik ILIKE ? OR b.name ILIKE ?)";
+    $term = "%$search%";
+    $params = array_merge($params, [$term, $term, $term, $term, $term]);
+}
+
+$where = "WHERE " . implode(' AND ', $where_clauses);
 
 // Total count
 $count_stmt = $pdo->prepare("
