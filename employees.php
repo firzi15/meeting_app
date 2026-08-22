@@ -247,18 +247,18 @@ $divisions = $pdo->query("SELECT name FROM divisions WHERE 1=1 $branch_condition
                 <div class="card">
                     <div class="table-responsive">
                         <div class="table-container">
-                            <table class="table">
+                            <table class="table table-fixed">
                                 <thead>
                                     <tr>
-                                        <th style="width: 50px; text-align: center;">No.</th>
-                                        <th style="width: 100px;">NIK</th>
-                                        <th>Nama Lengkap</th>
-                                        <th>Username</th>
-                                        <th>Role</th>
-                                        <th>Jabatan</th>
-                                        <th>Group</th>
-                                        <th>Divisi</th>
-                                        <th style="width: 100px; text-align: center;">Aksi</th>
+                                        <th style="width: 44px; text-align: center;">No.</th>
+                                        <th style="width: 80px;">NIK</th>
+                                        <th style="width: 22%;">Nama Lengkap</th>
+                                        <th style="width: 14%;">Username</th>
+                                        <th style="width: 75px; text-align: center;">Role</th>
+                                        <th style="width: 22%;">Jabatan</th>
+                                        <th style="width: 85px; text-align: center;">Group</th>
+                                        <th style="width: 16%;">Divisi</th>
+                                        <th style="width: 78px; text-align: center;">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>

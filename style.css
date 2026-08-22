@@ -532,103 +532,50 @@ body {
     white-space: nowrap;
 }
 
-/* Responsive Truncation Rules (Adapts to Sidebar State & Screen Width) */
+/* Auto-Fitting Truncation Rules (Adapts 100% to Column Width and Sidebar State) */
 .name-truncate {
-    max-width: 145px;
+    max-width: 100%;
+    width: 100%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    display: inline-block;
-    vertical-align: middle;
+    display: block;
     cursor: default;
-    transition: max-width 0.25s ease;
+    box-sizing: border-box;
 }
 
 .truncate-cell {
-    max-width: 145px;
+    max-width: 100%;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    cursor: default;
+    box-sizing: border-box;
+}
+
+.badge-truncate {
+    max-width: 100%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     display: inline-block;
     vertical-align: middle;
     cursor: default;
-    transition: max-width 0.25s ease;
+    box-sizing: border-box;
 }
 
-.badge-truncate {
-    max-width: 130px;
-    white-space: nowrap;
+.table-fixed {
+    table-layout: fixed !important;
+    width: 100% !important;
+}
+
+.table-fixed th,
+.table-fixed td {
     overflow: hidden;
     text-overflow: ellipsis;
-    display: inline-block;
     vertical-align: middle;
-    transition: max-width 0.25s ease;
-}
-
-/* When Sidebar is COLLAPSED (Tutup): Expand max-width dynamically */
-.sidebar.collapsed ~ .main-wrapper .name-truncate,
-.app-container.sidebar-collapsed .name-truncate {
-    max-width: 260px;
-}
-
-.sidebar.collapsed ~ .main-wrapper .truncate-cell,
-.app-container.sidebar-collapsed .truncate-cell {
-    max-width: 260px;
-}
-
-.sidebar.collapsed ~ .main-wrapper .badge-truncate,
-.app-container.sidebar-collapsed .badge-truncate {
-    max-width: 230px;
-}
-
-/* Large Screens (>= 1440px): More room available */
-@media (min-width: 1440px) {
-    .name-truncate {
-        max-width: 210px;
-    }
-    .truncate-cell {
-        max-width: 210px;
-    }
-    .badge-truncate {
-        max-width: 180px;
-    }
-    .sidebar.collapsed ~ .main-wrapper .name-truncate,
-    .app-container.sidebar-collapsed .name-truncate {
-        max-width: 360px;
-    }
-    .sidebar.collapsed ~ .main-wrapper .truncate-cell,
-    .app-container.sidebar-collapsed .truncate-cell {
-        max-width: 360px;
-    }
-    .sidebar.collapsed ~ .main-wrapper .badge-truncate,
-    .app-container.sidebar-collapsed .badge-truncate {
-        max-width: 300px;
-    }
-}
-
-/* Medium-Large Screens (1200px - 1439px) */
-@media (min-width: 1200px) and (max-width: 1439px) {
-    .name-truncate {
-        max-width: 160px;
-    }
-    .truncate-cell {
-        max-width: 160px;
-    }
-    .badge-truncate {
-        max-width: 140px;
-    }
-    .sidebar.collapsed ~ .main-wrapper .name-truncate,
-    .app-container.sidebar-collapsed .name-truncate {
-        max-width: 280px;
-    }
-    .sidebar.collapsed ~ .main-wrapper .truncate-cell,
-    .app-container.sidebar-collapsed .truncate-cell {
-        max-width: 280px;
-    }
-    .sidebar.collapsed ~ .main-wrapper .badge-truncate,
-    .app-container.sidebar-collapsed .badge-truncate {
-        max-width: 250px;
-    }
 }
 
 .badge-success {

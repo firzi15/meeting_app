@@ -152,15 +152,15 @@ $users = $stmt_users->fetchAll();
 
                 <div class="card">
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table table-fixed">
                             <thead>
                                 <tr>
-                                    <th style="width: 60px; text-align: center;">No.</th>
-                                    <th>Nama Karyawan</th>
-                                    <th>Divisi</th>
-                                    <th>Cabang</th>
-                                    <th style="text-align:center; width: 140px;">Owner Privilege</th>
-                                    <th style="text-align:center; width: 140px;">Akses Dashboard</th>
+                                    <th style="width: 50px; text-align: center;">No.</th>
+                                    <th style="width: 35%;">Nama Karyawan</th>
+                                    <th style="width: 25%;">Divisi</th>
+                                    <th style="width: 20%;">Cabang</th>
+                                    <th style="text-align:center; width: 120px;">Owner Privilege</th>
+                                    <th style="text-align:center; width: 120px;">Akses Dashboard</th>
                                 </tr>
                             </thead>
                             <tbody>
