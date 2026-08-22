@@ -584,8 +584,6 @@ body {
 
 .table-fixed th,
 .table-fixed td {
-    overflow: hidden;
-    text-overflow: ellipsis;
     vertical-align: middle;
 }
 
