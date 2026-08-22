@@ -250,15 +250,15 @@ $divisions = $pdo->query("SELECT name FROM divisions WHERE 1=1 $branch_condition
                             <table class="table table-fixed">
                                 <thead>
                                     <tr>
-                                        <th style="width: 44px; text-align: center;">No.</th>
-                                        <th style="width: 76px;">NIK</th>
-                                        <th style="width: 20%;">Nama Lengkap</th>
-                                        <th style="width: 13%;">Username</th>
-                                        <th style="width: 72px; text-align: center;">Role</th>
-                                        <th style="width: 20%;">Jabatan</th>
-                                        <th style="width: 82px; text-align: center;">Group</th>
-                                        <th style="width: 15%;">Divisi</th>
-                                        <th style="width: 100px; text-align: center;">Aksi</th>
+                                        <th style="width: 40px; text-align: center;">No.</th>
+                                        <th style="width: 72px;">NIK</th>
+                                        <th style="width: 19%;">Nama Lengkap</th>
+                                        <th style="width: 11%;">Username</th>
+                                        <th style="width: 70px; text-align: center;">Role</th>
+                                        <th style="width: 19%;">Jabatan</th>
+                                        <th style="width: 105px; text-align: center;">Group</th>
+                                        <th style="width: 18%;">Divisi</th>
+                                        <th style="width: 92px; text-align: center;">Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
